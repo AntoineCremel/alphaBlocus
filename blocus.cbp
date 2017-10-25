@@ -34,7 +34,16 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/jouer.h" />
+		<Unit filename="src/joueur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/joueur.h" />
 		<Unit filename="src/mainHeader.h" />
+		<Unit filename="src/partie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/partie.h" />
 		<Unit filename="src/piece/piece.c">
 			<Option compilerVar="CC" />
 		</Unit>

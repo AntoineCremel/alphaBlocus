@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1508315376 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
+	"src/mainHeader.h"
+
+1508315376 c:\users\antoine\documents\ece\programmation\projet\blocus\src\mainheader.h
+	<stdio.h>
+	<stdlib.h>
+
+1508315376 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.c
+	"piece.h"
+
+1508917916 c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.h
+
+1508916583 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.c
+
+1508917560 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
+
