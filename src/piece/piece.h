@@ -16,6 +16,10 @@ typedef struct piece
     Réfléchir aussi à ajouter éventuellement des variables qui donnent l'orientation de la pièce
     (afin de retenir l'orientation qu'elle avait la dernière fois que le joueur l'a regardée.
     */
+
+    char grille[5][5];// Cette grille renseigne quelles cases sont couvertes par la pièce
+
+
 }t_Piece;
 
 

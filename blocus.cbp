@@ -34,6 +34,11 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/mainHeader.h" />
+		<Unit filename="src/piece/piece.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/piece/piece.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
