@@ -18,11 +18,12 @@ typedef struct Joueur
     t_Piece * ancre;
     // Variable pour définir le type de joueur (AI, aléatoire, joueur humain)
     char type;
-}t_Joueur
+}t_Joueur;
 
 //2 Prototypes des fonctions
 
 //Fonction qui initalise une structure de joueur avec sa liste chaînée de pièces
-void joueurInitialisation(t_Joueur * self);
+// Recoit en entrée : la structure d'un joueur, et
+void joueurInitialisation(t_Joueur * self, char pieceFile);
 
 #endif // JOUEUR_H_INCLUDED
