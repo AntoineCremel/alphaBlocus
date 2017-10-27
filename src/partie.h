@@ -2,6 +2,7 @@
 #define PARTIE_H_INCLUDED
 
 #include "joueur.h"
+#include "controles.h"
 /*
 Ce fichier contient la définition d'une structure partie ainsi que
 le prototype des fonctions liées à la gestion de cette partie
@@ -15,8 +16,10 @@ typedef struct Partie
 {
     // Contiendra la grille de la partie
     char** grille;
-    // Contiendra un tableau dynamique de joueurs
+    // Contient un tableau dynamique de joueurs
     t_Joueur* joueurListe;
+    // Contient les touches à utiliser pour jouer
+    t_Controles touches;
     // Variable indiquant l'état de la partie
     char state;
 }t_Partie;

@@ -1,6 +1,9 @@
 #ifndef JOUEUR_H_INCLUDED
 #define JOUEUR_H_INCLUDED
 
+#include <string.h>
+#include <stdlib.h>
+
 #include "piece/piece.h"
 
 /*
@@ -23,7 +26,9 @@ typedef struct Joueur
 //2 Prototypes des fonctions
 
 //Fonction qui initalise une structure de joueur avec sa liste chaînée de pièces
-// Recoit en entrée : la structure d'un joueur, et
-void joueurInitialisation(t_Joueur * self, char pieceFile);
+// Recoit en entrée :
+//      la structure d'un joueur
+//      un string contenant le nom du fichier où se trouve la liste des fichiers contenant les pièces disponibles au joueur
+void joueurInitialisation(t_Joueur * self, char pieceFile[30]);
 
 #endif // JOUEUR_H_INCLUDED

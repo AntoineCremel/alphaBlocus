@@ -38,6 +38,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/affichageConsole.h" />
+		<Unit filename="src/controles.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/controles.h" />
 		<Unit filename="src/gameLoop.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -11,9 +11,11 @@
 
 1508918275 c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.h
 
-1508916583 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.c
+1509018492 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.c
+	"joueur.h"
 
-1508917560 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
+1509018516 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
+	"partie.h"
 
 1509019537 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
 	"affichageConsole.h"
@@ -23,4 +25,20 @@
 
 1509018584 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.c
 	"mainHeader.h"
+
+1509091027 c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.h
+	<string.h>
+	<stdlib.h>
+	"piece/piece.h"
+
+1509018821 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\menu.c
+	"mainHeader.h"
+
+1509088837 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
+	"joueur.h"
+	"controles.h"
+
+1509088695 c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.h
+
+1509088712 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.c
 
