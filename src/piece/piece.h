@@ -6,18 +6,21 @@
     ainsi que les définitions des fonctions qui permettront de faire fonctionner ces pièces.
 */
 
-//0 Définition de la structure
+//
+
+//1 Définition de la structure
 typedef struct Piece
 {
     ///Implémenter la définition d'une pièce de Blocus
    char grille[5][5];// Cette grille renseigne quelles cases sont couvertes par la pièce
 
-    // Pointeur nécessaire au fonctionnement d'une liste chaînée.
+    // Pointeurs nécessaires au fonctionnement d'une liste chaînée.
+    struct Piece * precedent;
     struct Piece * suivant;
 }t_Piece;
 
 
-//1 Défintion des fonctions liées à Piece
+//2 Défintion des fonctions liées à Piece
 
 /*
 Fonction qui permet la rotation d'une pièce. Change les espaces occupés dans grille

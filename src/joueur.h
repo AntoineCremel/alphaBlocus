@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "piece/piece.h"
 
@@ -13,6 +14,8 @@ Ce fichier contiendra la structure et les définitions des fonctions nécessaires 
 //0 Constantes
 #define JOUEUR_HUMAIN 0
 #define JOUEUR_ALEATOIRE 1
+
+#define TAILLE_FILE_NAME 30
 
 //1 Définition de la structure
 typedef struct Joueur
