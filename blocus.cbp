@@ -62,6 +62,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/piece/piece.h" />
+		<Unit filename="src/toolbox/tools.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/toolbox/tools.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

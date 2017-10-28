@@ -6,13 +6,18 @@
     ainsi que les définitions des fonctions qui permettront de faire fonctionner ces pièces.
 */
 
-//
+//0 Constantes
+#define I_TAB_PIECE 5
+#define J_TAB_PIECE 5
+
+#define SYMB_PIECE '@'
+#define SYMB_PAS_PIECE '.'
 
 //1 Définition de la structure
 typedef struct Piece
 {
     ///Implémenter la définition d'une pièce de Blocus
-   char grille[5][5];// Cette grille renseigne quelles cases sont couvertes par la pièce
+   char grille[I_TAB_PIECE][J_TAB_PIECE];// Cette grille renseigne quelles cases sont couvertes par la pièce
 
     // Pointeurs nécessaires au fonctionnement d'une liste chaînée.
     struct Piece * precedent;
