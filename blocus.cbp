@@ -45,7 +45,7 @@
 		<Unit filename="src/gameLoop.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/jouer.h" />
+		<Unit filename="src/gameLoop.h" />
 		<Unit filename="src/joueur.c">
 			<Option compilerVar="CC" />
 		</Unit>
