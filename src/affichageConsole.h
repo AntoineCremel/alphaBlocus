@@ -15,7 +15,6 @@
 void gotoligcol(int lig, int col);
 
 // Fonction pour changer la couleur des lettres de la console.
-//
 void changeColour(int letters, int backGround);
 
 // Fonction qui réunit tous les affichages dans la partie

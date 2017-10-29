@@ -17,8 +17,6 @@ Ce fichier contiendra la structure et les définitions des fonctions nécessaires 
 #define JOUEUR_HUMAIN 0
 #define JOUEUR_ALEATOIRE 1
 
-#define TAILLE_FILE_NAME 50
-
 //1 Définition de la structure
 typedef struct Joueur
 {

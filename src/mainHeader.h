@@ -24,4 +24,6 @@ Ce fichier contiendra les #include communs à tous les fichiers, ainsi que la déf
 #define L_YELLOW	14
 #define L_WHITE		15
 
+#define TAILLE_FILE_NAME 50
+
 #endif // MAINHEADER_H_INCLUDED
