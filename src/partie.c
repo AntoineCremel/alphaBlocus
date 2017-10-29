@@ -11,11 +11,12 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 
 	// 1 Tout d'abord on initialise la liste de joueurs
 	// 1.0 On alloue la place mémoire nécessaire
-	self->joueurListe = (t_Joueur*)malloc(n_joueurs * sizeof(t_Joueur));
+	self->joueurListe = (t_Joueur*)malloc((n_joueurs/2) * sizeof(t_Joueur));
 	// 1.1 Ensuite on la remplit avec des joueurs que l'on initialise en même temps
-	for(int i=0; i < n_joueurs; i++)
+	for(int i=0; i < (n_joueurs/2); i++)
 	{
 		self->joueurListe[i].type = (char)va_arg(valist, int);
+		self->joueurListe[i].couleur = (char)va_arg(valist, int);
 		// 1.2 Creation du joueur
 		/// Pour l'instant seul un type de partie est pris en compte
 		joueurInitialisation(&self->joueurListe[i], "../data/gameInit/stdPiecesList.txt");

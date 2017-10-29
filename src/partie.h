@@ -5,6 +5,7 @@
 
 #include "joueur.h"
 #include "controles.h"
+#include "mainHeader.h"
 /*
 Ce fichier contient la définition d'une structure partie ainsi que
 le prototype des fonctions liées à la gestion de cette partie
@@ -27,9 +28,9 @@ typedef struct Partie
     // Les cases peuvent contenir l'une des deux valeurs suivantes :
     //		CASE_VIDE pour dire que la case est vide
     //		Un numéro qui correspond au numéro d'un joueur sur le tableau, pour dire que la case est occupée par une pièce du joueur correspondant.
-    char** grille;
+    char ** grille;
     // Contient un tableau dynamique de joueurs
-    t_Joueur* joueurListe;
+    t_Joueur * joueurListe;
     // Contient les touches à utiliser pour jouer
     t_Controles touches;
     // Variable indiquant l'état de la partie
@@ -49,12 +50,14 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
 //		int h_grille : hauteur voulue pour la grille
 //		char partieType : Nombre d'arguments voulus
 //		int num_arguments : nombre d'arguments dans les ...
-//			-> Cette fonction prend un nombre d'argument variable. Ces arguments sont des chars et représentent le type de joueur voulu.
+//			-> Cette fonction prend un nombre d'argument variable.
+//				Ces arguments sont des chars et servent à définir les joueurs voulus.
+//				Chaque joueur que l'on ajoute doit avoir deux arguments : son type et sa couleur
 //
 //	Exemple d'utilisation :
-//		initialisationPartie(partie, 20, 20, PARTIE_STANDARD, JOUEUR_HUMAIN, JOUEUR_HUMAIN, JOUEUR_ALEATOIRE, JOUEUR_ALEATOIRE);
+//		initialisationPartie(partie, 20, 20, PARTIE_STANDARD, JOUEUR_HUMAIN, ROUGE, JOUEUR_HUMAIN, YELLOW, JOUEUR_ALEATOIRE, PURPLE, JOUEUR_ALEATOIRE, AQUA);
 //		initialisera la structure partie avec une grille de 20*20, pour une partie standard, avec deux joueurs humains et deux ordinateurs
-//			jouant de manière aléatoire.
+//			jouant de manière aléatoire. Leurs couleurs seront, dans l'ordre : rouge, jaune, violet, turquoise
 void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, t_Controles touches, int n_joueurs, ...);
 
 // Fonction pour libérer l'espace mémoire alloué lors de l'initialisation de la partie

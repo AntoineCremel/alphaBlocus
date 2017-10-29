@@ -1,46 +1,49 @@
 # depslib dependency file v1.0
-1509202904 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
-	"src/mainHeader.h"
-
-1508311776 c:\users\antoine\documents\ece\programmation\projet\blocus\src\mainheader.h
+1509304453 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
 	<stdio.h>
 	<stdlib.h>
 
-1508311776 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.c
+1509304453 c:\users\antoine\documents\ece\programmation\projet\blocus\src\mainheader.h
+
+1509302876 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.c
 	"piece.h"
 
-1509205676 c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.h
+1509302876 c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.h
 
 1509290998 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.c
 	"joueur.h"
 
-1509018516 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
+1509305053 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
 	"partie.h"
 
-1509015937 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
+1509304453 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
 	"affichageConsole.h"
 
-1509015937 c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.h
-	"windows.h"
+1509304486 c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.h
+	<windows.h>
+	"mainHeader.h"
 
 1509014984 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.c
 	"mainHeader.h"
 
-1509290996 c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.h
+1509305053 c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.h
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
 	"piece/piece.h"
 	"toolbox/tools.h"
+	"mainHeader.h"
 
 1509015221 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\menu.c
 	"mainHeader.h"
 
-1509088837 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
+1509307372 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
+	<stdarg.h>
 	"joueur.h"
 	"controles.h"
+	"mainHeader.h"
 
-1509088695 c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.h
+1509085095 c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.h
 
 1509085112 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.c
 

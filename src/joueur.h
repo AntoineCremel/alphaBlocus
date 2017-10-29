@@ -7,6 +7,7 @@
 
 #include "piece/piece.h"
 #include "toolbox/tools.h"
+#include "mainHeader.h"
 
 /*
 Ce fichier contiendra la structure et les définitions des fonctions nécessaires au fonctionnement d'un joueur.
@@ -25,6 +26,9 @@ typedef struct Joueur
     t_Piece * ancre;
     // Variable pour définir le type de joueur (AI, aléatoire, joueur humain)
     char type;
+    // Variable qui définit la couleur des pièces d'un joueur.
+    // Les constantes définissant les couleurs windows sont dans mainHeader.h
+    char couleur;
 }t_Joueur;
 
 //2 Prototypes des fonctions

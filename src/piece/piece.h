@@ -28,7 +28,8 @@ typedef struct Piece
 //2 Défintion des fonctions liées à Piece
 
 /*
-Fonction qui permet la rotation d'une pièce. Change les espaces occupés dans grille
+Fonction qui permet la rotation d'une pièce dans le sens horaire.
+Modifie la grille en conséquence
 */
 void pieceRotation(t_Piece* self);
 

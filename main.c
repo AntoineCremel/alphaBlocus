@@ -1,4 +1,5 @@
-#include "src/mainHeader.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
