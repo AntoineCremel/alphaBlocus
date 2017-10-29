@@ -101,7 +101,7 @@ void playAncre(t_Joueur * self, char grid[I_TAB_PIECE][J_TAB_PIECE])
 			grid[i][j] = self->ancre->grille[i][j];
 		}
 	}
-	/// Il est possible que l'effaçage de la poièce fasse bugger cette fonction
+	/// Il est possible que l'effaçage de la pièce fasse bugger cette fonction
 	/// IE : peut etre que le contenu du tableau sera effacé par le free que l'on s'apprete à effectuer
 	/// 			A TESTER
 	scrapAncre(self);
