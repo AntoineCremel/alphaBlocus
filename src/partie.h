@@ -39,10 +39,6 @@ typedef struct Partie
 
 //2 Prototype des fonctions
 
-// Cette fonction permet d'afficher la grille de jeu. Elle prend en paramètre la structure de la partie,
-// ainsi que les coordonnées où la grille de jeu doit être affichée (lig et col désignent le point en haut à gauche)
-void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
-
 // Fonction d'initialisation de la partie.
 //	Parametres :
 //		self : pointeur sur la partie

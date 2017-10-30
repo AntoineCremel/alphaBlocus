@@ -1,8 +1,9 @@
-haut: z
-bas: s
-gauche: q
-droite: d
-confirmer: ' '
-scrollHaut: i
-scrollBas: k
-quitter: m
+h:z
+b:s
+g:q
+d:d
+r:r
+c:' '
+p:i
+s:k
+q:m

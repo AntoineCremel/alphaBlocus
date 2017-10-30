@@ -33,4 +33,7 @@ Modifie la grille en conséquence
 */
 void pieceRotation(t_Piece* self);
 
+// Fonction qui sert à inverser la pièce (la retourner)
+void inversionPiece(t_Piece * self);
+
 #endif // PIECE_H_INCLUDED

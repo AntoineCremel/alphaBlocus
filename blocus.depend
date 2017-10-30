@@ -1,14 +1,16 @@
 # depslib dependency file v1.0
-1509304453 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
+1509355233 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
 	<stdio.h>
 	<stdlib.h>
+	"src/gameLoop.h"
+	"src/joueur.h"
 
 1509317008 c:\users\antoine\documents\ece\programmation\projet\blocus\src\mainheader.h
 
-1509302876 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.c
+1509354520 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.c
 	"piece.h"
 
-1509302876 c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.h
+1509354516 c:\users\antoine\documents\ece\programmation\projet\blocus\src\piece\piece.h
 
 1509290998 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.c
 	"joueur.h"
@@ -16,10 +18,10 @@
 1509305053 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
 	"partie.h"
 
-1509314418 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
+1509354520 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
 	"affichageConsole.h"
 
-1509309709 c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.h
+1509354520 c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.h
 	<windows.h>
 	"mainHeader.h"
 	"controles.h"
@@ -39,18 +41,19 @@
 1509015221 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\menu.c
 	"mainHeader.h"
 
-1509307372 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
+1509351806 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
 	<stdarg.h>
 	"joueur.h"
 	"controles.h"
 	"mainHeader.h"
 
-1509317008 c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.h
+1509354520 c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.h
 	<stdio.h>
 	<string.h>
 	"mainHeader.h"
 
-1509085112 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.c
+1509354914 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\controles.c
+	"controles.h"
 
 1509314353 c:\users\antoine\documents\ece\programmation\projet\blocus\src\toolbox\tools.h
 	<time.h>
@@ -58,7 +61,7 @@
 1509314353 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\toolbox\tools.c
 	"tools.h"
 
-1509314374 c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.h
+1509354520 c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.h
 	<conio.h>
 	"mainHeader.h"
 	"partie.h"

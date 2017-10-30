@@ -15,6 +15,9 @@
 #define CUSTOM_CONTROLS_FILE	"../data/options/customControls.txt"
 #define STD_CONTROLS_FILE		"../data/options/stdControls.txt"
 
+#define SIZE_TOUCHE_NAME		20
+#define SIZE_LINE				30
+
 //1 Structure
 typedef struct Controles
 {
