@@ -29,6 +29,7 @@ typedef struct Controles
     char rotation;
     char scrollHaut;
     char scrollBas;
+    char inversion;
     char quitter;
     /// Ajouter les controles responsables de la selection du bloc
 

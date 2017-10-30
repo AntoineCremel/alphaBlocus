@@ -37,7 +37,7 @@ void changeColour(int letters, int backGround);
 // Fonction qui réunit tous les affichages dans la partie
 //	 On fait passer les structures par pointeur pour économiser le passage par le tube,
 //	pas pour pouvoir modifier leurs contenus
-void affichageGame(t_Partie * game, t_Controles * touches);
+void affichageGame(t_Partie * game);
 
 // Fonction pour afficher un rappel des contrôles sur la console
 void affichageConsoleControles(t_Controles * self, int lig, int col);

@@ -26,7 +26,7 @@ void changeColour(int letters, int backGround)
 	SetConsoleTextAttribute(h_console, letters + 16 * backGround);
 }
 
-void affichageGame(t_Partie * game, t_Controles * touches)
+void affichageGame(t_Partie * game)
 {
 
 }

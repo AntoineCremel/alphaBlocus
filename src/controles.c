@@ -81,6 +81,9 @@ void readControlesFile(t_Controles * self, char fileName[TAILLE_FILE_NAME])
 			case 's':
 				self->scrollBas = touche;
 				break;
+			case 'i':
+				self->inversion = touche;
+				break;
 			case 'q':
 				self->quitter = touche;
 				break;

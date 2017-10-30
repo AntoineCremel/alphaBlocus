@@ -66,23 +66,7 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 					{
 						charBuff = (char)fgetc(fichierPiece);
 					}while(charBuff == '\n');
-					/*
-					// Si c'est un carractere de fin de ligne on passe a la ligne suivante sur le tableau
-					if(charBuff == '\n')
-					{
-						printf("charBuff == \\n");
-						j = J_TAB_PIECE;
-					}
 
-					// Si c'est un caractère de fin de fichier il n'y a plus rien à ajouter à cette pièce
-					else if(charBuff == EOF)
-					{
-						printf("charBuff == EOF");
-						i = I_TAB_PIECE;
-					}
-
-
-					else*/
 					// Si c'est bien un caractère qui veut dire quelquechose on l'ajoute a la grille
 					if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE)
 					{
@@ -95,6 +79,12 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 	}
 
 	fclose(fichierListe);
+
+	// On initialise les autres variables pour avoir une valeur de départ
+	self->type = JOUEUR_ALEATOIRE;
+	self->couleur = L_RED;
+	self->curs_lig = 3;
+	self->curs_col = 3;
 }
 
 void joueurDesinit(t_Joueur * self)

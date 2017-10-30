@@ -10,6 +10,9 @@
 #define I_TAB_PIECE 5
 #define J_TAB_PIECE 5
 
+#define I_CENTRE_PIECE	-(I_TAB_PIECE-1)/2
+#define J_CENTRE_PIECE	-(J_TAB_PIECE-1)/2
+
 #define SYMB_PIECE '@'
 #define SYMB_PAS_PIECE '.'
 
@@ -32,6 +35,8 @@ Fonction qui permet la rotation d'une pièce dans le sens horaire.
 Modifie la grille en conséquence
 */
 void pieceRotation(t_Piece* self);
+// Fonction pour faire la rotation en sens inverse
+void pieceAntiRotation(t_Piece * self);
 
 // Fonction qui sert à inverser la pièce (la retourner)
 void inversionPiece(t_Piece * self);

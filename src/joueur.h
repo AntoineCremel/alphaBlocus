@@ -27,6 +27,10 @@ typedef struct Joueur
     // Variable qui définit la couleur des pièces d'un joueur.
     // Les constantes définissant les couleurs windows sont dans mainHeader.h
     char couleur;
+    // Variables qui contiennent la position du curseur du joueur
+    // Le curseur correspond à la case centrale de la pièce
+    int curs_lig;
+    int curs_col;
 }t_Joueur;
 
 //2 Prototypes des fonctions

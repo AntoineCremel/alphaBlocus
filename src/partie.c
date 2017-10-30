@@ -1,6 +1,6 @@
 #include "partie.h"
 
-void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, t_Controles touches, int n_joueurs, ...)
+void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_joueurs, ...)
 {
 	// 0 Variables
 	// Variable de la bibliotheque stdarg contenant tous les arguments contenus dans les ...
@@ -39,8 +39,15 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 	/// Pour l'instant la partie commence à l'état PARTIE_EN_COURS
 	self->state = PARTIE_EN_COURS;
 
+	// On met joueur actif à 0
+	self->joueurActif = n_joueurs/2 - 1;
+
+	// On initialise les variables de taille de partie
+	self->h_grid = h_grille;
+	self->w_grid = w_grille;
+
 	// 4 On initialise les controles
-	self->touches = touches;
+	loadControles(&self->touches);
 }
 
 void deinitialisationPartie(t_Partie * self)
@@ -64,4 +71,119 @@ void deinitialisationPartie(t_Partie * self)
 	}
 	free(self->grille);
 	self->grille = NULL;
+}
+
+char testDepassement(t_Partie * self)
+{
+	// 0 Variables
+	// 0.1 C'est dans ces deux int que l'on va stocker l'équivalent
+	//		de la case actuelle de la piece sur la grille
+	int i_gameGrid;
+	int j_gameGrid;
+
+	// 1 On parcourt les cases de la piece concernée,
+	// 		et on détermine s'il y en a qui dépassent
+	for(int i=0; i < I_TAB_PIECE; i++)
+	{
+		for(int j=0; j < J_TAB_PIECE; j++)
+		{
+			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			{
+				// On calcule la position de cette case sur la game_grid
+				i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
+				j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
+
+				if(i_gameGrid < 0
+					|| i_gameGrid >= self->h_grid)
+					// Si la piece dépasse d'un coté ou de l'autre en i
+					return 1;
+
+				if(j_gameGrid < 0
+					|| j_gameGrid >= self->w_grid)
+					// Si la pièce dépasse d'un côté ou de l'autre en j
+					return 1;
+			}
+		}
+	}
+	return 0;
+}
+
+char playCoup(t_Partie * self)
+{
+	// 0 Variables
+	char coin = 1;
+	// 0.1 C'est dans ces deux int que l'on va stocker l'équivalent
+	//		de la case actuelle de la piece sur la grille
+	int i_gameGrid;
+	int j_gameGrid;
+
+	// 1 On parcourt les cases de la piece
+	for(int i=0; i < I_TAB_PIECE; i++)
+	{
+		for(int j=0; j < J_TAB_PIECE; j++)
+		{
+			i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
+			j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
+			// 1.0 Dans le cas où se trouve bien une case de la piece
+			// 		à cet emplacement de la grille
+			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			{
+				// 1.1 On vérifie que l'on se trouve bien sur une case vide
+				if(self->grille[i_gameGrid][j_gameGrid] != CASE_VIDE)
+					return 1;
+
+				// 1.2 Ensuite, on vérifie que l'on n'est pas au bord de
+				// l'une de nos propres cases
+				if(self->grille[i_gameGrid - 1][j_gameGrid] == self->joueurActif
+					|| self->grille[i_gameGrid + 1][j_gameGrid] == self->joueurActif
+					|| self->grille[i_gameGrid][j_gameGrid - 1] == self->joueurActif
+					|| self->grille[i_gameGrid][j_gameGrid + 1] == self->joueurActif)
+					return 1;
+
+				// 1.3.0 Enfin, on voit si le coin d'une de nos pièces est en contact avec cette case
+				if(self->grille[i_gameGrid - 1][j_gameGrid - 1] == self->joueurActif
+					|| self->grille[i_gameGrid + 1][j_gameGrid - 1] == self->joueurActif
+					|| self->grille[i_gameGrid - 1][j_gameGrid + 1] == self->joueurActif
+					|| self->grille[i_gameGrid + 1][j_gameGrid + 1] == self->joueurActif)
+					coin = 0;
+			}
+		}
+	}
+
+	// 1.3.1 Si on n'a pas trouvé de coin, alors le coup n'est pas légal
+	if(coin == 1)
+		return 1;
+	// 2 Si l'on est arrivé ici sans faire de return 1, c'est que le coup est légal,
+	// il faut donc le jouer
+	// 2.0 On effectue une boucle pour placer chacune des cases de la piece sur la grille
+	for(int i=0; i < I_TAB_PIECE; i++)
+	{
+		for(int j=0; j < J_TAB_PIECE; j++)
+		{
+			i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
+			j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
+
+			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			{
+				// 2.1 On place la case correspondante sur la grille
+				self->grille[i_gameGrid][i_gameGrid] = self->joueurActif;
+			}
+		}
+	}
+	// 2.2 Un fois que toutes les cases de la pièce ont été placées sur la grille,
+	// on peut effacer la pièce de la liste de pièces du joueur actif
+	scrapAncre(&self->joueurListe[self->joueurActif]);
+
+	return 0;
+}
+
+void nextPlayer(t_Partie * self)
+{
+	// 0 Variables
+	int n_Players = sizeof(self->joueurListe) / sizeof(t_Joueur);
+
+	// 1 On incrémente activePlayer
+	self->joueurActif ++;
+	if(self->joueurActif >= n_Players)
+		self->joueurActif = 0;
 }
