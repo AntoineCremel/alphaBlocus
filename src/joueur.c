@@ -25,18 +25,24 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     t_Piece * pieceBuff;
     // 0.4 Caractère qui servira d'intermédiaire vers la grille des pièces
     char charBuff;
+    // 0.5 On initialise self->ancre
+    self->ancre = NULL;
 
     // 1 On lit les informations relatives a la taille des pieces
     // 1.0 Ouverture du fichier permettant de trouver tous les fichiers de pièces
     fichierListe = fopen(pieceFile, "r");
     if(fichierListe == NULL)
+	{
 		return;
+	}
+
 
     // 1.1 Boucle permettant d'ouvrir successivement tous les fichiers contenant les tailles de pièces.
     while(!feof(fichierListe))
 	{
 		// 1.1.0 Obtention du nom du fichier
 		fgets(fileName, TAILLE_FILE_NAME, fichierListe);
+
 		// On retire le saut a la ligne grace a notre fonction custom
 		takeOutEndLines(fileName);
 
@@ -56,18 +62,32 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 				for(int j=0; j < J_TAB_PIECE; j++)
 				{
 					// On lit le caractère
-					charBuff = (char)fgetc(fichierPiece);
+					do
+					{
+						charBuff = (char)fgetc(fichierPiece);
+					}while(charBuff == '\n');
+					/*
 					// Si c'est un carractere de fin de ligne on passe a la ligne suivante sur le tableau
 					if(charBuff == '\n')
+					{
+						printf("charBuff == \\n");
 						j = J_TAB_PIECE;
+					}
+
 					// Si c'est un caractère de fin de fichier il n'y a plus rien à ajouter à cette pièce
 					else if(charBuff == EOF)
+					{
+						printf("charBuff == EOF");
 						i = I_TAB_PIECE;
+					}
 
-					else
+
+					else*/
 					// Si c'est bien un caractère qui veut dire quelquechose on l'ajoute a la grille
-					//if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE)
+					if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE)
+					{
 						self->ancre->grille[i][j] = charBuff;
+					}
 				}
 			}
 			fclose(fichierPiece);
@@ -148,7 +168,18 @@ void addPieceAfter(t_Joueur * self, t_Piece * newPiece)
 
 		self->ancre = newPiece;
 	}
-	// Dans le cas ou il y a au moins deja une piece pour ce joueur,
+	// Dans le cas où il y a une seule piece pour ce joueur
+	else if(self->ancre->suivant == NULL)
+	{
+		newPiece->precedent = self->ancre;
+		newPiece->suivant = self->ancre;
+
+		self->ancre->suivant = newPiece;
+		self->ancre->precedent = newPiece;
+
+		self->ancre = newPiece;
+	}
+	// Dans le cas ou il y a au deja plusieurs pieces pour ce joueur,
 	//on ajoute celle ci a la suite et on fait pointer l'ancre dessus
 	else
 	{

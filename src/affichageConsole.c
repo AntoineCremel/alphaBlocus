@@ -38,24 +38,50 @@ void affichagePieceScrollConsole(t_Piece * self, int * lig, int * col, int colou
 	couleur d'arrière plan la couleur du joueur
 	*/
 	// 0 Variables
+	int lig_max = 0;
+	int col_max = 0;
+	int lig_min = I_TAB_PIECE;
+	int col_min = J_TAB_PIECE;
 
-	// 1 Boucle d'affichage
+	// 1 On trouve les dimensions de lig_min et col_min
 	for(int i=0; i < I_TAB_PIECE; i++)
 	{
 		for(int j=0; j < J_TAB_PIECE; j++)
 		{
-			if(self->grille == SYMB_PIECE)
+			if(self->grille[i][j] == SYMB_PIECE)
 			{
-				gotoligcol(*lig + i, *col + j);
+				if(i < lig_min)
+					lig_min = i;
+				if(j < col_min)
+					col_min = j;
+			}
+		}
+	}
+
+	// 2 Boucle d'affichage
+	for(int i=0; i < I_TAB_PIECE; i++)
+	{
+		for(int j=0; j < J_TAB_PIECE; j++)
+		{
+			if(self->grille[i][j] == SYMB_PIECE)
+			{
+				gotoligcol(*lig + i - lig_min, *col + j - col_min);
 				changeColour(0, colour);
 				printf(" ");
+
+				// On met à jour lig_max et col_max pour savoir quels sont les
+				// dimensions de la pièce que l'on affiche
+				if(i > lig_max)
+					lig_max = i;
+				if(j > col_max)
+					col_max = j;
 			}
 		}
 	}
 
 	// 2 On met à jour lig et col pour que la fonction qui a appelé sache où l'on s'est arrété
-	*lig += I_TAB_PIECE;
-	*col += J_TAB_PIECE;
+	*lig += lig_max - lig_min + 1;
+	*col += col_max - col_min + 1;
 }
 
 void affichageConsoleControles(t_Controles * self, int lig, int col)

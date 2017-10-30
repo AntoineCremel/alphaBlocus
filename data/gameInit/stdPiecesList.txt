@@ -1,2 +1,2 @@
-piece1.txt
-piece2.txt
+data/gameInit/piece1.txt
+data/gameInit/piece2.txt
