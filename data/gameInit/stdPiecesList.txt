@@ -1,2 +1,4 @@
 data/gameInit/piece1.txt
 data/gameInit/piece2.txt
+data/gameInit/piece3.txt
+data/gameInit/piece4.txt

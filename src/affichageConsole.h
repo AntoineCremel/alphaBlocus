@@ -17,6 +17,14 @@
 // Constante qui définit le nombre d'espaces à laisser entre chaque pièce
 #define LINES_BETWEEN_PIECES_IN_SCROLL	1
 
+// Constante qui définit le nombre de caractère que l'on utilise pour une case de la piece
+//		- Pour la zone de scroll :
+#define W_SQUARE_SCROLL 2
+
+// Definition de la couleur de fond
+//		- Pour la zone de scroll
+#define SCROLL_BACK_COLOUR WHITE
+
 // 1 Structures
 
 // 2 Prototypes de fonctions
@@ -42,6 +50,6 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
 // C'est cette fonction qui appellera pieceScrollConsole
 void affichageJoueurConsole(t_Joueur * self, int lig, int col);
 // Fonction qui sert à afficher une pièce dans la zone qui sert à choisir quelle pièce on va jouer
-void affichagePieceScrollConsole(t_Piece * self, int * lig, int * col, int colour);
+void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour);
 
 #endif // AFFICHAGECONSOLE_H_INCLUDED
