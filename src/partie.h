@@ -41,6 +41,8 @@ typedef struct Partie
     // Variables qui retiennent les dimensions de la matrice de jeu
     int h_grid;
     int w_grid;
+    // Variable qui retient le nombre de joueurs actifs
+    int n_Players;
 }t_Partie;
 
 //2 Prototype des fonctions
@@ -57,10 +59,10 @@ typedef struct Partie
 //				Chaque joueur que l'on ajoute doit avoir deux arguments : son type et sa couleur
 //
 //	Exemple d'utilisation :
-//		initialisationPartie(partie, 20, 20, PARTIE_STANDARD, JOUEUR_HUMAIN, ROUGE, JOUEUR_HUMAIN, YELLOW, JOUEUR_ALEATOIRE, PURPLE, JOUEUR_ALEATOIRE, AQUA);
+//		initialisationPartie(partie, 20, 20, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, ROUGE, JOUEUR_HUMAIN, YELLOW, JOUEUR_ALEATOIRE, PURPLE, JOUEUR_ALEATOIRE, AQUA);
 //		initialisera la structure partie avec une grille de 20*20, pour une partie standard, avec deux joueurs humains et deux ordinateurs
 //			jouant de manière aléatoire. Leurs couleurs seront, dans l'ordre : rouge, jaune, violet, turquoise
-void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_joueurs, ...);
+void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_arguments, ...);
 
 // Fonction pour libérer l'espace mémoire alloué lors de l'initialisation de la partie
 void deinitialisationPartie(t_Partie * self);

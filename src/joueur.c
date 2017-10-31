@@ -33,6 +33,7 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     fichierListe = fopen(pieceFile, "r");
     if(fichierListe == NULL)
 	{
+		printf("Le fichier de pieces n'a pas pu être lu\n");
 		return;
 	}
 
@@ -79,12 +80,6 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 	}
 
 	fclose(fichierListe);
-
-	// On initialise les autres variables pour avoir une valeur de départ
-	self->type = JOUEUR_ALEATOIRE;
-	self->couleur = L_RED;
-	self->curs_lig = 3;
-	self->curs_col = 3;
 }
 
 void joueurDesinit(t_Joueur * self)

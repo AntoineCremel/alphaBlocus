@@ -1,25 +1,30 @@
 #include "partie.h"
 
-void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_joueurs, ...)
+void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_arguments, ...)
 {
 	// 0 Variables
 	// Variable de la bibliotheque stdarg contenant tous les arguments contenus dans les ...
 	va_list valist;
 
 	// 0.1 On initialise la liste d'arguments
-	va_start(valist, n_joueurs);
+	va_start(valist, n_arguments);
 
 	// 1 Tout d'abord on initialise la liste de joueurs
 	// 1.0 On alloue la place mémoire nécessaire
-	self->joueurListe = (t_Joueur*)malloc((n_joueurs/2) * sizeof(t_Joueur));
+	self->joueurListe = (t_Joueur*)malloc((n_arguments/2) * sizeof(t_Joueur));
 	// 1.1 Ensuite on la remplit avec des joueurs que l'on initialise en même temps
-	for(int i=0; i < (n_joueurs/2); i++)
+	for(int i=0; i < (n_arguments/2); i++)
 	{
-		self->joueurListe[i].type = (char)va_arg(valist, int);
-		self->joueurListe[i].couleur = (char)va_arg(valist, int);
+		self->joueurListe[i].type = va_arg(valist, int);
+		self->joueurListe[i].couleur = va_arg(valist, int);
+
 		// 1.2 Creation du joueur
 		/// Pour l'instant seul un type de partie est pris en compte
-		joueurInitialisation(&self->joueurListe[i], "../data/gameInit/stdPiecesList.txt");
+		joueurInitialisation(&self->joueurListe[i], "data/gameInit/stdPiecesList.txt");
+
+		// On initialise la position du curseur
+		self->joueurListe[i].curs_lig = h_grille/2;
+		self->joueurListe[i].curs_col = w_grille/2;
 	}
 	// 1.3 Libération de la valist
 	va_end(valist);
@@ -40,11 +45,14 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 	self->state = PARTIE_EN_COURS;
 
 	// On met joueur actif à 0
-	self->joueurActif = n_joueurs/2 - 1;
+	self->joueurActif = n_arguments/2 - 1;
 
 	// On initialise les variables de taille de partie
 	self->h_grid = h_grille;
 	self->w_grid = w_grille;
+
+	// On initialise le nombre de joueur
+	self->n_Players = n_arguments/2;
 
 	// 4 On initialise les controles
 	loadControles(&self->touches);
@@ -180,10 +188,10 @@ char playCoup(t_Partie * self)
 void nextPlayer(t_Partie * self)
 {
 	// 0 Variables
-	int n_Players = sizeof(self->joueurListe) / sizeof(t_Joueur);
+	//printf("n_Players : %i\n", self->n_Players);
 
 	// 1 On incrémente activePlayer
-	self->joueurActif ++;
-	if(self->joueurActif >= n_Players)
+	self->joueurActif = self->joueurActif + 1;
+	if(self->joueurActif >= self->n_Players)
 		self->joueurActif = 0;
 }

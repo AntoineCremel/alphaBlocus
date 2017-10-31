@@ -6,9 +6,19 @@
 
 int main()
 {
-    printf("Ceci est un test\n");
+    /* 1 Test pour voir si tout fonctionne
+		Lancement d'une partie avec deux joueurs humains
+	*/
+	t_Partie game;
 
-    changeColour(WHITE, BLACK);
+	printf("Bijour la gazelle\n");
+
+	initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 4, JOUEUR_HUMAIN, RED, JOUEUR_HUMAIN, BLUE);
+
+	printf("Initialisation faite\n");
+	gameTurns(&game);
+
+	deinitialisationPartie(&game);
     ///Ajouter le code du projet :-D
     return 0;
 }

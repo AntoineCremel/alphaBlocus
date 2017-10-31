@@ -14,6 +14,9 @@ void gameTurns(t_Partie * game)
 	while(game->state == PARTIE_EN_COURS)
 	{
 		// 2.0 On change le joueur actif
+		/*
+		printf("Joueur actif : %i\n", game->joueurActif);
+		printf("Type : %i\n", game->joueurListe[game->joueurActif].type);*/
 		nextPlayer(game);
 
 		// 2.1 On effectue une action en fonction du joueur actif
@@ -31,6 +34,7 @@ void humanTurn(t_Partie * game)
 	char pressed;
 	char stay = 1;
 
+	affichageGame(game);
 	// 1 Boucle d'affichage et de mouvement possibles pour un joueur
 	while(stay == 1)
 	{

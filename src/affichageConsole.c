@@ -28,7 +28,16 @@ void changeColour(int letters, int backGround)
 
 void affichageGame(t_Partie * game)
 {
+	// 0 Variables
 
+	// 1 On affiche la grille
+	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+
+	// 2 On affiche la zone de scroll
+	affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
+
+	// En fin d'exécution, on place le curseur à un endroit nul pou qu'il ne nous gêne pas
+	gotoligcol(0, 0);
 }
 
 void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour)
@@ -66,7 +75,77 @@ void affichageConsoleControles(t_Controles * self, int lig, int col)
 
 void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
 {
+	// 0 Variables
 
+	// 1 Double boucle parcourant la grille de jeu pour afficher chaque pièce qui se trouve dessus
+	for(int i=0; i < self->h_grid; i++)
+	{
+		for(int j=0; j < self->w_grid; j++)
+		{
+			if(self->grille[i][j] == CASE_VIDE)
+			{
+				gotoligcol(lig + i, col + j * W_SQUARE);
+				changeColour(0, GRID_BACK_COLOUR);
+				for(int k=0; k < W_SQUARE; k++)
+					printf(" ");
+			}
+			else
+			{
+				gotoligcol(lig + i, col + j * W_SQUARE);
+				changeColour(0, self->joueurListe[(int)self->grille[i][j]].couleur);
+				for(int k=0; k < W_SQUARE; k++)
+					printf(" ");
+			}
+		}
+	}
+	affichageConsoleCurseur(self, lig, col);
+}
+void affichageConsoleCurseur(t_Partie * self, int lig, int col)
+{
+	// 0 Variables
+	int i_gameGrid;
+	int j_gameGrid;
+
+	// 1 Double boucle pour placer le curseur a l'endroit correspondant
+	for(int i=0; i < I_TAB_PIECE; i++)
+	{
+		for(int j=0; j < J_TAB_PIECE; j++)
+		{
+			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			{
+				// 1.0 On détermine à quelle case de la grille est censée se trouver cette case du curseur
+				i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
+				j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
+
+				//1.1 On se place à cet endroit
+				gotoligcol(lig + i_gameGrid, col + j_gameGrid * W_SQUARE);
+
+				// 1.2 On détermine ce qu'il faut afficher en fonction de ce qui se trouve déjà sur la grille
+				if(self->grille[i_gameGrid][j_gameGrid] == CASE_VIDE)
+				{
+					// 1.2.0 Dans le cas où la case en dessous est vide, on affiche un o
+					changeColour(self->joueurListe[self->joueurActif].couleur, GRID_BACK_COLOUR);
+					for(int k=0; k < W_SQUARE; k++)
+					printf("%c", SKIN_CURSEUR_VIDE);
+				}
+				else if(self->grille[i_gameGrid][j_gameGrid] == self->joueurActif)
+				{
+					//1.2.1 Dans le cas où la case en dessous est occupé par une pièce du joueur actif,
+					// on doit mettre une couleur de police particulière pour bien voir
+					changeColour(FONT_SAME_FRONT, self->joueurListe[self->joueurActif].couleur);
+					for(int k=0; k < W_SQUARE; k++)
+					printf("%c", SKIN_CURSEUR_INTERDIT);
+				}
+				else
+				{
+					changeColour(self->joueurListe[self->joueurActif].couleur,
+									self->joueurListe[(int)self->grille[i_gameGrid][j_gameGrid]].couleur);
+					for(int k=0; k < W_SQUARE; k++)
+					printf("%c", SKIN_CURSEUR_INTERDIT);
+				}
+			}
+		}
+	}
 }
 
 void affichageJoueurConsole(t_Joueur * self, int lig, int col)
@@ -108,7 +187,8 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col)
 		ligActuelle += LINES_BETWEEN_PIECES_IN_SCROLL + I_TAB_PIECE;
 		colActuelle = col + J_TAB_PIECE;
 		//	2.1.2 On scroll à travers la liste de pièces
-		scrollToSuivant(self);
+		if(i != PIECES_A_AFFICHER_AU_DESSUS + PIECES_A_AFFICHER_AU_DESSOUS)
+			scrollToSuivant(self);
 	}
 
 	// 3 On scroll pour revenir à l'ancre de départ

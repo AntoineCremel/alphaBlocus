@@ -23,6 +23,11 @@ void readControlesFile(t_Controles * self, char fileName[TAILLE_FILE_NAME])
 
 	// 1 Ouverture du fichier
 	fic = fopen(fileName, "r");
+	if(fic == NULL)
+	{
+		printf("Les controles n'ont pas pu se charger\n");
+		return;
+	}
 
 	// 2 On parcourt le fichier et on remplace les controles qui sont définis dans ce fichier
 	while(!feof(fic))
@@ -46,7 +51,7 @@ void readControlesFile(t_Controles * self, char fileName[TAILLE_FILE_NAME])
 		while(buf != '\n' && buf != '\0' && compt < SIZE_LINE - 1)
 		{
 			buf = read[compt];
-			if(buf != '\'')
+			if(buf != '\'' && buf != '\n')
 			{
 				touche = buf;
 			}

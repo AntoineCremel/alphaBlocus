@@ -18,12 +18,29 @@
 #define LINES_BETWEEN_PIECES_IN_SCROLL	1
 
 // Constante qui définit le nombre de caractère que l'on utilise pour une case de la piece
+#define W_SQUARE 2
 //		- Pour la zone de scroll :
-#define W_SQUARE_SCROLL 2
+#define W_SQUARE_SCROLL W_SQUARE
 
 // Definition de la couleur de fond
 //		- Pour la zone de scroll
-#define SCROLL_BACK_COLOUR WHITE
+#define SCROLL_BACK_COLOUR 	WHITE
+//		- Pour la grille de jeu
+#define GRID_BACK_COLOUR	L_BLACK
+
+// Definition de la couleur de police
+//		- Lorsque l'on voudrait mettre une couleur de police et de background qui seraient les même
+#define FONT_SAME_FRONT	BLACK
+
+// Definition des "skins" (lettres utilisées pour représenter différentes choses)
+#define SKIN_CURSEUR_VIDE	'O'
+#define SKIN_CURSEUR_INTERDIT	'X'
+
+// Definition de l'endroit de la console où l'on place chaque partie de l'affichage
+#define I_PLACE_GRID	0
+#define J_PLACE_GRID	0
+#define I_PLACE_SCROLL	0
+#define J_PLACE_SCROLL	40
 
 // 1 Structures
 
@@ -45,6 +62,8 @@ void affichageConsoleControles(t_Controles * self, int lig, int col);
 // Cette fonction permet d'afficher la grille de jeu. Elle prend en paramètre la structure de la partie,
 // ainsi que les coordonnées où la grille de jeu doit être affichée (lig et col désignent le point en haut à gauche)
 void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
+// Appelée par l'affiochage de la grille de jeu, cette fonction affiche le curseur sur la grille.
+void affichageConsoleCurseur(t_Partie * self, int lig, int col);
 
 // Cette fonction sert à afficher le joueur actif (les pièces dont il dispose)
 // C'est cette fonction qui appellera pieceScrollConsole
