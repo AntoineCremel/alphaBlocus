@@ -142,19 +142,54 @@ char playCoup(t_Partie * self)
 
 				// 1.2 Ensuite, on vérifie que l'on n'est pas au bord de
 				// l'une de nos propres cases
-				if(self->grille[i_gameGrid - 1][j_gameGrid] == self->joueurActif
-					|| self->grille[i_gameGrid + 1][j_gameGrid] == self->joueurActif
-					|| self->grille[i_gameGrid][j_gameGrid - 1] == self->joueurActif
-					|| self->grille[i_gameGrid][j_gameGrid + 1] == self->joueurActif)
-					return 1;
+				// Et on en profite pour chercher si l'on trouve le coin d'une de nos pièces
+				if(i_gameGrid > 0)
+				{
+					if(self->grille[i_gameGrid - 1][j_gameGrid] == self->joueurActif)
+						return 0;
 
-				// 1.3.0 Enfin, on voit si le coin d'une de nos pièces ou le coin de la grille
+					if(j_gameGrid > 0)
+					{
+						if(i_gameGrid == 0 && j_gameGrid == 0)
+							coin = 0;
+					}
+					if(j_gameGrid < self->w_grid - 1)
+					{
+						if(i_gameGrid == 0 && j_gameGrid == self->w_grid - 1)
+							coin = 0;
+					}
+				}
+				if(i_gameGrid < self->h_grid - 1)
+				{
+					if(self->grille[i_gameGrid + 1][j_gameGrid] == self->joueurActif)
+						return 0;
+
+					if(j_gameGrid > 0)
+					{
+						if(self->grille[i_gameGrid + 1][j_gameGrid - 1] == self->joueurActif)
+							coin = 0;
+					}
+					if(j_gameGrid < self->w_grid - 1)
+					{
+						if(self->grille[i_gameGrid + 1][j_gameGrid + 1] == self->joueurActif)
+							coin = 0;
+					}
+				}
+				if(j_gameGrid > 0)
+				{
+					if(self->grille[i_gameGrid][j_gameGrid - 1] == self->joueurActif)
+						return 0;
+				}
+				if(j_gameGrid < self->w_grid - 1)
+				{
+					if(self->grille[i_gameGrid][j_gameGrid + 1] == self->joueurActif)
+						return 0;
+				}
+
+				// 1.3.0 Enfin, on voit si le coin de la grille
 				// est en contact avec cette case
-				if(self->grille[i_gameGrid - 1][j_gameGrid - 1] == self->joueurActif
-					|| self->grille[i_gameGrid + 1][j_gameGrid - 1] == self->joueurActif
-					|| self->grille[i_gameGrid - 1][j_gameGrid + 1] == self->joueurActif
-					|| self->grille[i_gameGrid + 1][j_gameGrid + 1] == self->joueurActif
-					|| (i_gameGrid == 0 && j_gameGrid == 0)
+
+				if((i_gameGrid == 0 && j_gameGrid == 0)
 					|| (i_gameGrid == self->h_grid - 1 && j_gameGrid == 0)
 					|| (i_gameGrid == 0 && j_gameGrid == self->w_grid - 1)
 					|| (i_gameGrid == self->h_grid - 1 && j_gameGrid == self->w_grid - 1))
