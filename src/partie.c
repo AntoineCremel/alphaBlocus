@@ -89,6 +89,10 @@ char testDepassement(t_Partie * self)
 	int i_gameGrid;
 	int j_gameGrid;
 
+	// Dans le cas où il n'y pas de pièce à placer, on ne fait rien
+	if(self->joueurListe[self->joueurActif].ancre == NULL)
+		return;
+
 	// 1 On parcourt les cases de la piece concernée,
 	// 		et on détermine s'il y en a qui dépassent
 	for(int i=0; i < I_TAB_PIECE; i++)

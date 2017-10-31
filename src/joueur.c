@@ -124,8 +124,11 @@ void scrapAncre(t_Joueur * self)
 	pieceBuffer = self->ancre;
 
 	// 1.1 On soude les autres elements de la chaine ensemble, en dehors de la piece que l'on veut effacer
-	pieceBuffer->precedent->suivant = pieceBuffer->suivant;
-	pieceBuffer->suivant->precedent = pieceBuffer->precedent;
+	if(pieceBuffer->precedent != NULL && pieceBuffer->suivant != NULL)
+	{
+		pieceBuffer->precedent->suivant = pieceBuffer->suivant;
+		pieceBuffer->suivant->precedent = pieceBuffer->precedent;
+	}
 
 	//1.2 Ensuite, on teste si l'on a affaire au dernier maillon qui existe
 	if(pieceBuffer->precedent == pieceBuffer || pieceBuffer->precedent == NULL)
@@ -180,10 +183,12 @@ void addPieceAfter(t_Joueur * self, t_Piece * newPiece)
 
 void scrollToSuivant(t_Joueur * self)
 {
-	self->ancre = self->ancre->suivant;
+	if(self->ancre != NULL && self->ancre->suivant != NULL)
+		self->ancre = self->ancre->suivant;
 }
 
 void scrollToPrecedent(t_Joueur * self)
 {
-	self->ancre = self->ancre->precedent;
+	if(self->ancre != NULL && self->ancre->precedent != NULL)
+		self->ancre = self->ancre->precedent;
 }

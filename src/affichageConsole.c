@@ -48,6 +48,9 @@ void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour)
 	*/
 	// 0 Variables
 
+	// 1 On vérifie que la pièce existe
+	if(self == NULL)
+		return;
 
 	// 2 Boucle d'affichage
 	for(int i=0; i < I_TAB_PIECE; i++)
@@ -105,6 +108,10 @@ void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 	// 0 Variables
 	int i_gameGrid;
 	int j_gameGrid;
+
+	// Dans le cas où il n'y pas de pièce à placer, on ne fait rien
+	if(self->joueurListe[self->joueurActif].ancre == NULL)
+		return;
 
 	// 1 Double boucle pour placer le curseur a l'endroit correspondant
 	for(int i=0; i < I_TAB_PIECE; i++)
