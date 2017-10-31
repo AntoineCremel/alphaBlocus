@@ -146,23 +146,23 @@ char playCoup(t_Partie * self)
 				if(i_gameGrid > 0)
 				{
 					if(self->grille[i_gameGrid - 1][j_gameGrid] == self->joueurActif)
-						return 0;
+						return 1;
 
 					if(j_gameGrid > 0)
 					{
-						if(i_gameGrid == 0 && j_gameGrid == 0)
+						if(self->grille[i_gameGrid - 1][j_gameGrid - 1] == self->joueurActif)
 							coin = 0;
 					}
 					if(j_gameGrid < self->w_grid - 1)
 					{
-						if(i_gameGrid == 0 && j_gameGrid == self->w_grid - 1)
+						if(self->grille[i_gameGrid - 1][j_gameGrid + 1] == self->joueurActif)
 							coin = 0;
 					}
 				}
 				if(i_gameGrid < self->h_grid - 1)
 				{
 					if(self->grille[i_gameGrid + 1][j_gameGrid] == self->joueurActif)
-						return 0;
+						return 1;
 
 					if(j_gameGrid > 0)
 					{
@@ -178,12 +178,12 @@ char playCoup(t_Partie * self)
 				if(j_gameGrid > 0)
 				{
 					if(self->grille[i_gameGrid][j_gameGrid - 1] == self->joueurActif)
-						return 0;
+						return 1;
 				}
 				if(j_gameGrid < self->w_grid - 1)
 				{
 					if(self->grille[i_gameGrid][j_gameGrid + 1] == self->joueurActif)
-						return 0;
+						return 1;
 				}
 
 				// 1.3.0 Enfin, on voit si le coin de la grille
@@ -208,19 +208,26 @@ char playCoup(t_Partie * self)
 	{
 		for(int j=0; j < J_TAB_PIECE; j++)
 		{
-			i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
-			j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
-
 			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
 			{
+				i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
+				j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
+
 				// 2.1 On place la case correspondante sur la grille
-				self->grille[i_gameGrid][i_gameGrid] = self->joueurActif;
+				self->grille[i_gameGrid][j_gameGrid] = self->joueurActif;
 			}
 		}
 	}
 	// 2.2 Un fois que toutes les cases de la pièce ont été placées sur la grille,
 	// on peut effacer la pièce de la liste de pièces du joueur actif
 	scrapAncre(&self->joueurListe[self->joueurActif]);
+
+	// 3 Une fois que l'on a fait cela, on s'assure que la nouvelle pièce ne dépasse pas de la grille
+	if(testDepassement(self) == 1)
+	{
+		self->joueurListe[self->joueurActif].curs_lig = self->h_grid / 2;
+		self->joueurListe[self->joueurActif].curs_col = self->w_grid / 2;
+	}
 
 	return 0;
 }
