@@ -10,7 +10,7 @@
 #include "affichageConsole.h"
 
 // 0 Constantes
-#define DELAY_BET_FRAMES 0.2
+#define DELAY_BET_FRAMES 0.05
 
 //1 Structures
 

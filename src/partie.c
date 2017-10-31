@@ -148,11 +148,16 @@ char playCoup(t_Partie * self)
 					|| self->grille[i_gameGrid][j_gameGrid + 1] == self->joueurActif)
 					return 1;
 
-				// 1.3.0 Enfin, on voit si le coin d'une de nos pièces est en contact avec cette case
+				// 1.3.0 Enfin, on voit si le coin d'une de nos pièces ou le coin de la grille
+				// est en contact avec cette case
 				if(self->grille[i_gameGrid - 1][j_gameGrid - 1] == self->joueurActif
 					|| self->grille[i_gameGrid + 1][j_gameGrid - 1] == self->joueurActif
 					|| self->grille[i_gameGrid - 1][j_gameGrid + 1] == self->joueurActif
-					|| self->grille[i_gameGrid + 1][j_gameGrid + 1] == self->joueurActif)
+					|| self->grille[i_gameGrid + 1][j_gameGrid + 1] == self->joueurActif
+					|| (i_gameGrid == 0 && j_gameGrid == 0)
+					|| (i_gameGrid == self->h_grid - 1 && j_gameGrid == 0)
+					|| (i_gameGrid == 0 && j_gameGrid == self->w_grid - 1)
+					|| (i_gameGrid == self->h_grid - 1 && j_gameGrid == self->w_grid - 1))
 					coin = 0;
 			}
 		}

@@ -3,7 +3,7 @@ b:s
 g:q
 d:d
 r:r
-c:a
+c:' '
 p:i
 s:k
 i:o

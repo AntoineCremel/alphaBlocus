@@ -9,14 +9,13 @@ void gameTurns(t_Partie * game)
 	// 0 Variables
 
 	// 1 Initialisation
+	// Affichage de l'ensemble de la partie
+	affichageGame(game);
 
 	// 2 Boucle de tours
 	while(game->state == PARTIE_EN_COURS)
 	{
 		// 2.0 On change le joueur actif
-		/*
-		printf("Joueur actif : %i\n", game->joueurActif);
-		printf("Type : %i\n", game->joueurListe[game->joueurActif].type);*/
 		nextPlayer(game);
 
 		// 2.1 On effectue une action en fonction du joueur actif
@@ -46,9 +45,6 @@ void humanTurn(t_Partie * game)
 			stay = treatInput(game, pressed);
 		}
 
-		// Affichage de l'ensemble de la partie
-		affichageGame(game);
-
 		// Attente
 		waitSeconds(DELAY_BET_FRAMES);
 	}
@@ -72,53 +68,82 @@ char treatInput(t_Partie * game, char pressed)
 		game->joueurListe[game->joueurActif].curs_lig--;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_lig++;
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.bas)
 	{
 		game->joueurListe[game->joueurActif].curs_lig++;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_lig--;
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.gauche)
 	{
 		game->joueurListe[game->joueurActif].curs_col--;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_col++;
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.droite)
 	{
 		game->joueurListe[game->joueurActif].curs_col++;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_col--;
+
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.rotation)
 	{
 		pieceRotation(game->joueurListe[game->joueurActif].ancre);
+		// On teste si ce mouvement fait sortir des cases ou non
 		if(testDepassement(game))
 			pieceAntiRotation(game->joueurListe[game->joueurActif].ancre);
+
+		// On affiche la zone des pièces
+		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+
 	}
 	else if(pressed == game->touches.inversion)
 	{
 		inversionPiece(game->joueurListe[game->joueurActif].ancre);
+
 		if(testDepassement(game))
 			inversionPiece(game->joueurListe[game->joueurActif].ancre);
+
+		// On affiche la zone des pièces
+		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.scrollBas)
 	{
 		scrollToSuivant(&game->joueurListe[game->joueurActif]);
+
 		if(testDepassement(game))
 			scrollToPrecedent(&game->joueurListe[game->joueurActif]);
+
+		// On affiche la zone des pièces
+		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.scrollHaut)
 	{
 		scrollToPrecedent(&game->joueurListe[game->joueurActif]);
+
 		if(testDepassement(game))
 			scrollToSuivant(&game->joueurListe[game->joueurActif]);
+
+		// On affiche la zone des pièces
+		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 	}
 	else if(pressed == game->touches.selectionner)
 	{
 		if(playCoup(game) == 0)
+		{
+			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 			return 0;
+		}
 	}
 	else if(pressed == game->touches.quitter)
 	{
