@@ -19,5 +19,5 @@ void waitSeconds(float seconds)
 	// 1 Definition de l'heure a laquelle on veut attendre
 	end = clock() + seconds * CLOCKS_PER_SEC;
 
-	while(clock() != end);
+	while(clock() < end);
 }
