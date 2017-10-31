@@ -31,6 +31,9 @@ typedef struct Joueur
     // Le curseur correspond à la case centrale de la pièce
     int curs_lig;
     int curs_col;
+    // Variable qui indique si le joueur est encore capable de jouer où si toutes
+    //  ses options sont bloquées, auquel cas il faut passer son tour
+    char bloque;
 }t_Joueur;
 
 //2 Prototypes des fonctions

@@ -25,6 +25,9 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 		// On initialise la position du curseur
 		self->joueurListe[i].curs_lig = h_grille/2;
 		self->joueurListe[i].curs_col = w_grille/2;
+
+		// On initialise la variable de deadlock
+		self->joueurListe[i].bloque = 0;
 	}
 	// 1.3 Libération de la valist
 	va_end(valist);
@@ -105,6 +108,7 @@ char testDepassement(t_Partie * self)
 				i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
 				j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
 
+
 				if(i_gameGrid < 0
 					|| i_gameGrid >= self->h_grid)
 					// Si la piece dépasse d'un coté ou de l'autre en i
@@ -114,6 +118,25 @@ char testDepassement(t_Partie * self)
 					|| j_gameGrid >= self->w_grid)
 					// Si la pièce dépasse d'un côté ou de l'autre en j
 					return 1;
+				// On vérifie que la pièce ne dépasse pas
+				/*
+				if(i_gameGrid < 0)
+				{
+					self->joueurListe[self->joueurActif].curs_lig++;
+				}
+				else if(i_gameGrid >= self->h_grid)
+				{
+					self->joueurListe[self->joueurActif].curs_lig--;
+				}
+				else if(j_gameGrid < 0)
+				{
+					self->joueurListe[self->joueurActif].curs_col++;
+				}
+				else if(j_gameGrid >= self->w_grid)
+				{
+					self->joueurListe[self->joueurActif].curs_col--;
+				}
+				*/
 			}
 		}
 	}

@@ -19,11 +19,18 @@ void gameTurns(t_Partie * game)
 		nextPlayer(game);
 
 		// 2.1 On effectue une action en fonction du joueur actif
-		if(game->joueurListe[game->joueurActif].type == JOUEUR_HUMAIN)
-			humanTurn(game);
+		if(game->joueurListe[game->joueurActif].type)
+		{
+			if(game->joueurListe[game->joueurActif].type == JOUEUR_HUMAIN)
+				humanTurn(game);
 
-		else if(game->joueurListe[game->joueurActif].type == JOUEUR_ALEATOIRE)
-			aleaTurn(game);
+			else if(game->joueurListe[game->joueurActif].type == JOUEUR_ALEATOIRE)
+				aleaTurn(game);
+		}
+		else
+		{
+			/// Ecrire un ecran pour indiquer que ce joueur est bloqué et ne peut plus jouer
+		}
 	}
 }
 
@@ -38,15 +45,13 @@ void humanTurn(t_Partie * game)
 	while(stay == 1)
 	{
 		// 1.0 Detection de l'appui d'une touche
-		if(kbhit())
-		{
-			pressed = getch();
-			// 1.1 On traite l'input du joueur pour savoir ce qu'il veut faire
-			stay = treatInput(game, pressed);
-		}
+		pressed = getch();
+		// 1.1 On traite l'input du joueur pour savoir ce qu'il veut faire
+		stay = treatInput(game, pressed);
 
 		// Attente
-		waitSeconds(DELAY_BET_FRAMES);
+		// Pas nécessaire puisque l'on affiche la grille que lorsque l'on effectue un mouvement
+		//waitSeconds(DELAY_BET_FRAMES);
 	}
 }
 void aleaTurn(t_Partie * game)
