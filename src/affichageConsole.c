@@ -101,6 +101,7 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
 			}
 		}
 	}
+	affichageConsoleStart(self, lig, col);
 	affichageConsoleCurseur(self, lig, col);
 }
 void affichageConsoleCurseur(t_Partie * self, int lig, int col)
@@ -151,6 +152,24 @@ void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 					printf("%c", SKIN_CURSEUR_INTERDIT);
 				}
 			}
+		}
+	}
+}
+void affichageConsoleStart(t_Partie * self, int lig, int col)
+{
+	// 0 Variables
+
+	// Boucle pour parcourir les joueurs
+	for(int i=0; i < self->n_Players; i++)
+	{
+		if(self->joueurListe[i].start_lig != OUT_BOUND
+		&& self->joueurListe[i].start_col != OUT_BOUND)
+		{
+			changeColour(self->joueurListe[i].couleur, GRID_BACK_COLOUR);
+			gotoligcol(self->joueurListe[i].start_lig, W_SQUARE * self->joueurListe[i].start_col);
+
+			for(int k=0; k < W_SQUARE; k++)
+				printf("%c", SKIN_START);
 		}
 	}
 }

@@ -34,6 +34,9 @@ typedef struct Joueur
     // Variable qui indique si le joueur est encore capable de jouer où si toutes
     //  ses options sont bloquées, auquel cas il faut passer son tour
     char bloque;
+    // Variables qui indique la position de départ du joueur
+    int start_lig;
+    int start_col;
 }t_Joueur;
 
 //2 Prototypes des fonctions

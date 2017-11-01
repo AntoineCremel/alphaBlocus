@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1509441808 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
+1509551770 source:c:\users\antoine\documents\ece\programmation\projet\blocus\main.c
 	<stdio.h>
 	<stdlib.h>
+	<time.h>
 	"src/gameLoop.h"
 	"src/joueur.h"
 
@@ -15,22 +16,22 @@
 1509491656 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.c
 	"joueur.h"
 
-1509526763 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
+1509551770 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.c
 	"partie.h"
 
-1509492614 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
+1509551671 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.c
 	"affichageConsole.h"
 
-1509440744 c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.h
+1509551853 c:\users\antoine\documents\ece\programmation\projet\blocus\src\affichageconsole.h
 	<windows.h>
 	"mainHeader.h"
 	"controles.h"
 	"partie.h"
 
-1509530414 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.c
+1509547158 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.c
 	"gameLoop.h"
 
-1509495934 c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.h
+1509545555 c:\users\antoine\documents\ece\programmation\projet\blocus\src\joueur.h
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
@@ -41,7 +42,7 @@
 1509015221 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\menu.c
 	"mainHeader.h"
 
-1509526764 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
+1509546682 c:\users\antoine\documents\ece\programmation\projet\blocus\src\partie.h
 	<stdarg.h>
 	"joueur.h"
 	"controles.h"
@@ -61,8 +62,7 @@
 1509471648 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\toolbox\tools.c
 	"tools.h"
 
-1509445844 c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.h
-	<conio.h>
+1509547158 c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.h
 	"mainHeader.h"
 	"partie.h"
 	"controles.h"

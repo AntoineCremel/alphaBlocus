@@ -21,6 +21,9 @@ le prototype des fonctions liées à la gestion de cette partie
 // Pour définir ce qui est contenu dans la case
 #define CASE_VIDE 50
 
+// Pour définir une case qui ne sera jamais dans la grille
+#define OUT_BOUND		-1
+
 //1 Définition de la structure
 typedef struct Partie
 {
@@ -55,11 +58,12 @@ typedef struct Partie
 //		char partieType : Nombre d'arguments voulus
 //		int num_arguments : nombre d'arguments dans les ...
 //			-> Cette fonction prend un nombre d'argument variable.
-//				Ces arguments sont des chars et servent à définir les joueurs voulus.
-//				Chaque joueur que l'on ajoute doit avoir deux arguments : son type et sa couleur
+//				Ces arguments sont des ints et servent à définir les joueurs voulus.
+//				Chaque joueur que l'on ajoute doit avoir 4 arguments : son type, sa couleur, et sa position de départ (lig et col)
+//					(IE : l'endroit sur lequel la première pièce du joueur doit être placée)
 //
 //	Exemple d'utilisation :
-//		initialisationPartie(partie, 20, 20, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, ROUGE, JOUEUR_HUMAIN, YELLOW, JOUEUR_ALEATOIRE, PURPLE, JOUEUR_ALEATOIRE, AQUA);
+//		initialisationPartie(partie, 20, 20, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, ROUGE, -1, -1, JOUEUR_HUMAIN, YELLOW, -1, 20, JOUEUR_ALEATOIRE, PURPLE, 20, 20, JOUEUR_ALEATOIRE, AQUA, -1, -1);
 //		initialisera la structure partie avec une grille de 20*20, pour une partie standard, avec deux joueurs humains et deux ordinateurs
 //			jouant de manière aléatoire. Leurs couleurs seront, dans l'ordre : rouge, jaune, violet, turquoise
 void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_arguments, ...);

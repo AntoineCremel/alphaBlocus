@@ -35,6 +35,7 @@
 // Definition des "skins" (lettres utilisées pour représenter différentes choses)
 #define SKIN_CURSEUR_VIDE	'O'
 #define SKIN_CURSEUR_INTERDIT	'X'
+#define SKIN_START				'A'
 
 // Definition de l'endroit de la console où l'on place chaque partie de l'affichage
 #define I_PLACE_GRID	0
@@ -64,6 +65,8 @@ void affichageConsoleControles(t_Controles * self, int lig, int col);
 void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
 // Appelée par l'affiochage de la grille de jeu, cette fonction affiche le curseur sur la grille.
 void affichageConsoleCurseur(t_Partie * self, int lig, int col);
+// Affichage des cases de départ
+void affichageConsoleStart(t_Partie * self, int lig, int col);
 
 // Cette fonction sert à afficher le joueur actif (les pièces dont il dispose)
 // C'est cette fonction qui appellera pieceScrollConsole

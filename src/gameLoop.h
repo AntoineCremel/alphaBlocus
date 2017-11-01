@@ -1,8 +1,6 @@
 #ifndef GAMELOOP_H_INCLUDED
 #define GAMELOOP_H_INCLUDED
 
-#include <conio.h>
-
 #include "mainHeader.h"
 #include "partie.h"
 #include "controles.h"
