@@ -82,4 +82,6 @@ char playCoup(t_Partie * self);
 
 void nextPlayer(t_Partie * self);
 
+void testBloc(t_Partie * self);
+
 #endif // PARTIE_H_INCLUDED

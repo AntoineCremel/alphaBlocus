@@ -53,9 +53,12 @@ void humanTurn(t_Partie * game)
 		// Pas nécessaire puisque l'on affiche la grille que lorsque l'on effectue un mouvement
 		//waitSeconds(DELAY_BET_FRAMES);
 	}
+	// 2 On test si le joueur est maintenant bloqué
+
 }
 void aleaTurn(t_Partie * game)
 {
+	// 0 Variables
 
 }
 

@@ -13,7 +13,7 @@ int main()
 
 	printf("Bijour la gazelle\n");
 
-	initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 4, JOUEUR_HUMAIN, RED, JOUEUR_HUMAIN, BLUE);
+	initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 4, JOUEUR_HUMAIN, RED, JOUEUR_HUMAIN, L_RED);
 
 	printf("Initialisation faite\n");
 	gameTurns(&game);

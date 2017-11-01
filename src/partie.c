@@ -109,6 +109,7 @@ char testDepassement(t_Partie * self)
 				j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
 
 
+				/*
 				if(i_gameGrid < 0
 					|| i_gameGrid >= self->h_grid)
 					// Si la piece dépasse d'un coté ou de l'autre en i
@@ -117,9 +118,9 @@ char testDepassement(t_Partie * self)
 				if(j_gameGrid < 0
 					|| j_gameGrid >= self->w_grid)
 					// Si la pièce dépasse d'un côté ou de l'autre en j
-					return 1;
+					return 1;*/
 				// On vérifie que la pièce ne dépasse pas
-				/*
+
 				if(i_gameGrid < 0)
 				{
 					self->joueurListe[self->joueurActif].curs_lig++;
@@ -136,7 +137,7 @@ char testDepassement(t_Partie * self)
 				{
 					self->joueurListe[self->joueurActif].curs_col--;
 				}
-				*/
+
 			}
 		}
 	}
@@ -268,4 +269,9 @@ void nextPlayer(t_Partie * self)
 	self->joueurActif = self->joueurActif + 1;
 	if(self->joueurActif >= self->n_Players)
 		self->joueurActif = 0;
+}
+
+void testBloc(t_Partie * self)
+{
+
 }
