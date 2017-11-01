@@ -19,7 +19,7 @@ void gameTurns(t_Partie * game)
 		nextPlayer(game);
 
 		// 2.1 On effectue une action en fonction du joueur actif
-		if(game->joueurListe[game->joueurActif].type)
+		if(!game->joueurListe[game->joueurActif].bloque)
 		{
 			if(game->joueurListe[game->joueurActif].type == JOUEUR_HUMAIN)
 				humanTurn(game);
