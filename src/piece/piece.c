@@ -28,6 +28,9 @@ void pieceRotation(t_Piece * self)
 			self->grille[i][j] = buffer[i][j];
 		}
 	}
+
+	// On met à jour l'orientation
+	self->orientation = (self->orientation + 1) % 4;
 }
 
 void pieceAntiRotation(t_Piece * self)
@@ -53,6 +56,9 @@ void pieceAntiRotation(t_Piece * self)
 			self->grille[i][j] = buffer[i][j];
 		}
 	}
+
+	// On met à jour l'orientation
+	self->orientation = (self->orientation + 3) % 4;
 }
 
 void inversionPiece(t_Piece * self)
@@ -78,4 +84,7 @@ void inversionPiece(t_Piece * self)
 			self->grille[i][j] = buffer[i][j];
 		}
 	}
+
+	// On met à jour l'inversion de la pièce
+	self->inversion = (self->inversion + 1) % 2;
 }

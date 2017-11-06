@@ -58,6 +58,10 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 			// 1.1.2.1 On met la piece dans la chaine
 			addPieceAfter(self, pieceBuff);
 
+			// Initialisation de l'orientation de la pièce
+			self->ancre->inversion = 0;
+			self->ancre->orientation = 0;
+
 			for(int i=0; i < I_TAB_PIECE; i++)
 			{
 				for(int j=0; j < J_TAB_PIECE; j++)
