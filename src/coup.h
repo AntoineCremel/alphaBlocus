@@ -13,10 +13,25 @@ typedef struct Coup
 	// Variables de position
 	int curs_i;
 	int curs_y;
-
 	// Variables qui indiquent la rotation de la pièce
 	char rotation;
 	char inversion;
+
+	// Pointeur de la liste chaînée
+	struct Coup * suivant;
 }t_Coup;
+
+typedef struct Coin
+{
+	// Variables de position
+	int i;
+	int j;
+
+	// Pointeur sur Coup
+	t_Coup * ancre;
+}t_Coin;
+
+// 2 Prototypes de fonction
+
 
 #endif // COUP_H_INCLUDED

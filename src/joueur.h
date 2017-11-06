@@ -8,6 +8,7 @@
 #include "piece/piece.h"
 #include "toolbox/tools.h"
 #include "mainHeader.h"
+#include "coup.h"
 
 /*
 Ce fichier contiendra la structure et les définitions des fonctions nécessaires au fonctionnement d'un joueur.
@@ -22,6 +23,8 @@ typedef struct Joueur
 {
     // Pointeur vers la liste chaînée de pièces destinées au joueur
     t_Piece * ancre;
+    // Double pointeur vers une liste de coups accessibles au joueur en cours
+    t_Coup * possibilites;
     // Variable pour définir le type de joueur (AI, aléatoire, joueur humain)
     char type;
     // Variable qui définit la couleur des pièces d'un joueur.

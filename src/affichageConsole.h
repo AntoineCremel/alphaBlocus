@@ -2,6 +2,7 @@
 #define AFFICHAGECONSOLE_H_INCLUDED
 
 #include <windows.h>
+
 #include "mainHeader.h"
 #include "controles.h"
 #include "partie.h"
