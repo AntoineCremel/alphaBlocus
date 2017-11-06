@@ -14,7 +14,7 @@ int main()
 	t_Partie game;
 	srand(time(NULL));
 
-	initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 0, 0, JOUEUR_HUMAIN, BLUE, 13, 13);
+	initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, RED, 0, 0, JOUEUR_HUMAIN, BLUE, 0, 19, JOUEUR_HUMAIN, AQUA, 19, 19, JOUEUR_HUMAIN, YELLOW, 19, 0);
 
 	printf("Initialisation faite\n");
 	gameTurns(&game);

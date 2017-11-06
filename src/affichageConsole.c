@@ -63,7 +63,7 @@ void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour)
 			{
 
 				// Affichage a partir du centre
-				gotoligcol(lig - (I_TAB_PIECE-1)/2 + i, W_SQUARE_SCROLL*(col - (J_TAB_PIECE-1) + j));
+				gotoligcol(lig - (I_TAB_PIECE)/2 + i, W_SQUARE_SCROLL*(col - (J_TAB_PIECE * W_SQUARE_SCROLL) / 2 + j));
 				changeColour(0, colour);
 
 				for(int k=0; k < W_SQUARE_SCROLL; k++)
@@ -134,7 +134,7 @@ void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 				if(self->grille[i_gameGrid][j_gameGrid] == CASE_VIDE)
 				{
 					// 1.2.0 Dans le cas où la case en dessous est vide, on affiche un o
-					changeColour(self->joueurListe[self->joueurActif].couleur, GRID_BACK_COLOUR);
+					changeColour(self->joueurListe[self->joueurActif].couleur, (self->joueurListe[self->joueurActif].couleur + 8)%16);
 					for(int k=0; k < W_SQUARE; k++)
 					printf("%c", SKIN_CURSEUR_VIDE);
 				}
@@ -142,14 +142,13 @@ void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 				{
 					//1.2.1 Dans le cas où la case en dessous est occupé par une pièce du joueur actif,
 					// on doit mettre une couleur de police particulière pour bien voir
-					changeColour(FONT_SAME_FRONT, self->joueurListe[self->joueurActif].couleur);
+					changeColour(self->joueurListe[self->joueurActif].couleur, (self->joueurListe[self->joueurActif].couleur + 8)%16);
 					for(int k=0; k < W_SQUARE; k++)
 					printf("%c", SKIN_CURSEUR_INTERDIT);
 				}
 				else
 				{
-					changeColour(self->joueurListe[self->joueurActif].couleur,
-									self->joueurListe[(int)self->grille[i_gameGrid][j_gameGrid]].couleur);
+					changeColour(self->joueurListe[self->joueurActif].couleur, (self->joueurListe[self->joueurActif].couleur + 8)%16);
 					for(int k=0; k < W_SQUARE; k++)
 					printf("%c", SKIN_CURSEUR_INTERDIT);
 				}
@@ -168,7 +167,7 @@ void affichageConsoleStart(t_Partie * self, int lig, int col)
 		&& self->joueurListe[i].start_col != OUT_BOUND)
 		{
 			changeColour(self->joueurListe[i].couleur, GRID_BACK_COLOUR);
-			gotoligcol(self->joueurListe[i].start_lig, W_SQUARE * self->joueurListe[i].start_col);
+			gotoligcol(self->joueurListe[i].start_lig + lig, W_SQUARE * self->joueurListe[i].start_col + col);
 
 			for(int k=0; k < W_SQUARE; k++)
 				printf("%c", SKIN_START);
@@ -192,7 +191,7 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col)
 	// 1 On commence par colorer une zone taille fixe
 	for(int i=0; i < (I_TAB_PIECE + LINES_BETWEEN_PIECES_IN_SCROLL) * (PIECES_A_AFFICHER_AU_DESSUS + 1 + PIECES_A_AFFICHER_AU_DESSOUS); i++)
 	{
-		for(int j=0; j < J_TAB_PIECE * W_SQUARE_SCROLL; j++)
+		for(int j=0; j < J_TAB_PIECE; j++)
 		{
 			gotoligcol(lig + i, W_SQUARE_SCROLL * (col + j));
 			changeColour(0, SCROLL_BACK_COLOUR);
