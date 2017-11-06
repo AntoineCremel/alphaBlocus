@@ -62,7 +62,8 @@
 1509471648 source:c:\users\antoine\documents\ece\programmation\projet\blocus\src\toolbox\tools.c
 	"tools.h"
 
-1509547158 c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.h
+1509979757 c:\users\antoine\documents\ece\programmation\projet\blocus\src\gameloop.h
+	<conio.h>
 	"mainHeader.h"
 	"partie.h"
 	"controles.h"
