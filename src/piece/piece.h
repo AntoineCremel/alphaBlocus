@@ -25,6 +25,13 @@ typedef struct Piece
     // Pointeurs nécessaires au fonctionnement d'une liste chaînée.
     struct Piece * precedent;
     struct Piece * suivant;
+
+    // Char qui retient l'orientation de la pièce
+    char orientation; // Retient le nombre de rotations dans le sens des aiguilles d'une montre
+    char inversion;  // Retient si la pièce a été inversée
+
+    // Variable qui retient le numéro de la pièce
+    int number;
 }t_Piece;
 
 
