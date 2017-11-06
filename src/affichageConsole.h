@@ -33,7 +33,7 @@
 #define FONT_SAME_FRONT	BLACK
 
 // Definition des "skins" (lettres utilisées pour représenter différentes choses)
-#define SKIN_CURSEUR_VIDE	'O'
+#define SKIN_CURSEUR_VIDE	' '
 #define SKIN_CURSEUR_INTERDIT	'X'
 #define SKIN_START				'A'
 
@@ -41,7 +41,7 @@
 #define I_PLACE_GRID	0
 #define J_PLACE_GRID	0
 #define I_PLACE_SCROLL	0
-#define J_PLACE_SCROLL	40
+#define J_PLACE_SCROLL	30
 
 // 1 Structures
 
