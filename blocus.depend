@@ -69,3 +69,73 @@
 	"toolbox/tools.h"
 	"affichageConsole.h"
 
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"src/gameLoop.h"
+	"src/joueur.h"
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\gameloop.h
+	"mainHeader.h"
+	"partie.h"
+	"controles.h"
+	"toolbox/tools.h"
+	"affichageConsole.h"
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\mainheader.h
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\partie.h
+	<stdarg.h>
+	"joueur.h"
+	"controles.h"
+	"mainHeader.h"
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\joueur.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"piece/piece.h"
+	"toolbox/tools.h"
+	"mainHeader.h"
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\piece\piece.h
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\toolbox\tools.h
+	<time.h>
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\controles.h
+	<stdio.h>
+	<string.h>
+	"mainHeader.h"
+
+1509979603 c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\affichageconsole.h
+	<windows.h>
+	"mainHeader.h"
+	"controles.h"
+	"partie.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\affichageconsole.c
+	"affichageConsole.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\controles.c
+	"controles.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\gameloop.c
+	"gameLoop.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\joueur.c
+	"joueur.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\menu.c
+	"mainHeader.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\partie.c
+	"partie.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\piece\piece.c
+	"piece.h"
+
+1509979603 source:c:\users\julien\desktop\ \ing3 tdu03b\projet informatique (blocus)\blocus\src\toolbox\tools.c
+	"tools.h"
+
