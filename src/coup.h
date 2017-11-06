@@ -29,6 +29,8 @@ typedef struct Coin
 
 	// Pointeur sur Coup
 	t_Coup * ancre;
+	// Pointeur pour continuer la liste chaînée de points
+	struct Coin * suivant;
 }t_Coin;
 
 // 2 Prototypes de fonction

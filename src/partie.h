@@ -84,8 +84,11 @@ char testDepassement(t_Partie * self);
 */
 char playCoup(t_Partie * self);
 
+// Fonction pour passer au joueur suivant
 void nextPlayer(t_Partie * self);
 
-void testBloc(t_Partie * self);
+/// Pour les coins
+// Fonction pour trouver tous les coups possibles à partir d'un coin donné
+void findAllPlaysHere()
 
 #endif // PARTIE_H_INCLUDED

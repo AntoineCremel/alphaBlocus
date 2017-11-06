@@ -33,6 +33,8 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 
 		// On initialise la variable de deadlock
 		self->joueurListe[i].bloque = 0;
+		// On initialise la liste chaînée de coups possibles
+
 	}
 	// 1.3 Libération de la valist
 	va_end(valist);
@@ -310,9 +312,4 @@ void nextPlayer(t_Partie * self)
 	self->joueurActif = self->joueurActif + 1;
 	if(self->joueurActif >= self->n_Players)
 		self->joueurActif = 0;
-}
-
-void testBloc(t_Partie * self)
-{
-
 }

@@ -90,7 +90,7 @@ void joueurDesinit(t_Joueur * self)
 {
 	// 0 Variables
 
-	// 1 On effctue une boucle dans la liste chainee afin d'effacer toutes les pieces
+	// 1 On effectue une boucle dans la liste chainee afin d'effacer toutes les pieces
 	while(self->ancre != NULL)
 	{
 		scrapAncre(self);
@@ -195,4 +195,18 @@ void scrollToPrecedent(t_Joueur * self)
 {
 	if(self->ancre != NULL && self->ancre->precedent != NULL)
 		self->ancre = self->ancre->precedent;
+}
+
+char testBloc(t_Joueur * self)
+{
+	if(!self->possibilites)
+	{
+		self->bloque = 1;
+		return 1;
+	}
+	else
+	{
+		self->bloque = 0;
+		return 0;
+	}
 }

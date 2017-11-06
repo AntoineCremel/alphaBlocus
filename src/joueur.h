@@ -23,8 +23,9 @@ typedef struct Joueur
 {
     // Pointeur vers la liste chaînée de pièces destinées au joueur
     t_Piece * ancre;
-    // Double pointeur vers une liste de coups accessibles au joueur en cours
-    t_Coup * possibilites;
+    // Liste chaînée de coin.
+    // A chaque maillon de cette liste s'accroche une liste chaînée de coups possibles depuis ce coin
+    t_Coin * possibilites;
     // Variable pour définir le type de joueur (AI, aléatoire, joueur humain)
     char type;
     // Variable qui définit la couleur des pièces d'un joueur.
@@ -67,5 +68,8 @@ void scrapAncre(t_Joueur * self);
 void scrollToSuivant(t_Joueur * self);
 // Fonction permettant de reculer sur la liste chainée
 void scrollToPrecedent(t_Joueur * self);
+
+// Fonction qui teste si le joueur est bloqué
+char testBloc(t_Joueur * self);
 
 #endif // JOUEUR_H_INCLUDED
