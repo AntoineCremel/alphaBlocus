@@ -38,6 +38,8 @@ void affichageGame(t_Partie * game)
 
 	// En fin d'exécution, on place le curseur à un endroit nul pou qu'il ne nous gêne pas
 	gotoligcol(0, 0);
+	// Et on remet la couleur à la valeur de base
+	changeColour(WHITE, BLACK);
 }
 
 void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour)
