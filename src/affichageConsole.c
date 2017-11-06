@@ -2,7 +2,7 @@
 
 /*
     Contient toutes les fonctions nécessaires à l'affichage de la partie sur console.
-    Ces fonctions sont appellent les affichages de chaque structure et les place aux bons endroits grâce à des gotoligcol appropriés.
+    Ces fonctions appellent les affichages de chaque structure et les place aux bons endroits grâce à des gotoligcol appropriés.
 */
 
 
