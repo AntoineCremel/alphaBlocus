@@ -69,3 +69,73 @@
 	"toolbox/tools.h"
 	"affichageConsole.h"
 
+1509971344 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"src/gameLoop.h"
+	"src/joueur.h"
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\gameloop.h
+	"mainHeader.h"
+	"partie.h"
+	"controles.h"
+	"toolbox/tools.h"
+	"affichageConsole.h"
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\mainheader.h
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\partie.h
+	<stdarg.h>
+	"joueur.h"
+	"controles.h"
+	"mainHeader.h"
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\joueur.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"piece/piece.h"
+	"toolbox/tools.h"
+	"mainHeader.h"
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\piece\piece.h
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\toolbox\tools.h
+	<time.h>
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\controles.h
+	<stdio.h>
+	<string.h>
+	"mainHeader.h"
+
+1509819217 c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\affichageconsole.h
+	<windows.h>
+	"mainHeader.h"
+	"controles.h"
+	"partie.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\affichageconsole.c
+	"affichageConsole.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\controles.c
+	"controles.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\gameloop.c
+	"gameLoop.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\joueur.c
+	"joueur.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\menu.c
+	"mainHeader.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\partie.c
+	"partie.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\piece\piece.c
+	"piece.h"
+
+1509819217 source:c:\users\bastien\desktop\ece paris\info\projet blokus\blocus\src\toolbox\tools.c
+	"tools.h"
+
