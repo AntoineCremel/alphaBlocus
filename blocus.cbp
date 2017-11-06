@@ -42,6 +42,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/controles.h" />
+		<Unit filename="src/coup.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/coup.h" />
 		<Unit filename="src/gameLoop.c">
 			<Option compilerVar="CC" />
 		</Unit>
