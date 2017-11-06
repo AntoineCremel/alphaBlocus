@@ -71,6 +71,9 @@ void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour)
 			}
 		}
 	}
+	// Remise à 0 du pointeur
+	gotoligcol(0, 0);
+	changeColour(BASE_TEXT, BASE_BACKGROUND);
 }
 
 void affichageConsoleControles(t_Controles * self, int lig, int col)
@@ -105,6 +108,10 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
 	}
 	affichageConsoleStart(self, lig, col);
 	affichageConsoleCurseur(self, lig, col);
+
+	// Remise à 0 du pointeur
+	gotoligcol(0, 0);
+	changeColour(BASE_TEXT, BASE_BACKGROUND);
 }
 void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 {
@@ -155,6 +162,10 @@ void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 			}
 		}
 	}
+
+	// Remise à 0 du pointeur
+	gotoligcol(0, 0);
+	changeColour(BASE_TEXT, BASE_BACKGROUND);
 }
 void affichageConsoleStart(t_Partie * self, int lig, int col)
 {
@@ -173,6 +184,10 @@ void affichageConsoleStart(t_Partie * self, int lig, int col)
 				printf("%c", SKIN_START);
 		}
 	}
+
+	// Remise à 0 du pointeur
+	gotoligcol(0, 0);
+	changeColour(BASE_TEXT, BASE_BACKGROUND);
 }
 
 void affichageJoueurConsole(t_Joueur * self, int lig, int col)
@@ -221,4 +236,9 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col)
 	// 3 On scroll pour revenir à l'ancre de départ
 	for(int i=0; i < PIECES_A_AFFICHER_AU_DESSOUS; i++)
 		scrollToPrecedent(self);
+
+
+	// Remise à 0 du pointeur
+	gotoligcol(0, 0);
+	changeColour(BASE_TEXT, BASE_BACKGROUND);
 }

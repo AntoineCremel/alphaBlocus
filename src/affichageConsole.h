@@ -43,6 +43,9 @@
 #define I_PLACE_SCROLL	0
 #define J_PLACE_SCROLL	30
 
+#define BASE_TEXT	WHITE
+#define BASE_BACKGROUND	BLACK
+
 // 1 Structures
 
 // 2 Prototypes de fonctions
