@@ -88,3 +88,11 @@ void inversionPiece(t_Piece * self)
 	// On met à jour l'inversion de la pièce
 	self->inversion = (self->inversion + 1) % 2;
 }
+
+char isPiece(char symb)
+{
+	if(symb == SYMB_PIECE || symb == SYMB_PIECE_MORT)
+		return 1;
+
+	else return 0;
+}

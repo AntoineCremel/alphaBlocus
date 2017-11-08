@@ -14,6 +14,7 @@
 #define J_CENTRE_PIECE	-(J_TAB_PIECE-1)/2
 
 #define SYMB_PIECE '@'
+#define SYMB_PIECE_MORT	'O'
 #define SYMB_PAS_PIECE '.'
 
 //1 Définition de la structure
@@ -47,5 +48,8 @@ void pieceAntiRotation(t_Piece * self);
 
 // Fonction qui sert à inverser la pièce (la retourner)
 void inversionPiece(t_Piece * self);
+
+// Fonction qui renvoit 1 si symb est un symbole de pièce, 0 sinon
+char isPiece(char symb);
 
 #endif // PIECE_H_INCLUDED

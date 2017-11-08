@@ -18,10 +18,6 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 		self->joueurListe[i].type = (char)va_arg(valist, int);
 		self->joueurListe[i].couleur = (char)va_arg(valist, int);
 
-		// 1.2 Creation du joueur
-		/// Pour l'instant seul un type de partie est pris en compte
-		joueurInitialisation(&self->joueurListe[i], "data/gameInit/stdPiecesList.txt");
-
 		// On initialise la position de départ du joueur
 		self->joueurListe[i].start_lig = va_arg(valist, int);
 		self->joueurListe[i].start_col = va_arg(valist, int);
@@ -31,10 +27,12 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 		self->joueurListe[i].curs_lig = self->joueurListe[i].start_lig;
 		self->joueurListe[i].curs_col = self->joueurListe[i].start_col;
 
+		// 1.2 Creation du joueur
+		/// Pour l'instant seul un type de partie est pris en compte
+		joueurInitialisation(&self->joueurListe[i], "data/gameInit/stdPiecesList.txt");
+
 		// On initialise la variable de deadlock
 		self->joueurListe[i].bloque = 0;
-		// On initialise la liste chaînée de coups possibles
-
 	}
 	// 1.3 Libération de la valist
 	va_end(valist);
@@ -119,7 +117,7 @@ char testDepassement(t_Partie * self)
 		{
 			for(int j=0; j < J_TAB_PIECE; j++)
 			{
-				if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+				if(isPiece(self->joueurListe[self->joueurActif].ancre->grille[i][j]))
 				{
 					// On calcule la position de cette case sur la game_grid
 					i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
@@ -189,7 +187,7 @@ char playCoup(t_Partie * self)
 			j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
 			// 1.0 Dans le cas où se trouve bien une case de la piece
 			// 		à cet emplacement de la grille
-			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			if(isPiece(self->joueurListe[self->joueurActif].ancre->grille[i][j]))
 			{
 				// 1.1 On vérifie que l'on se trouve bien sur une case vide
 				if(self->grille[i_gameGrid][j_gameGrid] != CASE_VIDE)
@@ -279,7 +277,7 @@ char playCoup(t_Partie * self)
 	{
 		for(int j=0; j < J_TAB_PIECE; j++)
 		{
-			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			if(isPiece(self->joueurListe[self->joueurActif].ancre->grille[i][j]))
 			{
 				i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
 				j_gameGrid = self->joueurListe[self->joueurActif].curs_col + j + J_CENTRE_PIECE;
@@ -312,4 +310,23 @@ void nextPlayer(t_Partie * self)
 	self->joueurActif = self->joueurActif + 1;
 	if(self->joueurActif >= self->n_Players)
 		self->joueurActif = 0;
+}
+
+/// Les coins
+void findAllPlaysHere(t_Partie * self, t_Coin * here)
+{
+	// 0 Variables
+
+	// 1 Tout d'abord, on vérifie que l'espace du coin est toujours libre et n'est pas occupé
+	if(self->grille[here->pos_i][here->pos_j] != CASE_VIDE)
+	{
+		// S'il l'est, on l'efface
+		scrapCoin(&self->joueurListe[self->joueurActif], here->pos_i, here->pos_j);
+	}
+	else
+	{
+		// 2 Sinon, on fait le tour de toutes les pièces du joueur pour savoir s'il est possible
+		//	de les jouer à cet endroit là.
+
+	}
 }

@@ -1,6 +1,8 @@
 #ifndef COUP_H_INCLUDED
 #define COUP_H_INCLUDED
 
+#include <stdlib.h>
+
 /*
 	Ce fichier contient la définition d'un coup possible, c'est à dire d'un coup accessible à un joueur
 */
@@ -24,8 +26,8 @@ typedef struct Coup
 typedef struct Coin
 {
 	// Variables de position
-	int i;
-	int j;
+	int pos_i;
+	int pos_j;
 
 	// Pointeur sur Coup
 	t_Coup * ancre;
@@ -34,6 +36,9 @@ typedef struct Coin
 }t_Coin;
 
 // 2 Prototypes de fonction
+
+// Libération de la mémoire des coins
+void emptyCoin(t_Coin * self);
 
 
 #endif // COUP_H_INCLUDED

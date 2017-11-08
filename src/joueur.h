@@ -72,4 +72,9 @@ void scrollToPrecedent(t_Joueur * self);
 // Fonction qui teste si le joueur est bloqué
 char testBloc(t_Joueur * self);
 
+// Fonction pour désallouer la mémoire d'un coin
+void scrapCoin(t_Joueur * self, int pos_i, int pos_j);
+// Fonction pour ajouter un coin à la liste chainee
+void addCoin(t_Joueur * self, int pos_i, int pos_j);
+
 #endif // JOUEUR_H_INCLUDED

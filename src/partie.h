@@ -89,6 +89,6 @@ void nextPlayer(t_Partie * self);
 
 /// Pour les coins
 // Fonction pour trouver tous les coups possibles à partir d'un coin donné
-void findAllPlaysHere()
+void findAllPlaysHere(t_Partie * self, t_Coin * here);
 
 #endif // PARTIE_H_INCLUDED

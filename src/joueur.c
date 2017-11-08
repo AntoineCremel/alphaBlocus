@@ -73,7 +73,7 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 					}while(charBuff == '\n');
 
 					// Si c'est bien un caractère qui veut dire quelquechose on l'ajoute a la grille
-					if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE)
+					if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE || charBuff == SYMB_PIECE_MORT)
 					{
 						self->ancre->grille[i][j] = charBuff;
 					}
@@ -84,16 +84,28 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 	}
 
 	fclose(fichierListe);
+
+	// 2 Maintenant on initialise la liste chainee de positions
+	addCoin(self, self->start_lig, self->start_col);
 }
 
 void joueurDesinit(t_Joueur * self)
 {
 	// 0 Variables
+	t_Coin * suite;
 
 	// 1 On effectue une boucle dans la liste chainee afin d'effacer toutes les pieces
 	while(self->ancre != NULL)
 	{
 		scrapAncre(self);
+	}
+
+	// 2 Boucle pour libérer la mémoire des possibilités
+	while(self->possibilites != NULL)
+	{
+		suite = self->possibilites->suivant;
+		free(self->possibilites);
+		self->possibilites = suite;
 	}
 }
 
@@ -209,4 +221,58 @@ char testBloc(t_Joueur * self)
 		self->bloque = 0;
 		return 0;
 	}
+}
+
+void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
+{
+	// 0 Variables
+	t_Coin * buffer = self->possibilites;
+	t_Coin * apres = NULL;
+	t_Coin * avant = NULL;
+
+	// On intialise apres
+	if(buffer)
+		apres = buffer->suivant;
+
+	// 1 On parcourt la liste chainee de coins jusqu'à trouver le coin ayant les positions voulues
+	while(buffer->suivant && (buffer->pos_i != pos_i || buffer->pos_j != pos_j))
+	{
+		avant = buffer;
+		buffer = buffer->suivant;
+		apres = buffer->suivant;
+	}
+
+	// 1 Si on n'a pas trouvé dans la liste de coin qui correspond à ce que l'on cherchait, on quitte
+	if(buffer->pos_i != pos_i || buffer->pos_j != pos_j)
+		return;
+
+	// 2 Ensuite on efface tous les coups de la liste chainee du coin
+	emptyCoin(buffer);
+
+	// 3 Enfin on libère ce coin de la chaîne
+	free(buffer);
+
+	if(avant)
+		avant->suivant = apres;
+	else
+		self->possibilites = apres;
+}
+
+void addCoin(t_Joueur * self, int pos_i, int pos_j)
+{
+	// 0 Variables
+	t_Coin * buffer;
+
+	// 1 On créé la variable
+	// 1.0 Allocation de l'espace mémoire nécessaire
+	buffer = (t_Coin*)malloc(sizeof(t_Coin));
+
+	// 1.1 On remplit les cases comme il le faut
+	buffer->pos_i = pos_i;
+	buffer->pos_j = pos_j;
+	buffer->ancre = NULL;
+
+	// 3 On ajoute maintenant ce coin à la chaine
+	buffer->suivant = self->possibilites;
+	self->possibilites = buffer;
 }

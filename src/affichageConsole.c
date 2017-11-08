@@ -59,7 +59,7 @@ void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour)
 	{
 		for(int j=0; j < J_TAB_PIECE; j++)
 		{
-			if(self->grille[i][j] == SYMB_PIECE)
+			if(isPiece(self->grille[i][j]))
 			{
 
 				// Affichage a partir du centre
@@ -128,7 +128,7 @@ void affichageConsoleCurseur(t_Partie * self, int lig, int col)
 	{
 		for(int j=0; j < J_TAB_PIECE; j++)
 		{
-			if(self->joueurListe[self->joueurActif].ancre->grille[i][j] == SYMB_PIECE)
+			if(isPiece(self->joueurListe[self->joueurActif].ancre->grille[i][j]))
 			{
 				// 1.0 On détermine à quelle case de la grille est censée se trouver cette case du curseur
 				i_gameGrid = self->joueurListe[self->joueurActif].curs_lig + i + I_CENTRE_PIECE;
