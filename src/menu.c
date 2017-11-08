@@ -31,40 +31,40 @@ void curseur(int *lig)
     switch(dep)
     {
     case 'z' :
-        if(lig==2)
+        if(*lig==2)
         {
-            lig=8;
-            gotoligcol(lig,2);
+            *lig=8;
+            gotoligcol(*lig,2);
             printf(" ");
-            lig=lig-2;
-            gotoligcol(lig,2);
+            *lig=*lig-2;
+            gotoligcol(*lig,2);
             printf(">");
         }
         else
         {
-            gotoligcol(lig,2);
+            gotoligcol(*lig,2);
             printf(" ");
-            lig=lig-2;
-            gotoligcol(lig,2);
+            *lig=*lig-2;
+            gotoligcol(*lig,2);
             printf(">");
         }
         break;
     case 's' :
-        if(lig==8)
+        if(*lig==8)
         {
-            lig=2;
-            gotoligcol(lig,2);
+            *lig=2;
+            gotoligcol(*lig,2);
             printf(" ");
-            lig=lig+2;
-            gotoligcol(lig,2);
+            *lig=*lig+2;
+            gotoligcol(*lig,2);
             printf(">");
         }
         else
         {
-            gotoligcol(lig,2);
+            gotoligcol(*lig,2);
             printf(" ");
-            lig=lig+2;
-            gotoligcol(lig+2,2);
+            *lig=*lig+2;
+            gotoligcol(*lig+2,2);
             printf(">");
         }
         break;
