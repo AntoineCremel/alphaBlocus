@@ -39,8 +39,11 @@ void addCoup(t_Coin * self, int curs_i, int curs_j, char orientation, char inver
 void scrapPieceCoups(t_Coin * self, int piece)
 {
 	// 0 Variables
-	t_Coup * curseur = self->ancre;
+	t_Coup * curseur = NULL;
 	t_Coup * prev = NULL;
+
+	if(self)
+		curseur = self->ancre;
 
 	// 1 On parcourt la liste chainee
 	while(curseur)
