@@ -62,6 +62,7 @@ void aleaTurn(t_Partie * game)
 
 	// 1 Si sa case de départ est toujours libre, le joueur aléatoire
 	//	doit jouer une pièce dessus
+	/// AJOUTER LE JOUEUR ALEATOIRE
 }
 
 char treatInput(t_Partie * game, char pressed)

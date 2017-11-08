@@ -25,8 +25,9 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     t_Piece * pieceBuff;
     // 0.4 Caractère qui servira d'intermédiaire vers la grille des pièces
     char charBuff;
-    // 0.5 On initialise self->ancre
+    // 0.5 On initialise les pointeurs
     self->ancre = NULL;
+    self->possibilites = NULL;
     // 0.6 Variable qui sera utilisée pour numéroter les pièces
     int num = 0;
 

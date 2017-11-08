@@ -59,11 +59,14 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 	// On initialise le nombre de joueur
 	self->n_Players = n_arguments/4;
 
-	// On effectue un testDeplacement sur tous les joueurs
+	// On fait un tour des joueurs actifs
 	for(int i=0; i < n_arguments/4; i++)
 	{
 		self->joueurActif = i;
+		// Pour tester si le curseur ne déborde pas
 		testDepassement(self);
+		// Pour mettre à jouer sa liste de coups possibles
+		findAllPlaysHere(self, self->joueurListe[self->joueurActif].possibilites);
 	}
 
 	// 4 On initialise les controles
