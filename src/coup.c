@@ -45,7 +45,23 @@ void scrapPieceCoups(t_Coin * self, int piece)
 	// 1 On parcourt la liste chainee
 	while(curseur)
 	{
+		// 2 Si on a trouve une possibilité qui utilise cette pièce
 		if(curseur->piece == piece)
+		{
+			if(prev)
+			{
+				prev->suivant = curseur->suivant;
+				free(curseur);
+				curseur = prev->suivant;
+			}
+			// Si l'on n'a pas encore defini prev, c'est que l'on est à l'ancre.
+			else
+			{
+				self->ancre = curseur->suivant;
+				free(curseur);
+				curseur = self->ancre;
+			}
+		}
 
 		// On avance d'un cran dans la chaîne
 		prev = curseur;

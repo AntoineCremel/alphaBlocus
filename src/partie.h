@@ -99,9 +99,24 @@ void findAllPlaysHere(t_Partie * self, t_Coin * here);
 	De plus, dans le cas ou c'est possible, les valeurs de la position du curseur seront assignées à curs_i et curs_j.
 */
 char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int piece_j, int * curs_i, int * curs_j);
+
+/*
+	Fonction qui enregistre le nouveau coup du joueur actif dans sa liste de coups possibles :
+		- Retire de sa double liste chaînée toutes les possibilités qui utilisent la pièce qu'il vient de jouer
+		- Ajoute tous les coins de la pièce qu'il vient de jouer à sa liste de coups
+
+	UTILISATION :
+	A utiliser après avoir joué le coup, mais avant d'avoir effacé l'ancre du joueur actif
+*/
+void recordPlay(t_Partie * self);
 /*
 	Fonction pour recalculer tous les coups possibles dans un rayon rad_i et rad_j de la case curs_i curs_j
 */
 void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i, int rad_j);
+
+/// Fonctions élémentaires
+// Regarde tous les coins autour de grille_i et de grille_j. Si ces sont éligibles, créé un coin dans ces cases
+// Renvoit 0 sinon
+void checkAround(t_Partie * self, int grille_i, int grille_j);
 
 #endif // PARTIE_H_INCLUDED

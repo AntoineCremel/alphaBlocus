@@ -21,3 +21,29 @@ void waitSeconds(float seconds)
 
 	while(clock() < end);
 }
+
+void cycleThroughCorner(int * pos_i, int * pos_j, int loop)
+{
+	// Renvoit l'un des quatres coins de la case grille_i grille_j
+	// en fonction de la valeur contenue dans loop
+	if(loop%4 == 0)
+	{
+		*pos_i = *pos_i - 1;
+		*pos_j = *pos_j - 1;
+	}
+	else if(loop%4 == 1)
+	{
+		*pos_i = *pos_i - 1;
+		*pos_j = *pos_j + 1;
+	}
+	else if(loop%4 == 2)
+	{
+		*pos_i = *pos_i + 1;
+		*pos_j = *pos_j + 1;
+	}
+	else if(loop%4 == 3)
+	{
+		*pos_i = *pos_i + 1;
+		*pos_j = *pos_j - 1;
+	}
+}

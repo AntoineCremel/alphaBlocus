@@ -288,11 +288,14 @@ char playCoup(t_Partie * self)
 		}
 	}
 	// 2.2 Un fois que toutes les cases de la pièce ont été placées sur la grille,
+	// Mettre à jour  les possibilités du joueur en cours
+	recordPlay(self);
 	// on peut effacer la pièce de la liste de pièces du joueur actif
 	scrapAncre(&self->joueurListe[self->joueurActif]);
 
-	/// Après avoir joué un coup, il faut recalculer tous les coins qui sont dans un rayon de 5 cases de
-	/// la position actuelle du curseur et ajouter des coins sur les coins de la piece que l'on vient de jouer
+	updateListesPossibilites(self, self->joueurListe[self->joueurActif].curs_lig,
+							self->joueurListe[self->joueurActif].curs_col,
+							I_TAB_PIECE + I_TAB_PIECE/2 + 1, J_TAB_PIECE + J_TAB_PIECE/2 + 1);
 
 	// 3 Une fois que l'on a fait cela, on s'assure que la nouvelle pièce ne dépasse pas de la grille
 	if(testDepassement(self) == 1)
@@ -334,6 +337,8 @@ void findAllPlaysHere(t_Partie * self, t_Coin * here)
 	{
 		// 2 Sinon, on fait le tour de toutes les pièces du joueur pour savoir s'il est possible
 		//	de les jouer à cet endroit là.
+		// D'abord, on efface les coups deja present, car on va refaire le calcul en entier
+		emptyCoin(here);
 		do
 		{
 			pieceActuelle = self->joueurListe[self->joueurActif].ancre;
@@ -427,31 +432,117 @@ char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int pie
 void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i, int rad_j)
 {
 	// 0 Variables
-	int joueurActuel = self->joueurActif;
-	t_Coin * coinCurs = self->joueurListe[joueurActuel].possibilites;
-	t_Coup * coupCurs;
+	int n_JoueurActuel = self->joueurActif;
+	t_Joueur * joueurActuel;
+	t_Coin * coinCurs;
+
+	// 1 On fait le tour des joueurs pour mettre à jour les coins qui sont
+	// dans l'aire d'influence de cette case
+	// 1.0 Boucle qui parcourt chaque joueur de la partie
+	do
+	{
+		joueurActuel = &self->joueurListe[n_JoueurActuel];
+		coinCurs = joueurActuel->possibilites;
+		// 1.1 Boucle qui parcourt les coins du joueur
+		while(coinCurs)
+		{
+			// 1.1.0 On teste s'il s'agit d'un coin dans le rayon d'action de cette nouvelle piece
+			if(coinCurs->pos_i > curs_i - rad_i && coinCurs->pos_i < curs_i + rad_i
+			&& coinCurs->pos_j > curs_j - rad_j && coinCurs->pos_j < curs_j + rad_j)
+			{
+				findAllPlaysHere(self, coinCurs);
+			}
+
+			coinCurs = coinCurs->suivant;
+		}
+
+		n_JoueurActuel = (n_JoueurActuel + 1) % self->n_Players;
+	}while(n_JoueurActuel != self->joueurActif);
+}
+
+void recordPlay(t_Partie * self)
+{
+	// 0 Variables
+	t_Joueur * joueurActuel = &self->joueurListe[self->joueurActif];
+	t_Coin * coinCurs = joueurActuel->possibilites;
+	// Variables qui correspondent à l'emplacement du carre i, j de la pièce active
+	// sur la grille
+	int grille_i, grille_j;
 
 	// 1 On commence par traiter le joueur actuel
 	// 1.0 On retire de ses coups tous ceux qui impliquent la pièce qu'il vient de jouer
 	//	Double while de parcours de la double liste chaînée
 	while(coinCurs)
 	{
-		coupCurs = coinCurs->ancre;
-		while(coupCurs)
-		{
-			if(coupCurs->piece == self->joueurListe[joueurActuel].ancre->number)
-
-			coupCurs = coupCurs->suivant;
-		}
+		scrapPieceCoups(coinCurs, joueurActuel->ancre->number);
 		coinCurs = coinCurs->suivant;
 	}
 
 	// 1.1 On rajoute tous les coins de la pièce qu'il vient de jouer
-
-	// 2 On fait le tour des joueurs pour mettre à jour les coins qui sont à proximité de cette case
-	do
+	for(int i=0; i < I_TAB_PIECE; i++)
 	{
+		for(int j=0; j < J_TAB_PIECE; j++)
+		{
+			// 1.1.0 Si l'on est sur une case de la pièce qui n'est pas une case morte
+			if(isCoin(joueurActuel->ancre->grille[i][j]))
+			{
+				// 1.1.1 On se place à l'endroit de la grille de jeu qui correspond
+				grille_i = joueurActuel->curs_lig + i + I_CENTRE_PIECE;
+				grille_j = joueurActuel->curs_col + j + J_CENTRE_PIECE;
 
-		joueurActuel = (joueurActuel + 1) % self->n_Players;
-	}while(joueurActuel != self->joueurActif);
+				// 1.1.2 Ensuite on regarde les 4 coins autour de cette case pour voir s'ils
+				// sont éligibles pour être ajoutés à la liste de coins du joueur
+				checkAround(self, grille_i, grille_j);
+			}
+		}
+	}
+}
+
+void checkAround(t_Partie * self, int grille_i, int grille_j)
+{
+	// 0 Variables
+	t_Joueur * joueurActuel = &self->joueurListe[self->joueurActif];
+	int corn_i = grille_i;
+	int corn_j = grille_j;
+	char ajout;
+
+	// 1 On regarde les coins autour de la case
+	for(int cyc = 0; cyc < 4; cyc++)
+	{
+		corn_i = grille_i;
+		corn_j = grille_j;
+		cycleThroughCorner(&corn_i, &corn_j, cyc);
+
+		if(corn_i >= 0 && corn_j >= 0 && corn_i < self->h_grid && corn_j < self->w_grid)
+		{
+			if(self->grille[corn_i][corn_j] == CASE_VIDE)
+			{
+				ajout = 1;
+				if(corn_i > 0)
+				{
+					if(self->grille[corn_i-1][corn_j] == joueurActuel->couleur)
+						ajout = 0;
+				}
+				if(corn_i < self->h_grid - 1)
+				{
+					if(self->grille[corn_i+1][corn_j] == joueurActuel->couleur)
+						ajout = 0;
+				}
+				if(corn_j > 0)
+				{
+					if(self->grille[corn_i][corn_j-1] == joueurActuel->couleur)
+						ajout = 0;
+				}
+				if(corn_j < self->w_grid - 1)
+				{
+					if(self->grille[corn_i][corn_j+1] == joueurActuel->couleur)
+						ajout = 0;
+				}
+				if(ajout)
+				{
+					addCoin(&self->joueurListe[self->joueurActif], corn_i, corn_j);
+				}
+			}
+		}
+	}
 }
