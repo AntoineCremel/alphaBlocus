@@ -6,6 +6,7 @@
 #include "joueur.h"
 #include "controles.h"
 #include "mainHeader.h"
+#include "toolbox/tools.h"
 /*
 Ce fichier contient la définition d'une structure partie ainsi que
 le prototype des fonctions liées à la gestion de cette partie

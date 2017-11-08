@@ -1,6 +1,12 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
+#include <stdio.h>
+#include <conio.h>
+
+#include "affichageConsole.h"
+#include "partie.h"
+
 // Fonction permettant d'effacer un menu pour en afficher un autre
 void effacement(char tab[10][20]);
 

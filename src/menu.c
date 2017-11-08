@@ -1,4 +1,3 @@
-#include "mainHeader.h"
 #include "menu.h"
 
 /*
@@ -21,7 +20,7 @@ void curseur(int *lig)
 {
     char dep;
 
-    gotoligcol(lig,2);
+    gotoligcol(*lig,2);
     printf(">");
     if (kbhit())
         {
@@ -114,6 +113,7 @@ void menu_options(char tab[10][20])
 void choix_menu(char tab[10][20], int *lig)
 {
     char val;
+    t_Partie game;
 
     menu_principal(tab);
     curseur(lig);
