@@ -22,52 +22,51 @@ void curseur(int *lig)
 
     gotoligcol(*lig,2);
     printf(">");
-    if (kbhit())
+
+    while(!kbhit())
         {
             dep=getch();
         }
 
-    switch(dep)
-    {
-    case 'z' :
-        if(*lig==2)
+        switch(dep)
         {
-            *lig=8;
-            gotoligcol(*lig,2);
-            printf(" ");
-            *lig=*lig-2;
-            gotoligcol(*lig,2);
-            printf(">");
+        case 'z' :
+            if(*lig==2)
+            {
+                gotoligcol(*lig,2);
+                printf(" ");
+                *lig=8;
+                gotoligcol(*lig,2);
+                printf(">");
         }
-        else
-        {
-            gotoligcol(*lig,2);
-            printf(" ");
-            *lig=*lig-2;
-            gotoligcol(*lig,2);
-            printf(">");
+            else
+            {
+                gotoligcol(*lig,2);
+                printf(" ");
+                *lig=*lig-2;
+                gotoligcol(*lig,2);
+                printf(">");
+            }
+            break;
+        case 's' :
+            if(*lig==8)
+            {
+                gotoligcol(*lig,2);
+                printf(" ");
+                *lig=2;
+                gotoligcol(*lig,2);
+                printf(">");
+            }
+            else
+            {
+                gotoligcol(*lig,2);
+                printf(" ");
+                *lig=*lig+2;
+                gotoligcol(*lig+2,2);
+                printf(">");
+            }
+            break;
         }
-        break;
-    case 's' :
-        if(*lig==8)
-        {
-            *lig=2;
-            gotoligcol(*lig,2);
-            printf(" ");
-            *lig=*lig+2;
-            gotoligcol(*lig,2);
-            printf(">");
-        }
-        else
-        {
-            gotoligcol(*lig,2);
-            printf(" ");
-            *lig=*lig+2;
-            gotoligcol(*lig+2,2);
-            printf(">");
-        }
-        break;
-    }
 }
 
 void menu_principal(char tab[10][20])
@@ -89,7 +88,7 @@ void menu_principal(char tab[10][20])
     printf("\n\n   Nouvelle Partie");
     printf("\n\n   Charger partie");
     printf("\n\n   Options");
-    printf("\n\n   Quitter le jeu");
+    printf("\n\n   Quitter le jeu\n\n");
 }
 
 void menu_charger_partie(char tab[10][20])
@@ -118,25 +117,29 @@ void choix_menu(char tab[10][20], int *lig)
     menu_principal(tab);
     curseur(lig);
 
-    if (kbhit())
+    while(!kbhit())
     {
         val=getch();
     }
-    switch(val)
-    {
-    case ' ' :
-        if(*lig==2)
+        switch(val)
         {
-            initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_HUMAIN, BLUE, 7, 7);
+        case ' ' :
+            if(*lig==2)
+            {
+                initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_HUMAIN, BLUE, 7, 7);
 
-            printf("Initialisation faite\n");
-        }
-        if(*lig==4)
-            menu_charger_partie(tab);
-        if(*lig==6)
-            menu_options(tab);
-        if(*lig==8)
+                printf("Initialisation faite\n");
+
+                gameTurns(&game);
+
+                deinitialisationPartie(&game);
+            }
+            if(*lig==4)
+                menu_charger_partie(tab);
+            if(*lig==6)
+                menu_options(tab);
+            if(*lig==8)
+                break;
             break;
-        break;
-    }
+        }
 }
