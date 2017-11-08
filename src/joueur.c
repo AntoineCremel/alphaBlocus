@@ -27,6 +27,8 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     char charBuff;
     // 0.5 On initialise self->ancre
     self->ancre = NULL;
+    // 0.6 Variable qui sera utilisée pour numéroter les pièces
+    int num = 0;
 
     // 1 On lit les informations relatives a la taille des pieces
     // 1.0 Ouverture du fichier permettant de trouver tous les fichiers de pièces
@@ -81,6 +83,8 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 			}
 			fclose(fichierPiece);
 		}
+		self->ancre->number = num;
+		num++;
 	}
 
 	fclose(fichierListe);

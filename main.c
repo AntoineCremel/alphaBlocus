@@ -20,6 +20,6 @@ int main()
 	gameTurns(&game);
 
 	deinitialisationPartie(&game);
-    ///Ajouter le code du projet :-D
+
     return 0;
 }

@@ -87,8 +87,21 @@ char playCoup(t_Partie * self);
 // Fonction pour passer au joueur suivant
 void nextPlayer(t_Partie * self);
 
+
 /// Pour les coins
 // Fonction pour trouver tous les coups possibles à partir d'un coin donné
 void findAllPlaysHere(t_Partie * self, t_Coin * here);
+/*
+	Fonction pour déterminer si on peut poser la case piece_i piece_j d'une pièce
+	sur la case game_i game_j de la grille de jeu tout en respectant les règles du jeu.
+
+	Renvoit 1 si c'est possible, 0 sinon.
+	De plus, dans le cas ou c'est possible, les valeurs de la position du curseur seront assignées à curs_i et curs_j.
+*/
+char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int piece_j, int * curs_i, int * curs_j);
+/*
+	Fonction pour recalculer tous les coups possibles dans un rayon rad_i et rad_j de la case curs_i curs_j
+*/
+void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i, int rad_j);
 
 #endif // PARTIE_H_INCLUDED

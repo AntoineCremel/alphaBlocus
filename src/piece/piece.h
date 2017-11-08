@@ -10,12 +10,17 @@
 #define I_TAB_PIECE 5
 #define J_TAB_PIECE 5
 
-#define I_CENTRE_PIECE	-(I_TAB_PIECE-1)/2
-#define J_CENTRE_PIECE	-(J_TAB_PIECE-1)/2
+#define I_CENTRE_PIECE	-(I_TAB_PIECE)/2
+#define J_CENTRE_PIECE	-(J_TAB_PIECE)/2
 
 #define SYMB_PIECE '@'
 #define SYMB_PIECE_MORT	'O'
 #define SYMB_PAS_PIECE '.'
+
+/* Constantes qui définissent les valeurs de symetrie de la piece.
+		- COMPLET : toutes les rotations et inversions sont utiles
+		- INVERSION
+*/
 
 //1 Définition de la structure
 typedef struct Piece
@@ -33,6 +38,10 @@ typedef struct Piece
 
     // Variable qui retient le numéro de la pièce
     int number;
+
+    // Variable qui indique le type de symétrie de la pièce
+    // A aouter plus tard
+    //char symetrie;
 }t_Piece;
 
 
@@ -49,7 +58,18 @@ void pieceAntiRotation(t_Piece * self);
 // Fonction qui sert à inverser la pièce (la retourner)
 void inversionPiece(t_Piece * self);
 
+/*
+	Fonction utilisée dans la détection des coups possibles.
+
+	Elle fait tourner la pièce vers l'orientation suivante
+*/
+void cycleThroughPiece(t_Piece * self);
+// Renvoit le nombre de rotations à essayer avec cette pièce
+int n_rotations(t_Piece * self);
+
 // Fonction qui renvoit 1 si symb est un symbole de pièce, 0 sinon
 char isPiece(char symb);
+// Fonction qui renvoit 1 si symb est un symbole de coin, 0 sinon
+char isCoin(char symb);
 
 #endif // PIECE_H_INCLUDED

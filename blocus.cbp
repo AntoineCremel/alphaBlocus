@@ -58,6 +58,7 @@
 		<Unit filename="src/menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/menu.h" />
 		<Unit filename="src/partie.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -89,9 +89,37 @@ void inversionPiece(t_Piece * self)
 	self->inversion = (self->inversion + 1) % 2;
 }
 
+void cycleThroughPiece(t_Piece * self)
+{
+	// 0 Variables
+
+	// 1 En fonction des valeurs de self->rotation et self->inversion,
+	// on détermine quel traitement on doit appliquer à la pièce
+	if(self->orientation == 3)
+	{
+		pieceRotation(self);
+		inversionPiece(self);
+	}
+	else
+	{
+		pieceRotation(self);
+	}
+}
+int n_rotations(t_Piece * self)
+{
+	return 8;
+}
+
 char isPiece(char symb)
 {
 	if(symb == SYMB_PIECE || symb == SYMB_PIECE_MORT)
+		return 1;
+
+	else return 0;
+}
+char isCoin(char symb)
+{
+	if(symb == SYMB_PIECE)
 		return 1;
 
 	else return 0;
