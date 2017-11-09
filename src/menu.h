@@ -6,6 +6,7 @@
 
 #include "affichageConsole.h"
 #include "partie.h"
+#include "gameLoop.h"
 
 // Fonction permettant d'effacer un menu pour en afficher un autre
 void effacement(char tab[10][20]);
