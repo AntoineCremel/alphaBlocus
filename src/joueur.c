@@ -133,6 +133,55 @@ void playAncre(t_Joueur * self, char grid[I_TAB_PIECE][J_TAB_PIECE])
 	scrapAncre(self);
 }
 
+t_Coup * getAleaCoup(t_Joueur * self)
+{
+	// 0 Variables
+	// 0.1 Variable qui permet de compter combien il y a de coups possibles
+	int n_coups = 0;
+	// 0.2 Curseurs permettant de parcourir les listes chaines
+	t_Coin * curs_coin = self->possibilites;
+	t_Coup * curs_coup;
+	// O.3 Nombre aléatoire permettant de déterminer le coup à jouer
+	int coup_choisi;
+
+	// 1 Boucles de parcourt des listes chaînées
+	while(curs_coin)
+	{
+		curs_coup = curs_coin->ancre;
+		while(curs_coup)
+		{
+			n_coups++;
+			curs_coup = curs_coup->suivant;
+		}
+		curs_coin = curs_coin->suivant;
+	}
+	// 2 On choisi un nombre aléatoire en fonction du nombre de coups disponibles
+	coup_choisi = rand() % n_coups;
+
+	// 3 On reparcourt les boucles pour trouver le coup correspondant
+	curs_coin = self->possibilites;
+	// Cette variable sert de nouveau à compter le nombre de coups que l'on a trouvé
+	n_coups = 0;
+	while(curs_coin && n_coups < coup_choisi)
+	{
+		curs_coup = curs_coin->ancre;
+		while(curs_coup && n_coups < coup_choisi)
+		{
+			n_coups++;
+
+			if(n_coups == coup_choisi)
+			{
+				return curs_coup;
+			}
+
+			curs_coup = curs_coup->suivant;
+		}
+		curs_coin = curs_coin->suivant;
+	}
+
+	return NULL;
+}
+
 /// Fonctions elementaires
 void scrapAncre(t_Joueur * self)
 {
@@ -280,4 +329,31 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j)
 	// 3 On ajoute maintenant ce coin à la chaine
 	buffer->suivant = self->possibilites;
 	self->possibilites = buffer;
+
+}
+
+char isBloque(t_Joueur * self)
+{
+	// 0 Variables
+	t_Coin * curs_coin = self->possibilites;
+
+	// Cas special ou l'ancre est NULL, le joueur ne peut donc rien jouer
+	if(!self->ancre)
+	{
+		self->bloque = 1;
+		return 1;
+	}
+
+	// 1 Boucle
+	while(curs_coin)
+	{
+		// Si on trouve quelquechose à l'ancre de l'un des coins
+		if(curs_coin->ancre)
+			return 0;
+
+		curs_coin = curs_coin->suivant;
+	}
+	// Si l'on n'a rien trouvé, on met à jour la variable
+	self->bloque = 1;
+	return 1;
 }

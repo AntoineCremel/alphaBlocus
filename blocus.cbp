@@ -50,6 +50,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/gameLoop.h" />
+		<Unit filename="src/gamePlayOptions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gamePlayOptions.h" />
 		<Unit filename="src/joueur.c">
 			<Option compilerVar="CC" />
 		</Unit>

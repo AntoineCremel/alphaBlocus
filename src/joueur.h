@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "piece/piece.h"
 #include "toolbox/tools.h"
@@ -58,6 +59,9 @@ void joueurDesinit(t_Joueur * self);
 // 		Renvoit la grille de la piece, et retire la piece de la liste chainee.
 void playAncre(t_Joueur * self, char grid[I_TAB_PIECE][J_TAB_PIECE]);
 
+// Fonction renvoyant un pointeur sur coup qui permet de jouer un coup aléatoire
+t_Coup * getAleaCoup(t_Joueur * self);
+
 /// Fonctions elementaires
 // Fonction permettant d'ajouter une piece vide dans la chaine juste apres l'ancre et de faire pointer l'ancre dessus
 void addPieceAfter(t_Joueur * self, t_Piece * newPiece);
@@ -76,5 +80,9 @@ char testBloc(t_Joueur * self);
 void scrapCoin(t_Joueur * self, int pos_i, int pos_j);
 // Fonction pour ajouter un coin à la liste chainee
 void addCoin(t_Joueur * self, int pos_i, int pos_j);
+
+// Fonction qui teste si un joueur peut encore jouer
+// Renvoit 1 s'il est bloqué, 0 sinon
+char isBloque(t_Joueur * self);
 
 #endif // JOUEUR_H_INCLUDED
