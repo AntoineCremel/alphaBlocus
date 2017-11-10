@@ -164,8 +164,7 @@ char treatInput(t_Partie * game, char pressed)
 			pieceAntiRotation(game->joueurListe[game->joueurActif].ancre);
 
 		// On affiche la zone des pièces
-		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageGame(game);
 
 	}
 	else if(pressed == game->touches.inversion)
@@ -176,8 +175,7 @@ char treatInput(t_Partie * game, char pressed)
 			inversionPiece(game->joueurListe[game->joueurActif].ancre);
 
 		// On affiche la zone des pièces
-		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageGame(game);
 	}
 	else if(pressed == game->touches.scrollBas)
 	{
@@ -187,8 +185,7 @@ char treatInput(t_Partie * game, char pressed)
 			scrollToPrecedent(&game->joueurListe[game->joueurActif]);
 
 		// On affiche la zone des pièces
-		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageGame(game);
 	}
 	else if(pressed == game->touches.scrollHaut)
 	{
@@ -198,8 +195,7 @@ char treatInput(t_Partie * game, char pressed)
 			scrollToSuivant(&game->joueurListe[game->joueurActif]);
 
 		// On affiche la zone des pièces
-		affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageGame(game);
 	}
 	else if(pressed == game->touches.selectionner)
 	{
