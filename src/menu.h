@@ -9,11 +9,8 @@
 #include "gameLoop.h"
 #include "mainHeader.h"
 
-// Fonction permettant d'effacer un menu pour en afficher un autre
-void effacement(char tab[10][20]);
-
 // Fonction qui permet de choisir quel menu lancer
-void curseur();
+void curseur(int *lig);
 
 // Fonction affichant le menu pour charger une partie
 void menu_charger_partie(char tab[10][20]);
@@ -25,5 +22,5 @@ void menu_options(char tab[10][20]);
 void menu_principal(char tab[10][20]);
 
 // Fonction permettant de choisir le menu a lancer
-void choix_menu();
+void choix_menu(char tab[10][20], int *lig);
 #endif // MENU_H_INCLUDED
