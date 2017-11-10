@@ -2,6 +2,7 @@
 #define PARTIE_H_INCLUDED
 
 #include <stdarg.h>
+#include <math.h>
 
 #include "joueur.h"
 #include "controles.h"

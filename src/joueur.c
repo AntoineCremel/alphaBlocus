@@ -303,6 +303,7 @@ void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
 	// 2 Ensuite on efface tous les coups de la liste chainee du coin
 	emptyCoin(buffer);
 
+
 	// 3 Enfin on libère ce coin de la chaîne
 	free(buffer);
 
@@ -325,6 +326,7 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j)
 	buffer->pos_i = pos_i;
 	buffer->pos_j = pos_j;
 	buffer->ancre = NULL;
+	buffer->suivant = NULL;
 
 	// 3 On ajoute maintenant ce coin à la chaine
 	buffer->suivant = self->possibilites;
