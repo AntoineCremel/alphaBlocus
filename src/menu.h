@@ -7,6 +7,7 @@
 #include "affichageConsole.h"
 #include "partie.h"
 #include "gameLoop.h"
+#include "mainHeader.h"
 
 #define MENU_P  0
 #define PLAY    1

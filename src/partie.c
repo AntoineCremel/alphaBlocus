@@ -447,7 +447,7 @@ void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i
 	// 0 Variables
 	int n_JoueurActuel = self->joueurActif;
 	t_Joueur * joueurActuel;
-	t_Coin * coinCurs;
+	t_Coin * coinCurs = NULL;
 
 	// 1 On fait le tour des joueurs pour mettre à jour les coins qui sont
 	// dans l'aire d'influence de cette case
@@ -460,8 +460,9 @@ void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i
 		while(coinCurs)
 		{
 			// 1.1.0 On teste s'il s'agit d'un coin dans le rayon d'action de cette nouvelle piece
-			if(coinCurs->pos_i > curs_i - rad_i && coinCurs->pos_i < curs_i + rad_i
-			&& coinCurs->pos_j > curs_j - rad_j && coinCurs->pos_j < curs_j + rad_j)
+			// Pour le calcul du rayon, on fait une forme de diamant
+			if(coinCurs->pos_i > curs_i - rad_i + abs(coinCurs->pos_j-curs_j) && coinCurs->pos_i < curs_i + rad_i - abs(coinCurs->pos_j - curs_j)
+			&& coinCurs->pos_j > curs_j - rad_j + abs(coinCurs->pos_i-curs_i) && coinCurs->pos_j < curs_j + rad_j - abs(coinCurs->pos_i-curs_i))
 			{
 				findAllPlaysHere(self, coinCurs);
 			}
@@ -514,7 +515,6 @@ void recordPlay(t_Partie * self)
 void checkAround(t_Partie * self, int grille_i, int grille_j)
 {
 	// 0 Variables
-	t_Joueur * joueurActuel = &self->joueurListe[self->joueurActif];
 	int corn_i = grille_i;
 	int corn_j = grille_j;
 	char ajout;
@@ -522,9 +522,18 @@ void checkAround(t_Partie * self, int grille_i, int grille_j)
 	// 1 On regarde les coins autour de la case
 	for(int cyc = 0; cyc < 4; cyc++)
 	{
+		/*
 		corn_i = grille_i;
 		corn_j = grille_j;
-		cycleThroughCorner(&corn_i, &corn_j, cyc);
+		cycleThroughCorner(&corn_i, &corn_j, cyc);*/
+		if(cyc < 2)
+			corn_i = grille_i - 1;
+		else
+			corn_i = grille_i + 1;
+		if(cyc % 2 == 0)
+			corn_j = grille_j - 1;
+		else
+			corn_j = grille_j + 1;
 
 		if(corn_i >= 0 && corn_j >= 0 && corn_i < self->h_grid && corn_j < self->w_grid)
 		{
@@ -533,22 +542,22 @@ void checkAround(t_Partie * self, int grille_i, int grille_j)
 				ajout = 1;
 				if(corn_i > 0)
 				{
-					if(self->grille[corn_i-1][corn_j] == joueurActuel->couleur)
+					if(self->grille[corn_i-1][corn_j] == self->joueurActif)
 						ajout = 0;
 				}
 				if(corn_i < self->h_grid - 1)
 				{
-					if(self->grille[corn_i+1][corn_j] == joueurActuel->couleur)
+					if(self->grille[corn_i+1][corn_j] == self->joueurActif)
 						ajout = 0;
 				}
 				if(corn_j > 0)
 				{
-					if(self->grille[corn_i][corn_j-1] == joueurActuel->couleur)
+					if(self->grille[corn_i][corn_j-1] == self->joueurActif)
 						ajout = 0;
 				}
 				if(corn_j < self->w_grid - 1)
 				{
-					if(self->grille[corn_i][corn_j+1] == joueurActuel->couleur)
+					if(self->grille[corn_i][corn_j+1] == self->joueurActif)
 						ajout = 0;
 				}
 				// Verifier que l'on n'est pas sur la case de depart d'un autre joueur
@@ -556,7 +565,7 @@ void checkAround(t_Partie * self, int grille_i, int grille_j)
 				{
 					if(corn_i == self->joueurListe[(self->joueurActif + p) % self->n_Players].start_lig
 					&& corn_j == self->joueurListe[(self->joueurActif + p) % self->n_Players].start_col)
-						return 0;
+						ajout = 0;
 				}
 
 				if(ajout)
