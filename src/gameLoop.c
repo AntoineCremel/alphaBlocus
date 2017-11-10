@@ -35,7 +35,7 @@ void gameTurns(t_Partie * game)
 			/// Ecrire un ecran pour indiquer que ce joueur est bloqué et ne peut plus jouer
 			gotoligcol(22, 0);
 			changeColour(L_WHITE, L_BLACK);
-			printf("Vous êtes coincés");
+			printf("Vous etes coinces");
 		}
 	}
 }

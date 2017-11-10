@@ -15,12 +15,7 @@ int main()
 	int lig=2;
 
 	srand(time(NULL));
-<<<<<<< HEAD
 
 	curseur(&lig);
-=======
-	curseur(&lig);
-
->>>>>>> c05f71f5b0ecf2cf90a2199f02ae03e1ddd27571
     return 0;
 }
