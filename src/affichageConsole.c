@@ -34,7 +34,7 @@ void affichageGame(t_Partie * game)
 	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
 
 	// 2 On affiche la zone de scroll
-	affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL);
+	affichageCompletJoueurConsole(game, &game->joueurListe[game->joueurActif]);
 
 	// En fin d'exécution, on place le curseur à un endroit nul pou qu'il ne nous gêne pas
 	gotoligcol(0, 0);
@@ -206,7 +206,7 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col)
 	// 1 On commence par colorer une zone taille fixe
 	for(int i=0; i < (I_TAB_PIECE + LINES_BETWEEN_PIECES_IN_SCROLL) * (PIECES_A_AFFICHER_AU_DESSUS + 1 + PIECES_A_AFFICHER_AU_DESSOUS); i++)
 	{
-		for(int j=0; j < J_TAB_PIECE; j++)
+		for(int j=-1; j < W_SCROLL; j++)
 		{
 			gotoligcol(lig + i, W_SQUARE_SCROLL * (col + j));
 			changeColour(0, SCROLL_BACK_COLOUR);
@@ -241,4 +241,24 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col)
 	// Remise à 0 du pointeur
 	gotoligcol(0, 0);
 	changeColour(BASE_TEXT, BASE_BACKGROUND);
+}
+
+
+void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self)
+{
+    int dep=0; //translation pour afficher d'autres zones de pièces
+
+    for (int i=0; i<4; i++)
+    {
+        affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL + dep);
+        dep = dep + W_SCROLL;
+        for(int i=0; i<5; i++)
+        {
+            scrollToSuivant(self);
+        }
+    }
+    for (int i=0; i<20; i++)
+    {
+        scrollToPrecedent(self);
+    }
 }

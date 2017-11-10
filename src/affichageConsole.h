@@ -47,6 +47,8 @@
 #define BASE_TEXT	WHITE
 #define BASE_BACKGROUND	BLACK
 
+#define W_SCROLL 6
+
 // 1 Structures
 
 // 2 Prototypes de fonctions
@@ -77,5 +79,7 @@ void affichageConsoleStart(t_Partie * self, int lig, int col);
 void affichageJoueurConsole(t_Joueur * self, int lig, int col);
 // Fonction qui sert à afficher une pièce dans la zone qui sert à choisir quelle pièce on va jouer
 void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour);
+// Fonction qui sert à afficher plusieurs zones dans lesquelles seront placées les pièces et celle utilisée actuellement
+void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self);
 
 #endif // AFFICHAGECONSOLE_H_INCLUDED

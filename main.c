@@ -21,7 +21,8 @@ int main()
 
 	//printf("Initialisation faite\n");
 	//choix_menu(tab, lig);
-
+    gameTurns(&game);
+    deinitialisationPartie(&game);
 
     return 0;
 }
