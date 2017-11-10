@@ -37,7 +37,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 
     while(!*quitter)
     {
-        if(kbhit)
+        if(kbhit())
         {
             dep=getch();
         }
@@ -97,7 +97,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 {
     char dep;
-    t_Partie *game;
+    t_Partie game;
 
     system("CLS");
     changeColour(11,0);
@@ -115,7 +115,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 
     while(!*quitter)
     {
-        if(kbhit)
+        if(kbhit())
         {
             dep=getch();
         }
@@ -202,7 +202,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 
     while(!*quitter)
     {
-        if(kbhit)
+        if(kbhit())
         {
             dep=getch();
         }
@@ -275,7 +275,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 
     while(!*quitter)
     {
-        if(kbhit)
+        if(kbhit())
         {
             dep=getch();
         }
