@@ -71,6 +71,8 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 
 	// 4 On initialise les controles
 	loadControles(&self->touches);
+	// 5 On initialise les options de jeu
+	loadGameOptions(&self->game_options);
 }
 
 void deinitialisationPartie(t_Partie * self)
@@ -403,7 +405,15 @@ char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int pie
 				if(self->grille[grille_i][grille_j] != CASE_VIDE)
 					return 0;
 
-				// 3.2 Verification que l'on n'est pas à côté d'une pièce alliée
+				// 3.2 Verification que l'on n'est pas sur la case de départ d'un autre joueur
+				for(int p = 1; p < self->n_Players; p++)
+				{
+					if(grille_i == self->joueurListe[(self->joueurActif + p) % self->n_Players].start_lig
+					&& grille_j == self->joueurListe[(self->joueurActif + p) % self->n_Players].start_col)
+						return 0;
+				}
+
+				// 3.3 Verification que l'on n'est pas à côté d'une pièce alliée
 				if(grille_i > 0)
 				{
 					if(self->grille[grille_i-1][grille_j] == self->joueurListe[self->joueurActif].couleur)
@@ -541,6 +551,14 @@ void checkAround(t_Partie * self, int grille_i, int grille_j)
 					if(self->grille[corn_i][corn_j+1] == joueurActuel->couleur)
 						ajout = 0;
 				}
+				// Verifier que l'on n'est pas sur la case de depart d'un autre joueur
+				for(int p = 1; p < self->n_Players; p++)
+				{
+					if(corn_i == self->joueurListe[(self->joueurActif + p) % self->n_Players].start_lig
+					&& corn_j == self->joueurListe[(self->joueurActif + p) % self->n_Players].start_col)
+						return 0;
+				}
+
 				if(ajout)
 				{
 					addCoin(&self->joueurListe[self->joueurActif], corn_i, corn_j);

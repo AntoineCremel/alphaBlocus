@@ -7,6 +7,7 @@
 #include "controles.h"
 #include "mainHeader.h"
 #include "toolbox/tools.h"
+#include "gamePlayOptions.h"
 /*
 Ce fichier contient la définition d'une structure partie ainsi que
 le prototype des fonctions liées à la gestion de cette partie
@@ -38,6 +39,8 @@ typedef struct Partie
     t_Joueur * joueurListe;
     // Contient les touches à utiliser pour jouer
     t_Controles touches;
+    // Contient les options de gameplay
+    t_GameOptions game_options;
     // Variable indiquant l'état de la partie
     char state;
     // Variable indiquant quel joueur est le joueur actif
