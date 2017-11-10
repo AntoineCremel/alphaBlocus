@@ -11,11 +11,10 @@ int main()
     /* 1 Test pour voir si tout fonctionne
 		Lancement d'une partie avec 4 joueurs humains
 	*/
-	char tab[10][20];
-	int lig=2;
 
 	srand(time(NULL));
-	curseur(&lig);
+
+	superLoop();
 
     return 0;
 }

@@ -8,18 +8,24 @@
 #include "partie.h"
 #include "gameLoop.h"
 
-// Fonction qui permet de choisir quel menu lancer
-void curseur(int *lig);
-
-// Fonction affichant le menu pour charger une partie
-void menu_charger_partie(char tab[10][20]);
-
-// Fonction affichant le menu d'options
-void menu_options(char tab[10][20]);
+#define MENU_P  0
+#define PLAY    1
+#define CHARGER 2
+#define OPTIONS 3
+#define QUITTER 4
 
 // Fonction affichant le menu principal
-void menu_principal(char tab[10][20]);
+int menu_principal(char tab[10][20], int *lig, char *quitter);
 
-// Fonction permettant de choisir le menu a lancer
-void choix_menu(char tab[10][20], int *lig);
+// Fonction affichant le menu pour lancer une nouvelle partie
+int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter);
+
+// Fonction affichant le menu pour charger une partie
+int menu_charger_partie(char tab[10][20], int *lig, char *quitter);
+
+// Fonction affichant le menu d'options
+int menu_options(char tab[10][20], int *lig, char *quitter);
+
+void superLoop();
+
 #endif // MENU_H_INCLUDED
