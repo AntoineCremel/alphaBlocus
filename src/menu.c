@@ -40,55 +40,56 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
         if(kbhit())
         {
             dep=getch();
-        }
-        switch(dep)
-        {
-        case 'z' :
-            if(*lig==2)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=8;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig-2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case 's' :
-            if(*lig==8)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig+2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case ' ' :
-            if(*lig==2)
-                return PLAY;
-            if(*lig==4)
-                return CHARGER;
-            if(*lig==6)
-                return OPTIONS;
-            if(*lig==8)
-                *quitter=1;
-            break;
+
+			switch(dep)
+			{
+			case 'z' :
+				if(*lig==2)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=8;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig-2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case 's' :
+				if(*lig==8)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig+2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case ' ' :
+				if(*lig==2)
+					return PLAY;
+				if(*lig==4)
+					return CHARGER;
+				if(*lig==6)
+					return OPTIONS;
+				if(*lig==8)
+					*quitter=1;
+				break;
+			}
         }
     }
     return MENU_P;
@@ -118,65 +119,65 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
         if(kbhit())
         {
             dep=getch();
-        }
-        switch(dep)
-        {
-        case 'z' :
-            if(*lig==2)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=8;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig-2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case 's' :
-            if(*lig==8)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig+2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case ' ' :
-            if(*lig==2)
-            {
+			switch(dep)
+			{
+			case 'z' :
+				if(*lig==2)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=8;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig-2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case 's' :
+				if(*lig==8)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig+2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case ' ' :
+				if(*lig==2)
+				{
 
-            }
-            if(*lig==4)
-            {
-                initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_HUMAIN, BLUE, 7, 7);
-                gameTurns(&game);
-                deinitialisationPartie(&game);
-            }
-            if(*lig==6)
-            {
-                initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, RED, 0, 0, JOUEUR_HUMAIN, BLUE, 0, 19, JOUEUR_HUMAIN, GREEN, 19, 19, JOUEUR_HUMAIN, YELLOW, 19, 0);
-                gameTurns(&game);
-                deinitialisationPartie(&game);
-            }
-            if(*lig==8)
-                return MENU_P;
-            break;
+				}
+				if(*lig==4)
+				{
+					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_HUMAIN, BLUE, 7, 7);
+					gameTurns(&game);
+					deinitialisationPartie(&game);
+				}
+				if(*lig==6)
+				{
+					initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, RED, 0, 0, JOUEUR_HUMAIN, BLUE, 0, 19, JOUEUR_HUMAIN, GREEN, 19, 19, JOUEUR_HUMAIN, YELLOW, 19, 0);
+					gameTurns(&game);
+					deinitialisationPartie(&game);
+				}
+				if(*lig==8)
+					return MENU_P;
+				break;
+			}
         }
     }
     return PLAY;
@@ -205,52 +206,53 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
         if(kbhit())
         {
             dep=getch();
-        }
-        switch(dep)
-        {
-        case 'z' :
-            if(*lig==2)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=8;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig-2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case 's' :
-            if(*lig==8)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig+2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case ' ' :
-            //if(*lig==2)
-            //if(*lig==4)
-            //if(*lig==6)
-            if(*lig==8)
-                return MENU_P;
-            break;
+
+			switch(dep)
+			{
+			case 'z' :
+				if(*lig==2)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=8;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig-2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case 's' :
+				if(*lig==8)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig+2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case ' ' :
+				//if(*lig==2)
+				//if(*lig==4)
+				//if(*lig==6)
+				if(*lig==8)
+					return MENU_P;
+				break;
+			}
         }
     }
     return CHARGER;
@@ -278,52 +280,53 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
         if(kbhit())
         {
             dep=getch();
-        }
-        switch(dep)
-        {
-        case 'z' :
-            if(*lig==2)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=8;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig-2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case 's' :
-            if(*lig==8)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig+2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            break;
-        case ' ' :
-            //if(*lig==2)
-            //if(*lig==4)
-            //if(*lig==6)
-            if(*lig==8)
-                return MENU_P;
-            break;
+
+			switch(dep)
+			{
+			case 'z' :
+				if(*lig==2)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=8;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig-2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case 's' :
+				if(*lig==8)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=*lig+2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				break;
+			case ' ' :
+				//if(*lig==2)
+				//if(*lig==4)
+				//if(*lig==6)
+				if(*lig==8)
+					return MENU_P;
+				break;
+			}
         }
     }
     return OPTIONS;
