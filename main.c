@@ -14,13 +14,8 @@ int main()
 	char tab[10][20];
 	int lig=2;
 
-	t_Partie game;
 	srand(time(NULL));
 	curseur(&lig);
-
-	gameTurns(&game);
-
-	deinitialisationPartie(&game);
 
     return 0;
 }
