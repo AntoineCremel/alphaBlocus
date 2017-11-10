@@ -16,13 +16,8 @@ int main()
 
 	t_Partie game;
 	srand(time(NULL));
+	curseur(&lig);
 
-	initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_HUMAIN, BLUE, 7, 7);
-
-	//printf("Initialisation faite\n");
-	//choix_menu(tab, lig);
-    gameTurns(&game);
-    deinitialisationPartie(&game);
 
     return 0;
 }

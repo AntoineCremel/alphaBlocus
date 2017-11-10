@@ -4,76 +4,90 @@
     Contient la définition des fonctions de fonctionnement et d'affichage sur console du menu.
 */
 
-void effacement(char tab[10][20])
-{
-    int i, j;
-    for(i=0;i<10;i++)
-    {
-        for(j=0;j<20;j++)
-            tab[i][j]=' ';
-            printf("%c",tab[i][j]);
-    }
-    printf("\n");
-}
-
 void curseur(int *lig)
 {
     char dep;
+    t_Partie game;
+    char tab[10][20];
+    char quitter=0;
+
+    menu_principal(tab);
 
     gotoligcol(*lig,2);
     printf(">");
 
-    while(!kbhit())
+    while(!quitter)
         {
-            dep=getch();
-        }
+            if(kbhit)
+            {
+                dep=getch();
+            }
+            switch(dep)
+            {
+            case 'z' :
+                if(*lig==2)
+                {
+                    gotoligcol(*lig,2);
+                    printf(" ");
+                    *lig=8;
+                    gotoligcol(*lig,2);
+                    printf(">");
+                }
+                else
+                {
+                    gotoligcol(*lig,2);
+                    printf(" ");
+                    *lig=*lig-2;
+                    gotoligcol(*lig,2);
+                    printf(">");
+                }
+                break;
+            case 's' :
+                if(*lig==8)
+                {
+                    gotoligcol(*lig,2);
+                    printf(" ");
+                    *lig=2;
+                    gotoligcol(*lig,2);
+                    printf(">");
+                }
+                else
+                {
+                    gotoligcol(*lig,2);
+                    printf(" ");
+                    *lig=*lig+2;
+                    gotoligcol(*lig,2);
+                    printf(">");
+                }
+                break;
 
-        switch(dep)
-        {
-        case 'z' :
-            if(*lig==2)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=8;
-                gotoligcol(*lig,2);
-                printf(">");
-        }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig-2;
-                gotoligcol(*lig,2);
-                printf(">");
+
+            case ' ' :
+                if(*lig==2)
+                {
+                    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_HUMAIN, BLUE, 7, 7);
+                    printf("Initialisation faite\n");
+
+                    gameTurns(&game);
+
+                    deinitialisationPartie(&game);
+                }
+                if(*lig==4)
+                    menu_charger_partie(tab);
+                if(*lig==6)
+                    menu_options(tab);
+                if(*lig==8)
+                    quitter=1;
+                break;
             }
-            break;
-        case 's' :
-            if(*lig==8)
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=2;
-                gotoligcol(*lig,2);
-                printf(">");
-            }
-            else
-            {
-                gotoligcol(*lig,2);
-                printf(" ");
-                *lig=*lig+2;
-                gotoligcol(*lig+2,2);
-                printf(">");
-            }
-            break;
         }
 }
 
 void menu_principal(char tab[10][20])
 {
-    effacement(tab);
+    system("CLS");
     changeColour(3,0);
-    printf("       B");
+    printf("          B");
     changeColour(2,0);
     printf("L");
     changeColour(14,0);
@@ -83,44 +97,48 @@ void menu_principal(char tab[10][20])
     changeColour(3,0);
     printf("U");
     changeColour(14,0);
-    printf("S       ");
+    printf("S          ");
     changeColour(7,0);
-    printf("\n\n   Nouvelle Partie");
-    printf("\n\n   Charger partie");
-    printf("\n\n   Options");
-    printf("\n\n   Quitter le jeu\n\n");
+    printf("\n\n    Nouvelle Partie");
+    printf("\n\n    Charger partie");
+    printf("\n\n    Options");
+    printf("\n\n    Quitter le jeu\n\n");
 }
 
 void menu_charger_partie(char tab[10][20])
 {
-    effacement(tab);
+    system("CLS");
     printf("    Charger Partie    ");
-    printf("\n\n 1.Emplacement vide");
-    printf("\n\n 2.Emplacement vide");
-    printf("\n\n 3.Emplacement vide");
-    printf("\n\n Retour");
+    printf("\n\n    1.Emplacement vide");
+    printf("\n\n    2.Emplacement vide");
+    printf("\n\n    3.Emplacement vide");
+    printf("\n\n    Retour");
 }
 
 void menu_options(char tab[10][20])
 {
-    effacement(tab);
-    printf("    Options    ");
+    system("CLS");
+    printf("       Options       ");
 
-    printf("\n\n Retour");
+    printf("\n\n    Retour");
 }
 
+/*
 void choix_menu(char tab[10][20], int *lig)
 {
     char val;
+    char quit=0;
     t_Partie game;
 
-    menu_principal(tab);
+
     curseur(lig);
 
-    while(!kbhit())
+    while(!quit)
     {
-        val=getch();
-    }
+        if(kbhit)
+        {
+            val=getch();
+        }
         switch(val)
         {
         case ' ' :
@@ -139,7 +157,9 @@ void choix_menu(char tab[10][20], int *lig)
             if(*lig==6)
                 menu_options(tab);
             if(*lig==8)
-                break;
+                quit=1;
             break;
         }
+    }
 }
+*/
