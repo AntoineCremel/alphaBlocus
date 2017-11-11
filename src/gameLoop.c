@@ -81,45 +81,98 @@ void aleaTurn(t_Partie * game)
 		while(actuel->ancre->number != a_jouer->piece)
 		{
 			scrollToSuivant(actuel);
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
+			FILE * fic;
+			fic = fopen(LOG_ALEA_NAME, "a");
+			if(fic)
+			{
+				fprintf(fic, "Scroll to suivant\n");
+				fclose(fic);
+			}
 		}
 		// 2.1 Ensuite on trouve la bonne orientation / inversion
 		while(actuel->ancre->orientation != a_jouer->rotation)
 		{
 			pieceRotation(actuel->ancre);
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
+			FILE * fic;
+			fic = fopen(LOG_ALEA_NAME, "a");
+			if(fic)
+			{
+				fprintf(fic, "Piece rotation\n");
+				fclose(fic);
+			}
 		}
 		while(actuel->ancre->inversion != a_jouer->inversion)
 		{
 			inversionPiece(actuel->ancre);
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
+			FILE * fic;
+			fic = fopen(LOG_ALEA_NAME, "a");
+			if(fic)
+			{
+				fprintf(fic, "Piece inversion\n");
+				fclose(fic);
+			}
 		}
 		// 2.2 Enfin on la déplace au bon endroit
-		while(actuel->curs_lig != a_jouer->curs_i || actuel->curs_col != a_jouer->curs_i)
+		while(actuel->curs_lig != a_jouer->curs_i || actuel->curs_col != a_jouer->curs_j)
 		{
 			if(actuel->curs_lig < a_jouer->curs_i)
 			{
-				actuel->curs_lig++;
+				actuel->curs_lig += 1;
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Lig ++\n");
+					fclose(fic);
+				}
 			}
 			else if(actuel->curs_lig > a_jouer->curs_i)
 			{
-				actuel->curs_lig--;
+				actuel->curs_lig -= 1;
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Lig --\n");
+					fclose(fic);
+				}
 			}
 			if(actuel->curs_col < a_jouer->curs_j)
 			{
-				actuel->curs_col++;
+				actuel->curs_col += 1;
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Col ++\n");
+					fclose(fic);
+				}
 			}
 			else if(actuel->curs_col > a_jouer->curs_j)
 			{
-				actuel->curs_col--;
+				actuel->curs_col -= 1;
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Col --\n");
+					fclose(fic);
+				}
 			}
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
 		}
 
 		// 3 Enfin on joue le coup correspondant
 		if(playCoup(game) == 0)
 		{
-			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+			affichageGame(game);
 			stay = 0;
 		}
 	}

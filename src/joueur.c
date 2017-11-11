@@ -171,6 +171,15 @@ t_Coup * getAleaCoup(t_Joueur * self)
 
 			if(n_coups == coup_choisi)
 			{
+				// 4 On log le coup choisi
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Coup choisi  : pos : (%i, %i) avec rotation :(%i, %i), sur la piece %i\n", curs_coup->curs_i, curs_coup->curs_j,
+								curs_coup->rotation, curs_coup->inversion, curs_coup->piece);
+						fclose(fic);
+				}
 				return curs_coup;
 			}
 
@@ -281,19 +290,17 @@ void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
 {
 	// 0 Variables
 	t_Coin * buffer = self->possibilites;
-	t_Coin * apres = NULL;
 	t_Coin * avant = NULL;
 
-	// On intialise apres
-	if(buffer)
-		apres = buffer->suivant;
+	// 0.1 Si le buffer est null, on quitte la fonction
+	if(!buffer)
+		return;
 
 	// 1 On parcourt la liste chainee de coins jusqu'à trouver le coin ayant les positions voulues
-	while(buffer->suivant && (buffer->pos_i != pos_i || buffer->pos_j != pos_j))
+	while(buffer && (buffer->pos_i != pos_i || buffer->pos_j != pos_j))
 	{
 		avant = buffer;
 		buffer = buffer->suivant;
-		apres = buffer->suivant;
 	}
 
 	// 1 Si on n'a pas trouvé dans la liste de coin qui correspond à ce que l'on cherchait, on quitte
@@ -303,20 +310,17 @@ void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
 	// 2 Ensuite on efface tous les coups de la liste chainee du coin
 	emptyCoin(buffer);
 
+	// 3 On referme la liste chainee
+	if(avant)
+		avant->suivant = buffer->suivant;
+	else
+		self->possibilites = buffer->suivant;
 
-	// 3 Enfin on libère ce coin de la chaîne
+	// 4 Enfin on libère ce coin de la chaîne
 	free(buffer);
 
-	if(avant)
-		avant->suivant = apres;
-	else
-		self->possibilites = apres;
-
-	// 4 On ecrit le log
-	FILE * logFile;
-	logFile = fopen("data/logs/corners.txt", "a");
-	fprintf(logFile, "joueur %i, REMOVED i : %i, j : %i\n", self->couleur, pos_i, pos_j);
-	fclose(logFile);
+	// 5 On ecrit le log
+	removeCoinLog(self->couleur, pos_i, pos_j);
 }
 
 void addCoin(t_Joueur * self, int pos_i, int pos_j)
@@ -338,10 +342,7 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j)
 	self->possibilites = buffer;
 
 	// 4 On ecrit le log
-	FILE * logFile;
-	logFile = fopen("data/logs/corners.txt", "a");
-	fprintf(logFile, "joueur %i, ADDED i : %i, j : %i\n", self->couleur, pos_i, pos_j);
-	fclose(logFile);
+	addCoinLog(self->couleur, pos_i, pos_j);
 }
 
 char isBloque(t_Joueur * self)
@@ -368,4 +369,37 @@ char isBloque(t_Joueur * self)
 	// Si l'on n'a rien trouvé, on met à jour la variable
 	self->bloque = 1;
 	return 1;
+}
+
+void clearEmptyCoins(t_Joueur * self)
+{
+	//0 Variables
+	t_Coin * precedent = NULL;
+	t_Coin * curseur = self->possibilites;
+
+	// 1 On parcourt la liste de coins
+	while(curseur)
+	{
+		//1.0 On teste si ce coin a toujours une liste de coups
+		if(!curseur->ancre)
+		{
+			// 1.0.0 Si non, on efface ce coin
+			if(precedent)
+				precedent->suivant = curseur->suivant;
+			else
+				self->possibilites = curseur->suivant;
+
+			removeCoinLog(self->couleur, curseur->pos_i, curseur->pos_j);
+
+			free(curseur);
+
+			if(precedent)
+				curseur = precedent->suivant;
+			else
+				curseur = self->possibilites;
+		}
+		// 1.1 On avance d'un cran dans la liste
+		precedent = curseur;
+		curseur = curseur->suivant;
+	}
 }

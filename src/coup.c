@@ -93,9 +93,11 @@ void scrapPieceCoups(t_Coin * self, int piece)
 				curseur = self->ancre;
 			}
 		}
-
-		// On avance d'un cran dans la chaîne
-		prev = curseur;
-		curseur = curseur->suivant;
+		else
+		{
+			// On avance d'un cran dans la chaîne
+			prev = curseur;
+			curseur = curseur->suivant;
+		}
 	}
 }

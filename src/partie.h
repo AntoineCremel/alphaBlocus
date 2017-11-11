@@ -30,6 +30,7 @@ le prototype des fonctions liées à la gestion de cette partie
 
 // Pour définir le nom du fichier de tests de positions
 #define LOG_FIND_NAME	"data/logs/testPlays.txt"
+#define LOG_UPDATE_PLAYS "data/logs/updatePlays.txt"
 
 //1 Définition de la structure
 typedef struct Partie

@@ -87,4 +87,7 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j);
 // Renvoit 1 s'il est bloqué, 0 sinon
 char isBloque(t_Joueur * self);
 
+// Fonction chargée de parcourir les coins du joueur afin de vider les coins vides
+void clearEmptyCoins(t_Joueur * self);
+
 #endif // JOUEUR_H_INCLUDED

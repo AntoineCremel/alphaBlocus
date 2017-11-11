@@ -12,6 +12,8 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 	fclose(fic);
 	fic = fopen(LOG_ALEA_NAME, "w");
 	fclose(fic);
+	fic = fopen(LOG_UPDATE_PLAYS, "w");
+	fclose(fic);
 
 	// 0 Variables
 	// Variable de la bibliotheque stdarg contenant tous les arguments contenus dans les ...
@@ -349,49 +351,40 @@ void findAllPlaysHere(t_Partie * self, t_Coin * here)
 
 	// 1 Tout d'abord, on vérifie que l'espace du coin est toujours libre et n'est pas occupé
 	if(self->grille[here->pos_i][here->pos_j] != CASE_VIDE)
+		return;
+
+	do
 	{
-		// S'il l'est, on l'efface
-		scrapCoin(&self->joueurListe[self->joueurActif], here->pos_i, here->pos_j);
-	}
-	else
-	{
-		// 2 Sinon, on fait le tour de toutes les pièces du joueur pour savoir s'il est possible
-		//	de les jouer à cet endroit là.
-		// D'abord, on efface les coups deja present, car on va refaire le calcul en entier
-		emptyCoin(here);
-		do
+		pieceActuelle = self->joueurListe[self->joueurActif].ancre;
+
+		if(pieceActuelle)
 		{
-			pieceActuelle = self->joueurListe[self->joueurActif].ancre;
 
-			if(pieceActuelle)
+			for(int k = 0; k < n_rotations(pieceActuelle); k++)
 			{
-
-				for(int k = 0; k < n_rotations(pieceActuelle); k++)
+				// On ajuste la rotation de la piece
+				cycleThroughPiece(pieceActuelle);
+				// On teste de mettre chacun des coins de la pièce sur ce coin là
+				for(int i = 0; i < I_TAB_PIECE; i++)
 				{
-					// On ajuste la rotation de la piece
-					cycleThroughPiece(pieceActuelle);
-					// On teste de mettre chacun des coins de la pièce sur ce coin là
-					for(int i = 0; i < I_TAB_PIECE; i++)
+					for(int j = 0; j < J_TAB_PIECE; j++)
 					{
-						for(int j = 0; j < J_TAB_PIECE; j++)
+						if(isCoin(pieceActuelle->grille[i][j]))
 						{
-							if(isCoin(pieceActuelle->grille[i][j]))
+							// Si l'on a trouve un coin à cet endroit là, alors on tente de placer la pièce en question
+							if(testPlacement(self, here->pos_i, here->pos_j, i, j, &curs_i, &curs_j))
 							{
-								// Si l'on a trouve un coin à cet endroit là, alors on tente de placer la pièce en question
-								if(testPlacement(self, here->pos_i, here->pos_j, i, j, &curs_i, &curs_j))
-								{
-									// Ajouter le coup correspondant à la liste chainee du coin en cours
-									addCoup(here, curs_i, curs_j, pieceActuelle->orientation, pieceActuelle->inversion, pieceActuelle->number);
-								}
+								// Ajouter le coup correspondant à la liste chainee du coin en cours
+								addCoup(here, curs_i, curs_j, pieceActuelle->orientation, pieceActuelle->inversion, pieceActuelle->number);
 							}
 						}
 					}
 				}
 			}
-			// On avance de un parmi les pièces du joueurs actifs
-			scrollToSuivant(&self->joueurListe[self->joueurActif]);
-		}while(self->joueurListe[self->joueurActif].ancre != depart);
-	}
+		}
+		// On avance de un parmi les pièces du joueurs actifs
+		scrollToSuivant(&self->joueurListe[self->joueurActif]);
+	}while(self->joueurListe[self->joueurActif].ancre != depart);
 }
 
 char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int piece_j, int * curs_i, int * curs_j)
@@ -490,6 +483,9 @@ void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i
 	t_Joueur * joueurActuel;
 	t_Coin * coinCurs = NULL;
 
+	int compt = 1;
+	int test;
+
 	// 1 On fait le tour des joueurs pour mettre à jour les coins qui sont
 	// dans l'aire d'influence de cette case
 	// 1.0 Boucle qui parcourt chaque joueur de la partie
@@ -497,19 +493,35 @@ void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i
 	{
 		joueurActuel = &self->joueurListe[n_JoueurActuel];
 		coinCurs = joueurActuel->possibilites;
+
 		// 1.1 Boucle qui parcourt les coins du joueur
+		compt = 1;
 		while(coinCurs)
 		{
+			FILE * fic = fopen("LOG_UPDATE_PLAYS", "a");
+			if(fic)
+			{
+				fprintf(fic, "Joueur : %i, recherche des plays sur le %ieme coin\n", n_JoueurActuel, compt);
+				fclose(fic);
+			}
+
+			test = coinCurs->pos_i;
+
 			// 1.1.0 On teste s'il s'agit d'un coin dans le rayon d'action de cette nouvelle piece
 			// Pour le calcul du rayon, on fait une forme de diamant
-			if(coinCurs->pos_i > curs_i - rad_i + abs(coinCurs->pos_j-curs_j) && coinCurs->pos_i < curs_i + rad_i - abs(coinCurs->pos_j - curs_j)
-			&& coinCurs->pos_j > curs_j - rad_j + abs(coinCurs->pos_i-curs_i) && coinCurs->pos_j < curs_j + rad_j - abs(coinCurs->pos_i-curs_i))
+			if(coinCurs->pos_i > curs_i - rad_i + abs(coinCurs->pos_j - curs_j) && coinCurs->pos_i < curs_i + rad_i - abs(coinCurs->pos_j - curs_j)
+			&& coinCurs->pos_j > curs_j - rad_j + abs(coinCurs->pos_i - curs_i) && coinCurs->pos_j < curs_j + rad_j - abs(coinCurs->pos_i - curs_i))
 			{
 				findAllPlaysHere(self, coinCurs);
 			}
 
 			coinCurs = coinCurs->suivant;
+			compt++;
 		}
+
+		// On commence  par s'assurer qu'il n'y a pas de coins vides dans la liste de possibilités
+		// du joueur actuel
+		clearEmptyCoins(joueurActuel);
 
 		n_JoueurActuel = (n_JoueurActuel + 1) % self->n_Players;
 	}while(n_JoueurActuel != self->joueurActif);
