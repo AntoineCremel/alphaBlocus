@@ -29,7 +29,7 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     self->ancre = NULL;
     self->possibilites = NULL;
     // 0.6 Variable qui sera utilisée pour numéroter les pièces
-    int num = 0;
+    int num = 1;
 
     // 1 On lit les informations relatives a la taille des pieces
     // 1.0 Ouverture du fichier permettant de trouver tous les fichiers de pièces
@@ -399,7 +399,10 @@ void clearEmptyCoins(t_Joueur * self)
 				curseur = self->possibilites;
 		}
 		// 1.1 On avance d'un cran dans la liste
-		precedent = curseur;
+		else
+		{
+			precedent = curseur;
 		curseur = curseur->suivant;
+		}
 	}
 }

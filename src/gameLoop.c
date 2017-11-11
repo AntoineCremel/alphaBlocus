@@ -81,6 +81,8 @@ void aleaTurn(t_Partie * game)
 		while(actuel->ancre->number != a_jouer->piece)
 		{
 			scrollToSuivant(actuel);
+			testDepassement(game);
+
 			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
 			FILE * fic;
@@ -95,6 +97,8 @@ void aleaTurn(t_Partie * game)
 		while(actuel->ancre->orientation != a_jouer->rotation)
 		{
 			pieceRotation(actuel->ancre);
+			testDepassement(game);
+
 			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
 			FILE * fic;
@@ -108,6 +112,8 @@ void aleaTurn(t_Partie * game)
 		while(actuel->ancre->inversion != a_jouer->inversion)
 		{
 			inversionPiece(actuel->ancre);
+			testDepassement(game);
+
 			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
 			FILE * fic;
@@ -124,6 +130,7 @@ void aleaTurn(t_Partie * game)
 			if(actuel->curs_lig < a_jouer->curs_i)
 			{
 				actuel->curs_lig += 1;
+				testDepassement(game);
 				FILE * fic;
 				fic = fopen(LOG_ALEA_NAME, "a");
 				if(fic)
@@ -135,6 +142,7 @@ void aleaTurn(t_Partie * game)
 			else if(actuel->curs_lig > a_jouer->curs_i)
 			{
 				actuel->curs_lig -= 1;
+				testDepassement(game);
 				FILE * fic;
 				fic = fopen(LOG_ALEA_NAME, "a");
 				if(fic)
@@ -146,6 +154,7 @@ void aleaTurn(t_Partie * game)
 			if(actuel->curs_col < a_jouer->curs_j)
 			{
 				actuel->curs_col += 1;
+				testDepassement(game);
 				FILE * fic;
 				fic = fopen(LOG_ALEA_NAME, "a");
 				if(fic)
@@ -157,6 +166,7 @@ void aleaTurn(t_Partie * game)
 			else if(actuel->curs_col > a_jouer->curs_j)
 			{
 				actuel->curs_col -= 1;
+				testDepassement(game);
 				FILE * fic;
 				fic = fopen(LOG_ALEA_NAME, "a");
 				if(fic)
