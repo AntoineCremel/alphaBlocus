@@ -15,7 +15,7 @@ void emptyCoin(t_Coin * self)
 		fic = fopen(LOG_PLAYS_NAME, "a");
 		if(fic)
 		{
-			fprintf(fic, "Coin (%i, %i), EMPTYCOIN piece : %i, rotation : %i, inversion : %i i : %i, j : %i\n", buffer->piece, buffer->rotation, buffer->inversion, buffer->curs_i, buffer->curs_j);
+			fprintf(fic, "Coin (%i, %i), EMPTYCOIN piece : (%i, rotation : %i, %i) i : %i, j : %i\n", self->pos_i, self->pos_j, buffer->piece, buffer->rotation, buffer->inversion, buffer->curs_i, buffer->curs_j);
 			fclose(fic);
 		}
 
@@ -45,7 +45,7 @@ void addCoup(t_Coin * self, int curs_i, int curs_j, char orientation, char inver
 	fic = fopen(LOG_PLAYS_NAME, "a");
 	if(fic)
 	{
-		fprintf(fic, "Coin (%i, %i), ADDED piece : %i, rotation : %i, inversion : %i i : %i, j : %i\n", buffer->piece, buffer->rotation, buffer->inversion, buffer->curs_i, buffer->curs_j);
+		fprintf(fic, "Coin (%i, %i), ADDED piece : %i, rotation : (%i, %i) i : %i, j : %i\n", self->pos_i, self->pos_j, buffer->piece, buffer->rotation,  buffer->inversion, buffer->curs_i, buffer->curs_j);
 		fclose(fic);
 	}
 
@@ -75,7 +75,7 @@ void scrapPieceCoups(t_Coin * self, int piece)
 			fic = fopen(LOG_PLAYS_NAME, "a");
 			if(fic)
 			{
-				fprintf(fic, "Coin (%i, %i), REMOVED piece : %i, rotation : %i, inversion : %i i : %i, j : %i\n", curseur->piece, curseur->rotation, curseur->inversion, curseur->curs_i, curseur->curs_j);
+				fprintf(fic, "Coin (%i, %i), REMOVED piece : %i, rotation : (%i, %i) i : %i, j : %i\n", self->pos_i, self->pos_j, curseur->piece, curseur->rotation, curseur->inversion, curseur->curs_i, curseur->curs_j);
 				fclose(fic);
 			}
 

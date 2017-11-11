@@ -37,8 +37,11 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 		self->joueurListe[i].curs_col = self->joueurListe[i].start_col;
 
 		// 1.2 Creation du joueur
-		/// Pour l'instant seul un type de partie est pris en compte
-		joueurInitialisation(&self->joueurListe[i], "data/gameInit/stdPiecesList.txt");
+		if(partieType == PARTIE_STANDARD)
+			joueurInitialisation(&self->joueurListe[i], "data/gameInit/stdPiecesList.txt");
+
+		else if(partieType == PARTIE_DEV)
+			joueurInitialisation(&self->joueurListe[i], "data/gameInit/devPiecesList.txt");
 
 		// On initialise la variable de deadlock
 		self->joueurListe[i].bloque = 0;

@@ -20,6 +20,7 @@ le prototype des fonctions liées à la gestion de cette partie
 
 // Pour définir le type de partie voulu
 #define PARTIE_STANDARD 8
+#define PARTIE_DEV		9
 
 // Pour définir ce qui est contenu dans la case
 #define CASE_VIDE 50

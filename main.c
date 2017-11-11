@@ -5,6 +5,7 @@
 
 #include "src/gameLoop.h"
 #include "src/joueur.h"
+#include "src/menu.h"
 
 int main()
 {
