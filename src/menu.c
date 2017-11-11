@@ -104,7 +104,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     changeColour(11,0);
     printf("       Nouvelle Partie       ");
     changeColour(7,0);
-    printf("\n\n    joueur VS ordinateur");
+    printf("\n\n    Tests");
     printf("\n\n    joueur VS joueur");
     printf("\n\n    4 joueurs");
     changeColour(12,0);
@@ -160,7 +160,9 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
 				{
-
+					initialisationPartie(&game, 3, 3, PARTIE_STANDARD, 4, JOUEUR_HUMAIN, RED, 0, 0);
+					gameTurns(&game);
+					deinitialisationPartie(&game);
 				}
 				if(*lig==4)
 				{

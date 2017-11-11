@@ -311,6 +311,12 @@ void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
 		avant->suivant = apres;
 	else
 		self->possibilites = apres;
+
+	// 4 On ecrit le log
+	FILE * logFile;
+	logFile = fopen("data/logs/corners.txt", "a");
+	fprintf(logFile, "joueur %i, REMOVED i : %i, j : %i\n", self->couleur, pos_i, pos_j);
+	fclose(logFile);
 }
 
 void addCoin(t_Joueur * self, int pos_i, int pos_j)
@@ -326,12 +332,16 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j)
 	buffer->pos_i = pos_i;
 	buffer->pos_j = pos_j;
 	buffer->ancre = NULL;
-	buffer->suivant = NULL;
 
 	// 3 On ajoute maintenant ce coin à la chaine
 	buffer->suivant = self->possibilites;
 	self->possibilites = buffer;
 
+	// 4 On ecrit le log
+	FILE * logFile;
+	logFile = fopen("data/logs/corners.txt", "a");
+	fprintf(logFile, "joueur %i, ADDED i : %i, j : %i\n", self->couleur, pos_i, pos_j);
+	fclose(logFile);
 }
 
 char isBloque(t_Joueur * self)

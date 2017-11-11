@@ -27,6 +27,9 @@ le prototype des fonctions liées à la gestion de cette partie
 // Pour définir une case qui ne sera jamais dans la grille
 #define OUT_BOUND		-1
 
+// Pour définir le nom du fichier de tests de positions
+#define LOG_FIND_NAME	"data/logs/testPlays.txt"
+
 //1 Définition de la structure
 typedef struct Partie
 {

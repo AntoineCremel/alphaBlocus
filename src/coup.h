@@ -2,12 +2,14 @@
 #define COUP_H_INCLUDED
 
 #include <stdlib.h>
+#include <stdio.h>
 
 /*
 	Ce fichier contient la définition d'un coup possible, c'est à dire d'un coup accessible à un joueur
 */
 
 // 0 Constantes
+#define LOG_PLAYS_NAME	"data/logs/plays.txt"
 
 // 1 Structures
 typedef struct Coup

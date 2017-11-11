@@ -3,6 +3,9 @@
 
 #include <time.h>
 
+#define LOG_FILE_SIZE 50
+#define LOG_MSG_SIZE 50
+
 // Fonction pour retirer les sauts a la ligne a la fin d'une chaine de caractère.
 void takeOutEndLines(char * chaine);
 

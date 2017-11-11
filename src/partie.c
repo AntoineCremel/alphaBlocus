@@ -2,6 +2,15 @@
 
 void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char partieType, int n_arguments, ...)
 {
+	// -1 Remise à jour des logs
+	FILE * fic;
+	fic = fopen("data/logs/corners.txt", "w");
+	fclose(fic);
+	fic = fopen(LOG_PLAYS_NAME, "w");
+	fclose(fic);
+	fic = fopen(LOG_FIND_NAME, "w");
+	fclose(fic);
+
 	// 0 Variables
 	// Variable de la bibliotheque stdarg contenant tous les arguments contenus dans les ...
 	va_list valist;
@@ -73,6 +82,7 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 	loadControles(&self->touches);
 	// 5 On initialise les options de jeu
 	loadGameOptions(&self->game_options);
+
 }
 
 void deinitialisationPartie(t_Partie * self)
@@ -353,6 +363,8 @@ void findAllPlaysHere(t_Partie * self, t_Coin * here)
 
 				for(int k = 0; k < n_rotations(pieceActuelle); k++)
 				{
+					// On ajuste la rotation de la piece
+					cycleThroughPiece(pieceActuelle);
 					// On teste de mettre chacun des coins de la pièce sur ce coin là
 					for(int i = 0; i < I_TAB_PIECE; i++)
 					{
@@ -392,6 +404,15 @@ char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int pie
 	// 2 Ensuite on fait le tour des cases de la piece pour voir s'il y a problème
 	if(actuelle)
 	{
+		FILE * fic;
+		fic = fopen(LOG_FIND_NAME, "a");
+		if(fic)
+		{
+			fprintf(fic, "Testing piece n : %i, au coin (%i, %i) in game grid, with orientation (%i, %i) from square (%i, %i) of piece, donc position du curseur : (%i, %i)\n",
+					actuelle->number, game_i, game_j, actuelle->orientation, actuelle->inversion, piece_i, piece_j, *curs_i, *curs_j);
+			fclose(fic);
+		}
+
 		for(int i = 0; i < I_TAB_PIECE; i++)
 		{
 			for(int j = 0; j < J_TAB_PIECE; j++)
@@ -421,29 +442,39 @@ char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int pie
 					// 3.3 Verification que l'on n'est pas à côté d'une pièce alliée
 					if(grille_i > 0)
 					{
-						if(self->grille[grille_i-1][grille_j] == self->joueurListe[self->joueurActif].couleur)
+						if(self->grille[grille_i-1][grille_j] == self->joueurActif)
 							return 0;
 					}
 					if(grille_i < self->h_grid - 1)
 					{
-						if(self->grille[grille_i+1][grille_j] == self->joueurListe[self->joueurActif].couleur)
+						if(self->grille[grille_i+1][grille_j] == self->joueurActif)
 							return 0;
 					}
 					if(grille_j > 0)
 					{
-						if(self->grille[grille_i][grille_j-1] == self->joueurListe[self->joueurActif].couleur)
+						if(self->grille[grille_i][grille_j-1] == self->joueurActif)
 							return 0;
 					}
 					if(grille_j < self->w_grid - 1)
 					{
-						if(self->grille[grille_i][grille_j+1] == self->joueurListe[self->joueurActif].couleur)
+						if(self->grille[grille_i][grille_j+1] == self->joueurActif)
 							return 0;
 					}
 				}
 			}
 		}
 	}
+	else
+		return 0;
 	// Si l'on est arrivé jusqu'ici sans rencontrer de return 0, c'est que tout va bien
+	// On indique au log que le test a été successful
+	FILE * fic;
+	fic = fopen(LOG_FIND_NAME, "a");
+	if(fic)
+	{
+		fprintf(fic, "CONFIRMED\n");
+		fclose(fic);
+	}
 	return 1;
 }
 
