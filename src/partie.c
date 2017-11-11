@@ -93,7 +93,7 @@ void deinitialisationPartie(t_Partie * self)
 	// 0 Variables
 
 	// 1.0 Boucle de désinitialisation des joueurs
-	for(int i=0; i < sizeof(self->joueurListe)/sizeof(t_Joueur); i++)
+	for(int i=0; i < self->n_Players; i++)
 	{
 		joueurDesinit(&self->joueurListe[i]);
 	}
@@ -102,7 +102,7 @@ void deinitialisationPartie(t_Partie * self)
 	self->joueurListe = NULL;
 
 	// 2.0 Boucle de libération de la mémoire de chaque ligne de la grille
-	for(int i=0; i < sizeof(char*) * sizeof(self->grille); i++)
+	for(int i=0; i < self->h_grid; i++)
 	{
 		free(self->grille[i]);
 		self->grille[i] = NULL;

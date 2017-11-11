@@ -163,18 +163,22 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 					initialisationPartie(&game, 3, 3, PARTIE_DEV, 4, JOUEUR_ALEATOIRE, RED, 0, 0);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
+					return MENU_P;
 				}
 				if(*lig==4)
 				{
 					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_ALEATOIRE, BLUE, 7, 7);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
+					system("cls");
+					return MENU_P;
 				}
 				if(*lig==6)
 				{
 					initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_HUMAIN, YELLOW, 0, 19, JOUEUR_HUMAIN, RED, 19, 19, JOUEUR_HUMAIN, GREEN, 19, 0);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
+					return MENU_P;
 				}
 				if(*lig==8)
 					return MENU_P;
