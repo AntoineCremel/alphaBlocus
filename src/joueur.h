@@ -19,6 +19,8 @@ Ce fichier contiendra la structure et les définitions des fonctions nécessaires 
 #define JOUEUR_HUMAIN 0
 #define JOUEUR_ALEATOIRE 1
 
+#define LOG_ALEA_NAME "data/logs/aleatoie.txt"
+
 //1 Définition de la structure
 typedef struct Joueur
 {

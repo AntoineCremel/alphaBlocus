@@ -160,7 +160,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
 				{
-					initialisationPartie(&game, 3, 3, PARTIE_DEV, 4, JOUEUR_ALEATOIRE, RED, 0, 0);
+					initialisationPartie(&game, 3, 3, PARTIE_DEV, 4, JOUEUR_HUMAIN, RED, 0, 0);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
 					return MENU_P;
@@ -170,7 +170,6 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_ALEATOIRE, BLUE, 7, 7);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
-					system("cls");
 					return MENU_P;
 				}
 				if(*lig==6)

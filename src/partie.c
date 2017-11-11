@@ -10,6 +10,8 @@ void initialisationPartie(t_Partie * self, int w_grille, int h_grille, char part
 	fclose(fic);
 	fic = fopen(LOG_FIND_NAME, "w");
 	fclose(fic);
+	fic = fopen(LOG_ALEA_NAME, "w");
+	fclose(fic);
 
 	// 0 Variables
 	// Variable de la bibliotheque stdarg contenant tous les arguments contenus dans les ...
