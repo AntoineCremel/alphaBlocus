@@ -88,7 +88,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 					return OPTIONS;
 				if(*lig==8)
 					*quitter=1;
-				break;
+                break;
 			}
         }
     }
@@ -172,7 +172,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 				}
 				if(*lig==6)
 				{
-					initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, RED, 0, 0, JOUEUR_HUMAIN, BLUE, 0, 19, JOUEUR_HUMAIN, GREEN, 19, 19, JOUEUR_HUMAIN, YELLOW, 19, 0);
+					initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_HUMAIN, YELLOW, 0, 19, JOUEUR_HUMAIN, RED, 19, 19, JOUEUR_HUMAIN, GREEN, 19, 0);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
 				}
@@ -248,9 +248,18 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 				}
 				break;
 			case ' ' :
-				//if(*lig==2)
-				//if(*lig==4)
-				//if(*lig==6)
+				if(*lig==2)
+                {
+
+                }
+				if(*lig==4)
+                {
+
+                }
+				if(*lig==6)
+                {
+
+                }
 				if(*lig==8)
 					return MENU_P;
 				break;
@@ -263,6 +272,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 int menu_options(char tab[10][20], int *lig, char *quitter)
 {
     char dep;
+    FILE * regle = NULL;
 
     system("CLS");
     changeColour(14,0);
@@ -296,11 +306,22 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 				}
 				else
 				{
-					gotoligcol(*lig,2);
-					printf(" ");
-					*lig=*lig-2;
-					gotoligcol(*lig,2);
-					printf(">");
+				    if(*lig==8)
+				    {
+				        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=4;
+                        gotoligcol(*lig,2);
+                        printf(">");
+				    }
+				    else
+                    {
+                        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=*lig-2;
+                        gotoligcol(*lig,2);
+                        printf(">");
+                    }
 				}
 				break;
 			case 's' :
@@ -314,17 +335,40 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 				}
 				else
 				{
-					gotoligcol(*lig,2);
-					printf(" ");
-					*lig=*lig+2;
-					gotoligcol(*lig,2);
-					printf(">");
+				    if(*lig==4)
+				    {
+				        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=8;
+                        gotoligcol(*lig,2);
+                        printf(">");
+				    }
+				    else
+                    {
+                        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=*lig+2;
+                        gotoligcol(*lig,2);
+                        printf(">");
+                    }
 				}
 				break;
 			case ' ' :
-				//if(*lig==2)
-				//if(*lig==4)
-				//if(*lig==6)
+				if(*lig==2)
+                {
+                    regle = fopen("C:\\Users\\Bastien\\Desktop\\ECE Paris\\Info\\Projet Blokus\\blocus\\data\\regle.txt", "r+");
+                    if (regle != NULL)
+                    {
+                    }
+                    else
+                    {
+                    printf(" Impossible d'ouvrir le regle regle.txt");
+                    }
+                }
+				if(*lig==4)
+                {
+
+                }
 				if(*lig==8)
 					return MENU_P;
 				break;
@@ -351,7 +395,5 @@ void superLoop()
             choix=menu_charger_partie(tab, &lig, &quitter);
         if(choix==OPTIONS)
             choix=menu_options(tab, &lig, &quitter);
-        if(choix==QUITTER)
-            break;
     }
 }

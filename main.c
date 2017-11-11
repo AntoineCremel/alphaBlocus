@@ -11,7 +11,6 @@ int main()
     /* 1 Test pour voir si tout fonctionne
 		Lancement d'une partie avec 4 joueurs humains
 	*/
-
 	srand(time(NULL));
 
 	superLoop();
