@@ -1,0 +1,37 @@
+REGLE DU JEU BLOKUS
+
+Composition du jeu :
+Le jeu se compose des éléments suivants :
+Un plateau de jeu de 400 cases.
+84 pièces (soit 21 pièces dans chacune des 4 couleurs).
+Chacune des 21 pièces est de forme différente.
+
+Les pièces du jeu :
+Il y a :
+1 pièce d’un carré.
+1 pièce à deux carrés (un « domino »).
+2 pièces à trois carrés (des « triominos »).
+5 pièces à quatre carrés (des « tetraminos »).
+12 pièces à cinq carrés (des « pentaminos »).
+
+But du jeu :
+Le but du jeu est, pour chaque joueur, de
+placer ses 21 pièces sur le plateau (ou en tous
+les cas, un maximum d’entre elles).
+
+Contraintes :
+Chaque joueur doit démarrer sur l’un des angles du plateau.
+L’ordre de jeu est bleu, jaune, rouge, vert.
+Chaque nouvelle pièce posée doit toucher au moins une pièce de la même couleur, mais uniquement par les angles, jamais par les cotés.
+
+Fin de la partie :
+Lorsqu’un joueur est bloqué et ne peut plus placer de pièce, il est obligé de passer son tour. Les autres joueurs poursuivent en 
+conservant le même ordre de jeu, jusqu’à ce que plus personne ne puisse placer de pièce.
+
+Décompte des points :
+Lorsque tous les joueurs sont bloqués, chacun compte le nombre de carrés qu’il n’a pu placer sur le plateau et calcule son score :
+Chaque carré non posé constitue un point négatif.
+Un bonus de15 points est accordé si les 21 pièces ont été posées.
+Ce bonus est de 20 points si les 21 pièces ont été posées avec le carré solitaire en
+dernière position.
+Celui qui a le plus de points a gagné ! 
