@@ -49,6 +49,9 @@
 
 #define W_SCROLL 6
 
+// Definition de l'affichage de la zone de score
+#define SCORE_AF_WIDTH	4
+
 // 1 Structures
 
 // 2 Prototypes de fonctions
@@ -83,5 +86,8 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col);
 void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour);
 // Fonction qui sert à afficher plusieurs zones dans lesquelles seront placées les pièces et celle utilisée actuellement
 void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self);
+
+// Fonction qui sert à afficher le score du joueur
+void affichageConsoleScore(t_Partie * self, int lig, int col);
 
 #endif // AFFICHAGECONSOLE_H_INCLUDED

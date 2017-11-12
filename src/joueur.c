@@ -30,6 +30,8 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     self->possibilites = NULL;
     // 0.6 Variable qui sera utilisée pour numéroter les pièces
     int num = 1;
+    // 0.7 Variable qui compte la taille de la pièce pour l'utiliser pour le calcul du score
+    int taille = 0;
 
     // 1 On lit les informations relatives a la taille des pieces
     // 1.0 Ouverture du fichier permettant de trouver tous les fichiers de pièces
@@ -61,6 +63,12 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 			// 1.1.2.1 On met la piece dans la chaine
 			addPieceAfter(self, pieceBuff);
 
+			// Reinitialisation du compteur de taille de la pièce
+			taille = 0;
+
+			// On initialise la symétrie de la pièce avec une valeur par défaut
+			self->ancre->symetrie = COMPLET;
+
 			// Initialisation de l'orientation de la pièce
 			self->ancre->inversion = 0;
 			self->ancre->orientation = 0;
@@ -79,19 +87,44 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 					if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE || charBuff == SYMB_PIECE_MORT)
 					{
 						self->ancre->grille[i][j] = charBuff;
+
+						if(isPiece(charBuff))
+							// Incrémentation de la taille de la pièce
+							taille++;
 					}
 				}
 			}
+			// Ensute, on lit le caractère qui renseigne la symétrie de la pièce
+			do
+			{
+				charBuff = (char)fgetc(fichierPiece);
+			}while(charBuff == '\n');
+
+			if(charBuff != EOF)
+			{
+				if(charBuff == COMPLET || charBuff == DEMI_COMPLET ||
+					charBuff == ROTATION_SEULE || charBuff == DEMI_ROTATION
+					|| charBuff == SIMPLE)
+				{
+					self->ancre->symetrie = charBuff;
+				}
+			}
 			fclose(fichierPiece);
+
+			// On attribue un numéro et une taille à la pièce en question
+			self->ancre->taille = taille;
+			self->ancre->number = num;
+			num++;
 		}
-		self->ancre->number = num;
-		num++;
 	}
 
 	fclose(fichierListe);
 
 	// 2 Maintenant on initialise la liste chainee de positions
 	addCoin(self, self->start_lig, self->start_col);
+
+	// 3 Intialisation du score à 0
+	self->score = 0;
 }
 
 void joueurDesinit(t_Joueur * self)
@@ -144,17 +177,9 @@ t_Coup * getAleaCoup(t_Joueur * self)
 	// O.3 Nombre aléatoire permettant de déterminer le coup à jouer
 	int coup_choisi;
 
-	// 1 Boucles de parcourt des listes chaînées
-	while(curs_coin)
-	{
-		curs_coup = curs_coin->ancre;
-		while(curs_coup)
-		{
-			n_coups++;
-			curs_coup = curs_coup->suivant;
-		}
-		curs_coin = curs_coin->suivant;
-	}
+	// 1 On détermine le nombre de coups possibles
+	n_coups = get_n_PossiblePlays(self);
+
 	// 2 On choisi un nombre aléatoire en fonction du nombre de coups disponibles
 	coup_choisi = rand() % n_coups;
 
@@ -405,4 +430,28 @@ void clearEmptyCoins(t_Joueur * self)
 		curseur = curseur->suivant;
 		}
 	}
+}
+
+int get_n_PossiblePlays(t_Joueur * self)
+{
+	// 0 Variables
+	// 0.1 Variable qui permet de compter combien il y a de coups possibles
+	int n_coups = 0;
+	// 0.2 Curseurs permettant de parcourir les listes chaines
+	t_Coin * curs_coin = self->possibilites;
+	t_Coup * curs_coup;
+
+	// 1 Boucles de parcourt des listes chaînées
+	while(curs_coin)
+	{
+		curs_coup = curs_coin->ancre;
+		while(curs_coup)
+		{
+			n_coups++;
+			curs_coup = curs_coup->suivant;
+		}
+		curs_coin = curs_coin->suivant;
+	}
+
+	return n_coups;
 }
