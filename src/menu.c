@@ -129,7 +129,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     printf("\n\n    joueur VS Joueur");
     printf("\n\n    joueur VS Joueur VS Ordinateur");
     changeColour(12,0);
-    printf("\n\n\    Retour");
+    printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
     changeColour(7,0);
@@ -228,7 +228,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     printf("\n\n    2 adversaires");
     printf("\n\n    3 adversaires");
     changeColour(12,0);
-    printf("\n\n\    Retour");
+    printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
     changeColour(7,0);
@@ -340,7 +340,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     printf("\n\n    2 adversaires");
     printf("\n\n    3 adversaires");
     changeColour(12,0);
-    printf("\n\n\    Retour");
+    printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
     changeColour(7,0);
@@ -448,7 +448,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     printf("\n\n    2 adversaires & 1 IA");
     printf("\n\n    1 adversaire & 2 IA");
     changeColour(12,0);
-    printf("\n\n\    Retour");
+    printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
     changeColour(7,0);
