@@ -96,7 +96,7 @@ void aleaTurn(t_Partie * game)
 		// 2.1 Ensuite on trouve la bonne orientation / inversion
 		while(actuel->ancre->orientation != a_jouer->rotation)
 		{
-			pieceRotation(actuel->ancre);
+			rotateThroughPiece(actuel->ancre);
 			testDepassement(game);
 
 			affichageGame(game);
@@ -111,7 +111,7 @@ void aleaTurn(t_Partie * game)
 		}
 		while(actuel->ancre->inversion != a_jouer->inversion)
 		{
-			inversionPiece(actuel->ancre);
+			cycleThroughPiece(actuel->ancre);
 			testDepassement(game);
 
 			affichageGame(game);
@@ -228,10 +228,10 @@ char treatInput(t_Partie * game, char pressed)
 	}
 	else if(pressed == game->touches.rotation)
 	{
-		pieceRotation(game->joueurListe[game->joueurActif].ancre);
+		rotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
 		// On teste si ce mouvement fait sortir des cases ou non
 		if(testDepassement(game))
-			pieceAntiRotation(game->joueurListe[game->joueurActif].ancre);
+			antiRotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
 
 		// On affiche la zone des pièces
 		affichageGame(game);
@@ -242,7 +242,7 @@ char treatInput(t_Partie * game, char pressed)
 		inversionPiece(game->joueurListe[game->joueurActif].ancre);
 
 		if(testDepassement(game))
-			inversionPiece(game->joueurListe[game->joueurActif].ancre);
+			cycleThroughPiece(game->joueurListe[game->joueurActif].ancre);
 
 		// On affiche la zone des pièces
 		affichageGame(game);

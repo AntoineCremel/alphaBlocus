@@ -41,7 +41,7 @@ typedef struct Piece
 
     // Variable qui indique le type de symétrie de la pièce
     // A aouter plus tard
-    //char symetrie;
+    char symetrie;
 }t_Piece;
 
 
@@ -64,6 +64,11 @@ void inversionPiece(t_Piece * self);
 	Elle fait tourner la pièce vers l'orientation suivante
 */
 void cycleThroughPiece(t_Piece * self);
+// Fonction qui devra être utilisée à la place de pieceRotation dans tous les endroits du code
+// a part piece.c
+void rotateThroughPiece(t_Piece * self);
+// Fonction permettant de faire l'inverse de rotateThroughPiece
+void antiRotateThroughPiece(t_Piece * self);
 // Renvoit le nombre de rotations à essayer avec cette pièce
 int n_rotations(t_Piece * self);
 
