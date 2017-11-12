@@ -31,7 +31,23 @@ void affichageGame(t_Partie * game)
 	// 0 Variables
 
 	// 1 On affiche la grille
-	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
+
+	// 2 On affiche la zone de scroll
+	affichageCompletJoueurConsole(game, &game->joueurListe[game->joueurActif]);
+
+	// En fin d'exécution, on place le curseur à un endroit nul pou qu'il ne nous gêne pas
+	gotoligcol(0, 0);
+	// Et on remet la couleur à la valeur de base
+	changeColour(WHITE, BLACK);
+}
+
+void affichageSansCurseur(t_Partie * game)
+{
+	// 0 Variables
+
+	// 1 On affiche la grille
+	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 0);
 
 	// 2 On affiche la zone de scroll
 	affichageCompletJoueurConsole(game, &game->joueurListe[game->joueurActif]);
@@ -81,7 +97,7 @@ void affichageConsoleControles(t_Controles * self, int lig, int col)
 
 }
 
-void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
+void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col, char curseur)
 {
 	// 0 Variables
 
@@ -107,7 +123,8 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
 		}
 	}
 	affichageConsoleStart(self, lig, col);
-	affichageConsoleCurseur(self, lig, col);
+	if(curseur)
+		affichageConsoleCurseur(self, lig, col);
 
 	// Remise à 0 du pointeur
 	gotoligcol(0, 0);

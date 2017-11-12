@@ -167,7 +167,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 				}
 				if(*lig==4)
 				{
-					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 6, 6, JOUEUR_ALEATOIRE, BLUE, 7, 7);
+					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 5, 5, JOUEUR_ALEATOIRE, BLUE, 8, 8);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
 					return MENU_P;

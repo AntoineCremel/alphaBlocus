@@ -62,13 +62,15 @@ void changeColour(int letters, int backGround);
 //	 On fait passer les structures par pointeur pour économiser le passage par le tube,
 //	pas pour pouvoir modifier leurs contenus
 void affichageGame(t_Partie * game);
+// Lorsque l'on est coincé, on  a besoin d'afficher le jeu sans le curseur du joueur
+void affichageSansCurseur(t_Partie * game);
 
 // Fonction pour afficher un rappel des contrôles sur la console
 void affichageConsoleControles(t_Controles * self, int lig, int col);
 
 // Cette fonction permet d'afficher la grille de jeu. Elle prend en paramètre la structure de la partie,
 // ainsi que les coordonnées où la grille de jeu doit être affichée (lig et col désignent le point en haut à gauche)
-void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
+void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col, char curseur);
 // Appelée par l'affiochage de la grille de jeu, cette fonction affiche le curseur sur la grille.
 void affichageConsoleCurseur(t_Partie * self, int lig, int col);
 // Affichage des cases de départ
