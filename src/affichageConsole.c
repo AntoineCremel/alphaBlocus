@@ -290,13 +290,20 @@ void affichageConsoleScore(t_Partie * self, int lig, int col)
 {
 	// 0 Variables
 
-	// 1 Boucle qui parcourt les jouers
+	// 1 Boucle qui parcourt les joueurs
 	for(int i=0; i < self->n_Players; i++)
 	{
+		// Affichage d'un espace correspondant à la couleujr du joueur
 		gotoligcol(lig, col + i * SCORE_AF_WIDTH);
 		changeColour(BLACK, (self->joueurListe[i].couleur + 8) % 16);
 		printf(" ");
+
+		// Affichage du score des joueurs
 		changeColour(L_WHITE, L_BLACK);
 		printf("%i", self->joueurListe[i].score);
+
+		// Affichage du nombre de coups qu'il leur leste à jouer
+		gotoligcol(lig + 1, col + i * SCORE_AF_WIDTH);
+		printf("%i", get_n_PossiblePlays(&self->joueurListe[i]));
 	}
 }

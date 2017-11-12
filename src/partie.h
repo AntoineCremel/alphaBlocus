@@ -128,5 +128,7 @@ void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i
 // Regarde tous les coins autour de grille_i et de grille_j. Si ces sont éligibles, créé un coin dans ces cases
 // Renvoit 0 sinon
 void checkAround(t_Partie * self, int grille_i, int grille_j);
+// Fonction qui détecte si tous les joueurs de la partie sont bloqués
+char isFinished(t_Partie * self);
 
 #endif // PARTIE_H_INCLUDED

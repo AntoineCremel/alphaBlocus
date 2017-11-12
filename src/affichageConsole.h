@@ -50,7 +50,7 @@
 #define W_SCROLL 6
 
 // Definition de l'affichage de la zone de score
-#define SCORE_AF_WIDTH	4
+#define SCORE_AF_WIDTH	5
 
 // 1 Structures
 

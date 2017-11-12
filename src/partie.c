@@ -625,3 +625,16 @@ void checkAround(t_Partie * self, int grille_i, int grille_j)
 		}
 	}
 }
+
+char isFinished(t_Partie * self)
+{
+	// 0 Variables
+
+	// 1 Tour de la partie
+	for(int i = 0; i < self->n_Players; i++)
+	{
+		if(!self->joueurListe[i].bloque)
+			return 0;
+	}
+	return 1;
+}

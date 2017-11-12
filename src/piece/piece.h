@@ -21,11 +21,11 @@
 		- COMPLET : toutes les rotations et inversions sont utiles
 		- ROTATION_SEULE :
 */
-#define COMPLET 		0
-#define ROTATION_SEULE	1
-#define DEMI_COMPLET	2
-#define DEMI_ROTATION	3
-#define SIMPLE			4
+#define COMPLET 		'0'
+#define ROTATION_SEULE	'1'
+#define DEMI_COMPLET	'2'
+#define DEMI_ROTATION	'3'
+#define SIMPLE			'4'
 
 //1 Définition de la structure
 typedef struct Piece
@@ -67,10 +67,14 @@ void pieceAntiRotation(t_Piece * self);
 void inversionPiece(t_Piece * self);
 
 /*
-	Fonction utilisée dans la détection des coups possibles.
+	Interface de rotation
 
-	Elle fait tourner la pièce vers l'orientation suivante
+	Fonctions utilisées pour manipuler l'orientation de la pièce en fonction de sa symétrie.
+
+
 */
+void invertThroughPiece(t_Piece * self);
+// Sert à faire avancer la pièce vers l'orientation suivante
 void cycleThroughPiece(t_Piece * self);
 // Fonction qui devra être utilisée à la place de pieceRotation dans tous les endroits du code
 // a part piece.c

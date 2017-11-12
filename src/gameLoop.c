@@ -30,7 +30,7 @@ void gameTurns(t_Partie * game)
 		}
 		else
 		{
-			/// Ecrire un ecran pour indiquer que ce joueur est bloqué et ne peut plus jouer
+
 			gotoligcol(22, 0);
 			changeColour(game->joueurListe[game->joueurActif].couleur, L_BLACK);
 			printf("Vous etes coince");
@@ -38,6 +38,13 @@ void gameTurns(t_Partie * game)
 			affichageSansCurseur(game);
 
 			getch();
+
+			if(isFinished(game))
+			{
+				/// ECRAN DE FIN DE LA PARTIE
+				game->state = PARTIE_FINIE;
+			}
+
 			gotoligcol(22, 0);
 			changeColour(L_WHITE, BLACK);
 			printf("                ");
@@ -115,7 +122,7 @@ void aleaTurn(t_Partie * game)
 		}
 		while(actuel->ancre->inversion != a_jouer->inversion)
 		{
-			cycleThroughPiece(actuel->ancre);
+			invertThroughPiece(actuel->ancre);
 			testDepassement(game);
 
 			affichageGame(game);
@@ -243,7 +250,7 @@ char treatInput(t_Partie * game, char pressed)
 	}
 	else if(pressed == game->touches.inversion)
 	{
-		inversionPiece(game->joueurListe[game->joueurActif].ancre);
+		invertThroughPiece(game->joueurListe[game->joueurActif].ancre);
 
 		if(testDepassement(game))
 			cycleThroughPiece(game->joueurListe[game->joueurActif].ancre);
