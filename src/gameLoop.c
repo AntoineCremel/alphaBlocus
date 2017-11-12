@@ -9,8 +9,6 @@ void gameTurns(t_Partie * game)
 	// 0 Variables
 
 	// 1 Initialisation
-	// Affichage de l'ensemble de la partie
-	affichageGame(game);
 
 	// 2 Boucle de tours
 	while(game->state == PARTIE_EN_COURS)
@@ -34,8 +32,11 @@ void gameTurns(t_Partie * game)
 		{
 			/// Ecrire un ecran pour indiquer que ce joueur est bloqué et ne peut plus jouer
 			gotoligcol(22, 0);
-			changeColour(L_WHITE, L_BLACK);
+			changeColour(game->joueurListe[game->joueurActif].couleur, L_BLACK);
 			printf("Vous etes coince");
+
+			affichageSansCurseur(game);
+
 			getch();
 			gotoligcol(22, 0);
 			changeColour(L_WHITE, BLACK);
@@ -70,6 +71,9 @@ void aleaTurn(t_Partie * game)
 	t_Joueur * actuel = &game->joueurListe[game->joueurActif];
 	t_Coup * a_jouer;
 	char stay = 1;
+
+	// Affichage de la partie dans son état actuel
+	affichageGame(game);
 
 	// 1 On détermine un coup aléatoire à jouer
 	a_jouer = getAleaCoup(&game->joueurListe[game->joueurActif]);
@@ -202,21 +206,21 @@ char treatInput(t_Partie * game, char pressed)
 		game->joueurListe[game->joueurActif].curs_lig--;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_lig++;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.bas)
 	{
 		game->joueurListe[game->joueurActif].curs_lig++;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_lig--;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.gauche)
 	{
 		game->joueurListe[game->joueurActif].curs_col--;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_col++;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.droite)
 	{
@@ -224,7 +228,7 @@ char treatInput(t_Partie * game, char pressed)
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_col--;
 
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.rotation)
 	{
@@ -271,7 +275,7 @@ char treatInput(t_Partie * game, char pressed)
 	{
 		if(playCoup(game) == 0)
 		{
-			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+			affichageGame(game);
 			return 0;
 		}
 	}

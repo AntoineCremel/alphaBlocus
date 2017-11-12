@@ -310,11 +310,14 @@ char playCoup(t_Partie * self)
 		}
 	}
 	// 2.2 Un fois que toutes les cases de la pièce ont été placées sur la grille,
-	// Mettre à jour  les possibilités du joueur en cours
+	// Incrémenter le score dudit joueur
+	self->joueurListe[self->joueurActif].score += (int)self->joueurListe[self->joueurActif].ancre->taille;
+	// Mettre à jour  les coins du joueur en cours
 	recordPlay(self);
 	// on peut effacer la pièce de la liste de pièces du joueur actif
 	scrapAncre(&self->joueurListe[self->joueurActif]);
 
+	// Enfin on fait le tour des coins à proximité et on les remplit
 	updateListesPossibilites(self, self->joueurListe[self->joueurActif].curs_lig,
 							self->joueurListe[self->joueurActif].curs_col,
 							I_TAB_PIECE + I_TAB_PIECE/2 + 1, J_TAB_PIECE + J_TAB_PIECE/2 + 1);

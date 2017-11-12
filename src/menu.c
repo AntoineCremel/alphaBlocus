@@ -105,7 +105,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 				if(*lig==6)
 					return OPTIONS;
 				if(*lig==8)
-					*quitter=1;
+					return QUITTER;
                 break;
 			}
         }
@@ -301,6 +301,10 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 				    initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 12, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_ALEATOIRE, YELLOW, 0, 19, JOUEUR_ALEATOIRE, RED, 19, 10);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
+
+					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 5, 5, JOUEUR_ALEATOIRE, BLUE, 8, 8);
+					gameTurns(&game);
+					deinitialisationPartie(&game);
 					return MENU_P;
 				}
 				if(*lig==6)
@@ -734,7 +738,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
                 {
-                    regle = fopen("C:\\Users\\Bastien\\Desktop\\ECE Paris\\Info\\Projet Blokus\\blocus\\data\\regle.txt", "r+");
+                    regle = fopen("data/regle.txt", "r+");
                     if (regle != NULL)
                     {
                         fgetc(regle);

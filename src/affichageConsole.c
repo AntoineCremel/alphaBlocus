@@ -31,10 +31,32 @@ void affichageGame(t_Partie * game)
 	// 0 Variables
 
 	// 1 On affiche la grille
-	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 
 	// 2 On affiche la zone de scroll
 	affichageCompletJoueurConsole(game, &game->joueurListe[game->joueurActif]);
+
+	// 3 Affichage du score
+	affichageConsoleScore(game, game->h_grid, 0);
+
+	// En fin d'exécution, on place le curseur à un endroit nul pou qu'il ne nous gêne pas
+	gotoligcol(0, 0);
+	// Et on remet la couleur à la valeur de base
+	changeColour(WHITE, BLACK);
+}
+
+void affichageSansCurseur(t_Partie * game)
+{
+	// 0 Variables
+
+	// 1 On affiche la grille
+	affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 0);
+
+	// 2 On affiche la zone de scroll
+	affichageCompletJoueurConsole(game, &game->joueurListe[game->joueurActif]);
+
+	// 3 Affichage du score
+	affichageConsoleScore(game, game->h_grid, 0);
 
 	// En fin d'exécution, on place le curseur à un endroit nul pou qu'il ne nous gêne pas
 	gotoligcol(0, 0);
@@ -81,7 +103,7 @@ void affichageConsoleControles(t_Controles * self, int lig, int col)
 
 }
 
-void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
+void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col, char curseur)
 {
 	// 0 Variables
 
@@ -107,7 +129,8 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col)
 		}
 	}
 	affichageConsoleStart(self, lig, col);
-	affichageConsoleCurseur(self, lig, col);
+	if(curseur)
+		affichageConsoleCurseur(self, lig, col);
 
 	// Remise à 0 du pointeur
 	gotoligcol(0, 0);
@@ -261,4 +284,19 @@ void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self)
     {
         scrollToPrecedent(self);
     }
+}
+
+void affichageConsoleScore(t_Partie * self, int lig, int col)
+{
+	// 0 Variables
+
+	// 1 Boucle qui parcourt les jouers
+	for(int i=0; i < self->n_Players; i++)
+	{
+		gotoligcol(lig, col + i * SCORE_AF_WIDTH);
+		changeColour(BLACK, (self->joueurListe[i].couleur + 8) % 16);
+		printf(" ");
+		changeColour(L_WHITE, L_BLACK);
+		printf("%i", self->joueurListe[i].score);
+	}
 }

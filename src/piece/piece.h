@@ -19,8 +19,13 @@
 
 /* Constantes qui définissent les valeurs de symetrie de la piece.
 		- COMPLET : toutes les rotations et inversions sont utiles
-		- INVERSION
+		- ROTATION_SEULE :
 */
+#define COMPLET 		0
+#define ROTATION_SEULE	1
+#define DEMI_COMPLET	2
+#define DEMI_ROTATION	3
+#define SIMPLE			4
 
 //1 Définition de la structure
 typedef struct Piece
@@ -38,6 +43,9 @@ typedef struct Piece
 
     // Variable qui retient le numéro de la pièce
     int number;
+
+	// Variable qui stocke la taille de la pièce (nombre de carrés qu'elle contient)
+	char taille;
 
     // Variable qui indique le type de symétrie de la pièce
     // A aouter plus tard

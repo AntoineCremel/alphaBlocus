@@ -49,6 +49,9 @@
 
 #define W_SCROLL 6
 
+// Definition de l'affichage de la zone de score
+#define SCORE_AF_WIDTH	4
+
 // 1 Structures
 
 // 2 Prototypes de fonctions
@@ -62,13 +65,15 @@ void changeColour(int letters, int backGround);
 //	 On fait passer les structures par pointeur pour économiser le passage par le tube,
 //	pas pour pouvoir modifier leurs contenus
 void affichageGame(t_Partie * game);
+// Lorsque l'on est coincé, on  a besoin d'afficher le jeu sans le curseur du joueur
+void affichageSansCurseur(t_Partie * game);
 
 // Fonction pour afficher un rappel des contrôles sur la console
 void affichageConsoleControles(t_Controles * self, int lig, int col);
 
 // Cette fonction permet d'afficher la grille de jeu. Elle prend en paramètre la structure de la partie,
 // ainsi que les coordonnées où la grille de jeu doit être affichée (lig et col désignent le point en haut à gauche)
-void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col);
+void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col, char curseur);
 // Appelée par l'affiochage de la grille de jeu, cette fonction affiche le curseur sur la grille.
 void affichageConsoleCurseur(t_Partie * self, int lig, int col);
 // Affichage des cases de départ
@@ -81,5 +86,8 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col);
 void affichagePieceScrollConsole(t_Piece * self, int lig, int col, int colour);
 // Fonction qui sert à afficher plusieurs zones dans lesquelles seront placées les pièces et celle utilisée actuellement
 void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self);
+
+// Fonction qui sert à afficher le score du joueur
+void affichageConsoleScore(t_Partie * self, int lig, int col);
 
 #endif // AFFICHAGECONSOLE_H_INCLUDED

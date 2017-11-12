@@ -44,6 +44,8 @@ typedef struct Joueur
     // Variables qui indique la position de départ du joueur
     int start_lig;
     int start_col;
+    // Score du joueur
+    int score;
 }t_Joueur;
 
 //2 Prototypes des fonctions
@@ -89,5 +91,7 @@ char isBloque(t_Joueur * self);
 
 // Fonction chargée de parcourir les coins du joueur afin de vider les coins vides
 void clearEmptyCoins(t_Joueur * self);
+
+int get_n_PossiblePlays(t_Joueur * self);
 
 #endif // JOUEUR_H_INCLUDED
