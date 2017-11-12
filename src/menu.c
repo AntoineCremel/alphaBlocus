@@ -87,7 +87,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 				if(*lig==6)
 					return OPTIONS;
 				if(*lig==8)
-					*quitter=1;
+					return QUITTER;
                 break;
 			}
         }
