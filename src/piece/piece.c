@@ -95,18 +95,13 @@ void cycleThroughPiece(t_Piece * self)
 
 	// 1 En fonction des valeurs de self->rotation et self->inversion,
 	// on détermine quel traitement on doit appliquer à la pièce
-	if(self->orientation == 3)
-	{
+	inversionPiece(self);
+	if(self->inversion == 0)
 		pieceRotation(self);
-		inversionPiece(self);
-	}
-	else
-	{
-		pieceRotation(self);
-	}
 }
 int n_rotations(t_Piece * self)
 {
+	/// Pour optimisation de la detection des coups jouables, ajouter la prise en charge de la symetrie
 	return 8;
 }
 
