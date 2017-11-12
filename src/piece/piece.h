@@ -19,8 +19,13 @@
 
 /* Constantes qui définissent les valeurs de symetrie de la piece.
 		- COMPLET : toutes les rotations et inversions sont utiles
-		- INVERSION
+		- ROTATION_SEULE :
 */
+#define COMPLET 0
+#define ROTATION_SEULE	1
+#define DEMI_COMPLET
+#define DEMI_ROTATION
+#define SIMPLE
 
 //1 Définition de la structure
 typedef struct Piece

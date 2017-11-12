@@ -359,7 +359,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
                 {
-                    regle = fopen("C:\\Users\\Bastien\\Desktop\\ECE Paris\\Info\\Projet Blokus\\blocus\\data\\regle.txt", "r+");
+                    regle = fopen("data/regle.txt", "r+");
                     if (regle != NULL)
                     {
                     }
