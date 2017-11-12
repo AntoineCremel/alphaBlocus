@@ -135,6 +135,17 @@ void cycleThroughPiece(t_Piece * self)
 		else
 			pieceAntiRotation(self);
 	}
+	else if(self->symetrie == DEMI_COMPLET)
+	{
+		inversionPiece(self);
+		if(self->inversion == 0)
+		{
+			if(self->orientation == 0)
+				pieceRotation(self);
+			else
+				pieceAntiRotation(self);
+		}
+	}
 
 	else
 	{
