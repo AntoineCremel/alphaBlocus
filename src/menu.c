@@ -14,35 +14,36 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
     system("CLS");
 
     // Affichage de BLOKUS avec modification des couleurs
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("          B");
-    changeColour(10,0);
+    changeColour(L_YELLOW,BLACK);
     printf("L");
-    changeColour(14,0);
+    changeColour(L_RED,BLACK);
     printf("O");
-    changeColour(12,0);
+    changeColour(L_GREEN,BLACK);
     printf("K");
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("U");
-    changeColour(14,0);
+    changeColour(L_YELLOW,BLACK);
     printf("S          ");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("\n\n    Nouvelle Partie");
-    changeColour(10,0);
+    changeColour(L_GREEN,BLACK);
     printf("\n\n    Charger partie");
-    changeColour(14,0);
+    changeColour(L_YELLOW,BLACK);
     printf("\n\n    Options");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n    Quitter le jeu\n\n");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf( "(Z pour aller vers le haut, S pour aller vers le bas, SPACE pour selectionner)");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(10,78);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -65,6 +66,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(10,78);
 				}
 				else
 				{
@@ -73,6 +75,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig-2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(10,78);
 				}
 				break;
 
@@ -85,6 +88,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(10,78);
 				}
 				else
 				{
@@ -93,6 +97,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig+2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(10,78);
 				}
 				break;
 
@@ -122,17 +127,17 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     system("CLS");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("       Nouvelle Partie       ");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf("\n\n    Joueur vs Ordinateur");
     printf("\n\n    joueur VS Joueur");
     printf("\n\n    joueur VS Joueur VS Ordinateur");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
 
@@ -221,17 +226,17 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     system("CLS");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("       Nombre d'adversaires       ");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf("\n\n    1 adversaire");
     printf("\n\n    2 adversaires");
     printf("\n\n    3 adversaires");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
 
@@ -333,17 +338,17 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     system("CLS");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("       Nombre d'adversaires       ");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf("\n\n    1 adversaire");
     printf("\n\n    2 adversaires");
     printf("\n\n    3 adversaires");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
 
@@ -441,17 +446,17 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     system("CLS");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(11,0);
+    changeColour(L_AQUA,BLACK);
     printf("       Nombre d'adversaires       ");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf("\n\n    1 adversaire & 1 IA");
     printf("\n\n    2 adversaires & 1 IA");
     printf("\n\n    1 adversaire & 2 IA");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
 
@@ -548,17 +553,17 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
     system("CLS");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(10,0);
+    changeColour(L_GREEN,BLACK);
     printf("       Charger Partie       ");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf("\n\n    1.Emplacement vide");
     printf("\n\n    2.Emplacement vide");
     printf("\n\n    3.Emplacement vide");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n    Retour");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
 
@@ -641,22 +646,23 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 {
     // Declaration des variables
     char dep;
+    char a;
     FILE * regle = NULL;
 
     // Nettoyage de l'ecran pour afficher le menu
     system("CLS");
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
-    changeColour(14,0);
+    changeColour(L_YELLOW,BLACK);
     printf("       Options       ");
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     printf("\n\n    Regles");
     printf("\n\n    Reconfiguration des touches");
-    changeColour(12,0);
+    changeColour(L_RED,BLACK);
     printf("\n\n\n\n    Retour");
 
     // Affichage de la position initiale du curseur
-    changeColour(7,0);
+    changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
 
@@ -738,15 +744,131 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
                 {
-                    regle = fopen("data/regle.txt", "r+");
-                    if (regle != NULL)
+                    regle = fopen("data/regle.txt", "r");
+                    if(regle == NULL)
                     {
-                        fgetc(regle);
+                        printf("Impossible d'acceder au regle");
                     }
-                    else
+                    while(!feof(regle))
                     {
-                    printf(" Impossible d'ouvrir le regle regle.txt");
+                        a=fgetc(regle);
+                        printf("%c",a);
                     }
+                }
+				if(*lig==4)
+                {
+                    return TOUCHE;
+                }
+				if(*lig==8)
+					return MENU_P;
+				break;
+			}
+        }
+    }
+    return OPTIONS;
+}
+
+int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
+{
+    // Declaration des variables
+    char dep;
+
+    // Nettoyage de l'ecran pour afficher le menu
+    system("CLS");
+
+    // Affichage des differents elements composants le menu principal avec leur couleur respective
+    changeColour(L_YELLOW,BLACK);
+    printf("       Reconfiguration touches       ");
+    changeColour(WHITE,BLACK);
+    printf("\n\n    Reconfigurer");
+    printf("\n\n    Touches par defaut");
+    changeColour(L_RED,BLACK);
+    printf("\n\n\n\n    Retour");
+
+    // Affichage de la position initiale du curseur
+    changeColour(WHITE,BLACK);
+    gotoligcol(*lig,2);
+    printf(">");
+
+    // Boucle des différents deplacements du curseurs
+    // Saisie de la touche
+    while(!*quitter)
+    {
+        if(kbhit())
+        {
+            dep=getch();
+
+    // Les differentes touches
+			switch(dep)
+			{
+
+    // Aller vers le haut
+			case 'z' :
+				if(*lig==2)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=8;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+				    if(*lig==8)
+				    {
+				        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=4;
+                        gotoligcol(*lig,2);
+                        printf(">");
+				    }
+				    else
+                    {
+                        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=*lig-2;
+                        gotoligcol(*lig,2);
+                        printf(">");
+                    }
+				}
+				break;
+
+    // Aller vers le bas
+			case 's' :
+				if(*lig==8)
+				{
+					gotoligcol(*lig,2);
+					printf(" ");
+					*lig=2;
+					gotoligcol(*lig,2);
+					printf(">");
+				}
+				else
+				{
+				    if(*lig==4)
+				    {
+				        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=8;
+                        gotoligcol(*lig,2);
+                        printf(">");
+				    }
+				    else
+                    {
+                        gotoligcol(*lig,2);
+                        printf(" ");
+                        *lig=*lig+2;
+                        gotoligcol(*lig,2);
+                        printf(">");
+                    }
+				}
+				break;
+
+    // Selectionner
+			case ' ' :
+				if(*lig==2)
+                {
+                    loadControles(STD_CONTROLS_FILE);
                 }
 				if(*lig==4)
                 {
@@ -758,7 +880,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			}
         }
     }
-    return OPTIONS;
+    return TOUCHE;
 }
 
 void superLoop()
@@ -786,5 +908,7 @@ void superLoop()
             choix=menu_charger_partie(tab, &lig, &quitter);
         if(choix==OPTIONS)
             choix=menu_options(tab, &lig, &quitter);
+        if(choix==TOUCHE)
+            choix=menu_reconfigurer_touche(tab, &lig, &quitter);
     }
 }
