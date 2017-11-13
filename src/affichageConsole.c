@@ -286,7 +286,7 @@ void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self)
     }
 }
 
-<<<<<<< HEAD
+
 void xaffichageJoueurConsole(t_Joueur * self, int lig, int col)
 {
 	/*
@@ -308,7 +308,7 @@ void xaffichageJoueurConsole(t_Joueur * self, int lig, int col)
 			gotoligcol(lig + i, W_SQUARE_SCROLL * (col + j));
 			changeColour(0, SCROLL_BACK_COLOUR);
 			for(int k=0; k < W_SQUARE_SCROLL; k++)
-				printf(" ");
+            printf(" ");
 		}
 	}
 
@@ -338,7 +338,8 @@ void xaffichageJoueurConsole(t_Joueur * self, int lig, int col)
 	// Remise à 0 du pointeur
 	gotoligcol(0, 0);
 	changeColour(BASE_TEXT, BASE_BACKGROUND);
-=======
+}
+
 void affichageConsoleScore(t_Partie * self, int lig, int col)
 {
 	// 0 Variables
@@ -352,5 +353,4 @@ void affichageConsoleScore(t_Partie * self, int lig, int col)
 		changeColour(L_WHITE, L_BLACK);
 		printf("%i", self->joueurListe[i].score);
 	}
->>>>>>> 577618fda853f9809378420780c6d3aa38c25089
 }
