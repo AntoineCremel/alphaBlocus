@@ -1,0 +1,2 @@
+data/gameInit/piece17.txt
+data/gameInit/piece2.txt

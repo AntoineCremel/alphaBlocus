@@ -19,6 +19,8 @@ Ce fichier contiendra la structure et les définitions des fonctions nécessaires 
 #define JOUEUR_HUMAIN 0
 #define JOUEUR_ALEATOIRE 1
 
+#define LOG_ALEA_NAME "data/logs/aleatoie.txt"
+
 //1 Définition de la structure
 typedef struct Joueur
 {
@@ -42,6 +44,8 @@ typedef struct Joueur
     // Variables qui indique la position de départ du joueur
     int start_lig;
     int start_col;
+    // Score du joueur
+    int score;
 }t_Joueur;
 
 //2 Prototypes des fonctions
@@ -84,5 +88,10 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j);
 // Fonction qui teste si un joueur peut encore jouer
 // Renvoit 1 s'il est bloqué, 0 sinon
 char isBloque(t_Joueur * self);
+
+// Fonction chargée de parcourir les coins du joueur afin de vider les coins vides
+void clearEmptyCoins(t_Joueur * self);
+
+int get_n_PossiblePlays(t_Joueur * self);
 
 #endif // JOUEUR_H_INCLUDED

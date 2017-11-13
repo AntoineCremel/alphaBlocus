@@ -19,8 +19,13 @@
 
 /* Constantes qui définissent les valeurs de symetrie de la piece.
 		- COMPLET : toutes les rotations et inversions sont utiles
-		- INVERSION
+		- ROTATION_SEULE :
 */
+#define COMPLET 		0
+#define ROTATION_SEULE	1
+#define DEMI_COMPLET	2
+#define DEMI_ROTATION	3
+#define SIMPLE			4
 
 //1 Définition de la structure
 typedef struct Piece
@@ -39,9 +44,12 @@ typedef struct Piece
     // Variable qui retient le numéro de la pièce
     int number;
 
+	// Variable qui stocke la taille de la pièce (nombre de carrés qu'elle contient)
+	char taille;
+
     // Variable qui indique le type de symétrie de la pièce
     // A aouter plus tard
-    //char symetrie;
+    char symetrie;
 }t_Piece;
 
 
@@ -64,6 +72,11 @@ void inversionPiece(t_Piece * self);
 	Elle fait tourner la pièce vers l'orientation suivante
 */
 void cycleThroughPiece(t_Piece * self);
+// Fonction qui devra être utilisée à la place de pieceRotation dans tous les endroits du code
+// a part piece.c
+void rotateThroughPiece(t_Piece * self);
+// Fonction permettant de faire l'inverse de rotateThroughPiece
+void antiRotateThroughPiece(t_Piece * self);
 // Renvoit le nombre de rotations à essayer avec cette pièce
 int n_rotations(t_Piece * self);
 

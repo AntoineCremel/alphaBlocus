@@ -2,6 +2,7 @@
 #define PARTIE_H_INCLUDED
 
 #include <stdarg.h>
+#include <math.h>
 
 #include "joueur.h"
 #include "controles.h"
@@ -19,12 +20,17 @@ le prototype des fonctions liées à la gestion de cette partie
 
 // Pour définir le type de partie voulu
 #define PARTIE_STANDARD 8
+#define PARTIE_DEV		9
 
 // Pour définir ce qui est contenu dans la case
 #define CASE_VIDE 50
 
 // Pour définir une case qui ne sera jamais dans la grille
 #define OUT_BOUND		-1
+
+// Pour définir le nom du fichier de tests de positions
+#define LOG_FIND_NAME	"data/logs/testPlays.txt"
+#define LOG_UPDATE_PLAYS "data/logs/updatePlays.txt"
 
 //1 Définition de la structure
 typedef struct Partie
@@ -94,7 +100,7 @@ void nextPlayer(t_Partie * self);
 
 /// Pour les coins
 // Fonction pour trouver tous les coups possibles à partir d'un coin donné
-void findAllPlaysHere(t_Partie * self, t_Coin * here);
+void findAllPlaysHere(t_Partie * self, t_Coin * here, int n_joueurActuel);
 /*
 	Fonction pour déterminer si on peut poser la case piece_i piece_j d'une pièce
 	sur la case game_i game_j de la grille de jeu tout en respectant les règles du jeu.
@@ -102,7 +108,7 @@ void findAllPlaysHere(t_Partie * self, t_Coin * here);
 	Renvoit 1 si c'est possible, 0 sinon.
 	De plus, dans le cas ou c'est possible, les valeurs de la position du curseur seront assignées à curs_i et curs_j.
 */
-char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int piece_j, int * curs_i, int * curs_j);
+char testPlacement(t_Partie * self, int game_i, int game_j, int piece_i, int piece_j, int * curs_i, int * curs_j, int n_joueurActuel);
 
 /*
 	Fonction qui enregistre le nouveau coup du joueur actif dans sa liste de coups possibles :

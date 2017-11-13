@@ -7,19 +7,35 @@
 #include "affichageConsole.h"
 #include "partie.h"
 #include "gameLoop.h"
+#include "mainHeader.h"
 
-// Fonction qui permet de choisir quel menu lancer
-void curseur(int *lig);
-
-// Fonction affichant le menu pour charger une partie
-void menu_charger_partie(char tab[10][20]);
-
-// Fonction affichant le menu d'options
-void menu_options(char tab[10][20]);
+#define MENU_P     0
+#define PLAY       1
+#define NOMBRE1    2
+#define NOMBRE2    3
+#define NOMBRE3    4
+#define CHARGER    5
+#define OPTIONS    6
+#define QUITTER    7
 
 // Fonction affichant le menu principal
-void menu_principal(char tab[10][20]);
+int menu_principal(char tab[10][20], int *lig, char *quitter);
 
-// Fonction permettant de choisir le menu a lancer
-void choix_menu(char tab[10][20], int *lig);
+// Fonction affichant le menu pour lancer une nouvelle partie
+int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter);
+
+// Fonctions pour determiner le nombre de joueur ainsi que le type de l'adversaire
+int menu_nombre_IA(char tab[10][20], int *lig, char *quitter);
+int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter);
+int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter);
+
+// Fonction affichant le menu pour charger une partie
+int menu_charger_partie(char tab[10][20], int *lig, char *quitter);
+
+// Fonction affichant le menu d'options
+int menu_options(char tab[10][20], int *lig, char *quitter);
+
+// Fonction permettant le passage de menu en menu
+void superLoop();
+
 #endif // MENU_H_INCLUDED

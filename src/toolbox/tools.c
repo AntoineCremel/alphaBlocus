@@ -47,3 +47,20 @@ void cycleThroughCorner(int * pos_i, int * pos_j, int loop)
 		*pos_j = *pos_j - 1;
 	}
 }
+
+
+void addCoinLog(char couleur, int i, int j)
+{
+	FILE * logFile;
+	logFile = fopen("data/logs/corners.txt", "a");
+	fprintf(logFile, "joueur %i, ADDED i : %i, j : %i\n", couleur, i, j);
+	fclose(logFile);
+}
+
+void removeCoinLog(char couleur, int i, int j)
+{
+	FILE * logFile;
+	logFile = fopen("data/logs/corners.txt", "a");
+	fprintf(logFile, "joueur %i, REMOVED i : %i, j : %i\n", couleur, i, j);
+	fclose(logFile);
+}

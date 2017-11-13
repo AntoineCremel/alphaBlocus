@@ -29,7 +29,9 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
     self->ancre = NULL;
     self->possibilites = NULL;
     // 0.6 Variable qui sera utilisée pour numéroter les pièces
-    int num = 0;
+    int num = 1;
+    // 0.7 Variable qui compte la taille de la pièce pour l'utiliser pour le calcul du score
+    int taille = 0;
 
     // 1 On lit les informations relatives a la taille des pieces
     // 1.0 Ouverture du fichier permettant de trouver tous les fichiers de pièces
@@ -61,6 +63,12 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 			// 1.1.2.1 On met la piece dans la chaine
 			addPieceAfter(self, pieceBuff);
 
+			// Reinitialisation du compteur de taille de la pièce
+			taille = 0;
+
+			// On initialise la symétrie de la pièce avec une valeur par défaut
+			self->ancre->symetrie = COMPLET;
+
 			// Initialisation de l'orientation de la pièce
 			self->ancre->inversion = 0;
 			self->ancre->orientation = 0;
@@ -79,19 +87,44 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 					if(charBuff == SYMB_PIECE || charBuff == SYMB_PAS_PIECE || charBuff == SYMB_PIECE_MORT)
 					{
 						self->ancre->grille[i][j] = charBuff;
+
+						if(isPiece(charBuff))
+							// Incrémentation de la taille de la pièce
+							taille++;
 					}
 				}
 			}
+			// Ensute, on lit le caractère qui renseigne la symétrie de la pièce
+			do
+			{
+				charBuff = (char)fgetc(fichierPiece);
+			}while(charBuff == '\n');
+
+			if(charBuff != EOF)
+			{
+				if(charBuff == COMPLET || charBuff == DEMI_COMPLET ||
+					charBuff == ROTATION_SEULE || charBuff == DEMI_ROTATION
+					|| charBuff == SIMPLE)
+				{
+					self->ancre->symetrie = charBuff;
+				}
+			}
 			fclose(fichierPiece);
+
+			// On attribue un numéro et une taille à la pièce en question
+			self->ancre->taille = taille;
+			self->ancre->number = num;
+			num++;
 		}
-		self->ancre->number = num;
-		num++;
 	}
 
 	fclose(fichierListe);
 
 	// 2 Maintenant on initialise la liste chainee de positions
 	addCoin(self, self->start_lig, self->start_col);
+
+	// 3 Intialisation du score à 0
+	self->score = 0;
 }
 
 void joueurDesinit(t_Joueur * self)
@@ -144,17 +177,9 @@ t_Coup * getAleaCoup(t_Joueur * self)
 	// O.3 Nombre aléatoire permettant de déterminer le coup à jouer
 	int coup_choisi;
 
-	// 1 Boucles de parcourt des listes chaînées
-	while(curs_coin)
-	{
-		curs_coup = curs_coin->ancre;
-		while(curs_coup)
-		{
-			n_coups++;
-			curs_coup = curs_coup->suivant;
-		}
-		curs_coin = curs_coin->suivant;
-	}
+	// 1 On détermine le nombre de coups possibles
+	n_coups = get_n_PossiblePlays(self);
+
 	// 2 On choisi un nombre aléatoire en fonction du nombre de coups disponibles
 	coup_choisi = rand() % n_coups;
 
@@ -171,6 +196,15 @@ t_Coup * getAleaCoup(t_Joueur * self)
 
 			if(n_coups == coup_choisi)
 			{
+				// 4 On log le coup choisi
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Coup choisi  : pos : (%i, %i) avec rotation :(%i, %i), sur la piece %i\n", curs_coup->curs_i, curs_coup->curs_j,
+								curs_coup->rotation, curs_coup->inversion, curs_coup->piece);
+						fclose(fic);
+				}
 				return curs_coup;
 			}
 
@@ -281,19 +315,17 @@ void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
 {
 	// 0 Variables
 	t_Coin * buffer = self->possibilites;
-	t_Coin * apres = NULL;
 	t_Coin * avant = NULL;
 
-	// On intialise apres
-	if(buffer)
-		apres = buffer->suivant;
+	// 0.1 Si le buffer est null, on quitte la fonction
+	if(!buffer)
+		return;
 
 	// 1 On parcourt la liste chainee de coins jusqu'à trouver le coin ayant les positions voulues
-	while(buffer->suivant && (buffer->pos_i != pos_i || buffer->pos_j != pos_j))
+	while(buffer && (buffer->pos_i != pos_i || buffer->pos_j != pos_j))
 	{
 		avant = buffer;
 		buffer = buffer->suivant;
-		apres = buffer->suivant;
 	}
 
 	// 1 Si on n'a pas trouvé dans la liste de coin qui correspond à ce que l'on cherchait, on quitte
@@ -303,13 +335,17 @@ void scrapCoin(t_Joueur * self, int pos_i, int pos_j)
 	// 2 Ensuite on efface tous les coups de la liste chainee du coin
 	emptyCoin(buffer);
 
-	// 3 Enfin on libère ce coin de la chaîne
+	// 3 On referme la liste chainee
+	if(avant)
+		avant->suivant = buffer->suivant;
+	else
+		self->possibilites = buffer->suivant;
+
+	// 4 Enfin on libère ce coin de la chaîne
 	free(buffer);
 
-	if(avant)
-		avant->suivant = apres;
-	else
-		self->possibilites = apres;
+	// 5 On ecrit le log
+	removeCoinLog(self->couleur, pos_i, pos_j);
 }
 
 void addCoin(t_Joueur * self, int pos_i, int pos_j)
@@ -330,6 +366,8 @@ void addCoin(t_Joueur * self, int pos_i, int pos_j)
 	buffer->suivant = self->possibilites;
 	self->possibilites = buffer;
 
+	// 4 On ecrit le log
+	addCoinLog(self->couleur, pos_i, pos_j);
 }
 
 char isBloque(t_Joueur * self)
@@ -356,4 +394,64 @@ char isBloque(t_Joueur * self)
 	// Si l'on n'a rien trouvé, on met à jour la variable
 	self->bloque = 1;
 	return 1;
+}
+
+void clearEmptyCoins(t_Joueur * self)
+{
+	//0 Variables
+	t_Coin * precedent = NULL;
+	t_Coin * curseur = self->possibilites;
+
+	// 1 On parcourt la liste de coins
+	while(curseur)
+	{
+		//1.0 On teste si ce coin a toujours une liste de coups
+		if(!curseur->ancre)
+		{
+			// 1.0.0 Si non, on efface ce coin
+			if(precedent)
+				precedent->suivant = curseur->suivant;
+			else
+				self->possibilites = curseur->suivant;
+
+			removeCoinLog(self->couleur, curseur->pos_i, curseur->pos_j);
+
+			free(curseur);
+
+			if(precedent)
+				curseur = precedent->suivant;
+			else
+				curseur = self->possibilites;
+		}
+		// 1.1 On avance d'un cran dans la liste
+		else
+		{
+			precedent = curseur;
+		curseur = curseur->suivant;
+		}
+	}
+}
+
+int get_n_PossiblePlays(t_Joueur * self)
+{
+	// 0 Variables
+	// 0.1 Variable qui permet de compter combien il y a de coups possibles
+	int n_coups = 0;
+	// 0.2 Curseurs permettant de parcourir les listes chaines
+	t_Coin * curs_coin = self->possibilites;
+	t_Coup * curs_coup;
+
+	// 1 Boucles de parcourt des listes chaînées
+	while(curs_coin)
+	{
+		curs_coup = curs_coin->ancre;
+		while(curs_coup)
+		{
+			n_coups++;
+			curs_coup = curs_coup->suivant;
+		}
+		curs_coin = curs_coin->suivant;
+	}
+
+	return n_coups;
 }

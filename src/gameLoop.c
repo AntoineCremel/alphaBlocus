@@ -9,8 +9,6 @@ void gameTurns(t_Partie * game)
 	// 0 Variables
 
 	// 1 Initialisation
-	// Affichage de l'ensemble de la partie
-	affichageGame(game);
 
 	// 2 Boucle de tours
 	while(game->state == PARTIE_EN_COURS)
@@ -33,6 +31,16 @@ void gameTurns(t_Partie * game)
 		else
 		{
 			/// Ecrire un ecran pour indiquer que ce joueur est bloqué et ne peut plus jouer
+			gotoligcol(22, 0);
+			changeColour(game->joueurListe[game->joueurActif].couleur, L_BLACK);
+			printf("Vous etes coince");
+
+			affichageSansCurseur(game);
+
+			getch();
+			gotoligcol(22, 0);
+			changeColour(L_WHITE, BLACK);
+			printf("                ");
 		}
 	}
 }
@@ -64,6 +72,9 @@ void aleaTurn(t_Partie * game)
 	t_Coup * a_jouer;
 	char stay = 1;
 
+	// Affichage de la partie dans son état actuel
+	affichageGame(game);
+
 	// 1 On détermine un coup aléatoire à jouer
 	a_jouer = getAleaCoup(&game->joueurListe[game->joueurActif]);
 
@@ -74,45 +85,108 @@ void aleaTurn(t_Partie * game)
 		while(actuel->ancre->number != a_jouer->piece)
 		{
 			scrollToSuivant(actuel);
+			testDepassement(game);
+
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
+			FILE * fic;
+			fic = fopen(LOG_ALEA_NAME, "a");
+			if(fic)
+			{
+				fprintf(fic, "Scroll to suivant\n");
+				fclose(fic);
+			}
 		}
 		// 2.1 Ensuite on trouve la bonne orientation / inversion
 		while(actuel->ancre->orientation != a_jouer->rotation)
 		{
-			pieceRotation(actuel->ancre);
+			rotateThroughPiece(actuel->ancre);
+			testDepassement(game);
+
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
+			FILE * fic;
+			fic = fopen(LOG_ALEA_NAME, "a");
+			if(fic)
+			{
+				fprintf(fic, "Piece rotation\n");
+				fclose(fic);
+			}
 		}
 		while(actuel->ancre->inversion != a_jouer->inversion)
 		{
-			inversionPiece(actuel->ancre);
+			cycleThroughPiece(actuel->ancre);
+			testDepassement(game);
+
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
+			FILE * fic;
+			fic = fopen(LOG_ALEA_NAME, "a");
+			if(fic)
+			{
+				fprintf(fic, "Piece inversion\n");
+				fclose(fic);
+			}
 		}
 		// 2.2 Enfin on la déplace au bon endroit
-		while(actuel->curs_lig != a_jouer->curs_i || actuel->curs_col != a_jouer->curs_i)
+		while(actuel->curs_lig != a_jouer->curs_i || actuel->curs_col != a_jouer->curs_j)
 		{
 			if(actuel->curs_lig < a_jouer->curs_i)
 			{
-				actuel->curs_lig++;
+				actuel->curs_lig += 1;
+				testDepassement(game);
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Lig ++\n");
+					fclose(fic);
+				}
 			}
 			else if(actuel->curs_lig > a_jouer->curs_i)
 			{
-				actuel->curs_lig--;
+				actuel->curs_lig -= 1;
+				testDepassement(game);
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Lig --\n");
+					fclose(fic);
+				}
 			}
 			if(actuel->curs_col < a_jouer->curs_j)
 			{
-				actuel->curs_col++;
+				actuel->curs_col += 1;
+				testDepassement(game);
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Col ++\n");
+					fclose(fic);
+				}
 			}
 			else if(actuel->curs_col > a_jouer->curs_j)
 			{
-				actuel->curs_col--;
+				actuel->curs_col -= 1;
+				testDepassement(game);
+				FILE * fic;
+				fic = fopen(LOG_ALEA_NAME, "a");
+				if(fic)
+				{
+					fprintf(fic, "Col --\n");
+					fclose(fic);
+				}
 			}
+			affichageGame(game);
 			waitSeconds(game->game_options.bot_delay);
 		}
 
 		// 3 Enfin on joue le coup correspondant
 		if(playCoup(game) == 0)
 		{
-			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+			affichageGame(game);
 			stay = 0;
 		}
 	}
@@ -132,21 +206,21 @@ char treatInput(t_Partie * game, char pressed)
 		game->joueurListe[game->joueurActif].curs_lig--;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_lig++;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.bas)
 	{
 		game->joueurListe[game->joueurActif].curs_lig++;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_lig--;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.gauche)
 	{
 		game->joueurListe[game->joueurActif].curs_col--;
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_col++;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.droite)
 	{
@@ -154,14 +228,14 @@ char treatInput(t_Partie * game, char pressed)
 		if(testDepassement(game))
 			game->joueurListe[game->joueurActif].curs_col--;
 
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 	}
 	else if(pressed == game->touches.rotation)
 	{
-		pieceRotation(game->joueurListe[game->joueurActif].ancre);
+		rotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
 		// On teste si ce mouvement fait sortir des cases ou non
 		if(testDepassement(game))
-			pieceAntiRotation(game->joueurListe[game->joueurActif].ancre);
+			antiRotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
 
 		// On affiche la zone des pièces
 		affichageGame(game);
@@ -172,7 +246,7 @@ char treatInput(t_Partie * game, char pressed)
 		inversionPiece(game->joueurListe[game->joueurActif].ancre);
 
 		if(testDepassement(game))
-			inversionPiece(game->joueurListe[game->joueurActif].ancre);
+			cycleThroughPiece(game->joueurListe[game->joueurActif].ancre);
 
 		// On affiche la zone des pièces
 		affichageGame(game);
@@ -201,7 +275,7 @@ char treatInput(t_Partie * game, char pressed)
 	{
 		if(playCoup(game) == 0)
 		{
-			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID);
+			affichageGame(game);
 			return 0;
 		}
 	}
