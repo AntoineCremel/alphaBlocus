@@ -129,7 +129,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
     printf("       Nouvelle Partie       ");
-    changeColour(WHITE,BLACK);
+    changeColour(L_YELLOW,BLACK);
     printf("\n\n    Joueur vs Ordinateur");
     printf("\n\n    joueur VS Joueur");
     printf("\n\n    joueur VS Joueur VS Ordinateur");
@@ -140,6 +140,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -162,6 +163,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -170,6 +172,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig-2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -182,6 +185,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -190,6 +194,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig+2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -228,7 +233,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
     printf("       Nombre d'adversaires       ");
-    changeColour(WHITE,BLACK);
+    changeColour(L_GREEN,BLACK);
     printf("\n\n    1 adversaire");
     printf("\n\n    2 adversaires");
     printf("\n\n    3 adversaires");
@@ -239,6 +244,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -261,6 +267,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -269,6 +276,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig-2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -281,6 +289,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -289,6 +298,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig+2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -340,7 +350,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
     printf("       Nombre d'adversaires       ");
-    changeColour(WHITE,BLACK);
+    changeColour(L_GREEN,BLACK);
     printf("\n\n    1 adversaire");
     printf("\n\n    2 adversaires");
     printf("\n\n    3 adversaires");
@@ -351,6 +361,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -373,6 +384,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -381,6 +393,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig-2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -393,6 +406,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -401,6 +415,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig+2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -448,7 +463,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
     printf("       Nombre d'adversaires       ");
-    changeColour(WHITE,BLACK);
+    changeColour(L_GREEN,BLACK);
     printf("\n\n    1 adversaire & 1 IA");
     printf("\n\n    2 adversaires & 1 IA");
     printf("\n\n    1 adversaire & 2 IA");
@@ -459,6 +474,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -481,6 +497,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -489,6 +506,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig-2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -501,6 +519,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -509,6 +528,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig+2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -555,10 +575,10 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_GREEN,BLACK);
     printf("       Charger Partie       ");
-    changeColour(WHITE,BLACK);
-    printf("\n\n    1.Emplacement vide");
-    printf("\n\n    2.Emplacement vide");
-    printf("\n\n    3.Emplacement vide");
+    changeColour(L_YELLOW,BLACK);
+    printf("\n\n    1.Sauvegarde 1");
+    printf("\n\n    2.Sauvegarde 2");
+    printf("\n\n    3.Sauvegarde 3");
     changeColour(L_RED,BLACK);
     printf("\n\n    Retour");
 
@@ -566,6 +586,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -588,6 +609,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -596,6 +618,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig-2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -608,6 +631,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -616,6 +640,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
 					*lig=*lig+2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				break;
 
@@ -655,7 +680,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_YELLOW,BLACK);
     printf("       Options       ");
-    changeColour(WHITE,BLACK);
+    changeColour(L_GREEN,BLACK);
     printf("\n\n    Regles");
     printf("\n\n    Reconfiguration des touches");
     changeColour(L_RED,BLACK);
@@ -665,6 +690,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -687,6 +713,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -697,6 +724,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         *lig=4;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
 				    }
 				    else
                     {
@@ -705,6 +733,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         *lig=*lig-2;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
                     }
 				}
 				break;
@@ -718,6 +747,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -728,6 +758,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         *lig=8;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
 				    }
 				    else
                     {
@@ -736,6 +767,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         *lig=*lig+2;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
                     }
 				}
 				break;
@@ -754,6 +786,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         a=fgetc(regle);
                         printf("%c",a);
                     }
+                    fclose(regle);
                 }
 				if(*lig==4)
                 {
@@ -779,7 +812,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_YELLOW,BLACK);
     printf("       Reconfiguration touches       ");
-    changeColour(WHITE,BLACK);
+    changeColour(L_GREEN,BLACK);
     printf("\n\n    Reconfigurer");
     printf("\n\n    Touches par defaut");
     changeColour(L_RED,BLACK);
@@ -789,6 +822,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     changeColour(WHITE,BLACK);
     gotoligcol(*lig,2);
     printf(">");
+    gotoligcol(8,10);
 
     // Boucle des différents deplacements du curseurs
     // Saisie de la touche
@@ -811,6 +845,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
 					*lig=8;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -821,6 +856,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
                         *lig=4;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
 				    }
 				    else
                     {
@@ -829,6 +865,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
                         *lig=*lig-2;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
                     }
 				}
 				break;
@@ -842,6 +879,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
 					*lig=2;
 					gotoligcol(*lig,2);
 					printf(">");
+					gotoligcol(8,10);
 				}
 				else
 				{
@@ -852,6 +890,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
                         *lig=8;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
 				    }
 				    else
                     {
@@ -860,6 +899,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
                         *lig=*lig+2;
                         gotoligcol(*lig,2);
                         printf(">");
+                        gotoligcol(8,10);
                     }
 				}
 				break;
@@ -910,5 +950,56 @@ void superLoop()
             choix=menu_options(tab, &lig, &quitter);
         if(choix==TOUCHE)
             choix=menu_reconfigurer_touche(tab, &lig, &quitter);
+    }
+}
+
+void sauvegarder(char *quitter)
+{
+    FILE * save1=NULL;
+    FILE * save2=NULL;
+    FILE * save3=NULL;
+    char dep;
+
+     while(!*quitter)
+    {
+        if(kbhit())
+        {
+            dep=getch();
+
+    // Les differentes touches
+			switch(dep)
+			{
+            case 'p' :
+                if(save1!=NULL)
+                    {
+                        save1=fopen("data/sauvegardes/save1.txt","w");
+                        fprintf();
+                        fscanf();
+                    }
+                    else
+                    {
+                        if(save2!=NULL)
+                        {
+                            save1=fopen("data/sauvegardes/save2.txt","w");
+                            fprintf();
+                            fscanf();
+                        }
+                        else
+                        {
+                            if(save3!=NULL)
+                            {
+                                save1=fopen("data/sauvegardes/save3.txt","w");
+                                fprintf();
+                                fscanf();
+                            }
+                            else
+                            {
+                                gotoligcol();
+                                printf("Plus de sauvegarde disponible");
+                            }
+                        }
+                    }
+            }
+        }
     }
 }
