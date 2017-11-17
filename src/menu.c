@@ -953,7 +953,7 @@ void superLoop()
     }
 }
 
-void sauvegarder(char *quitter)
+/*void sauvegarder(char *quitter)
 {
     FILE * save1=NULL;
     FILE * save2=NULL;
@@ -1003,3 +1003,5 @@ void sauvegarder(char *quitter)
         }
     }
 }
+
+*/
