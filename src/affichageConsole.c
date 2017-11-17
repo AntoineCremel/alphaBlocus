@@ -287,6 +287,7 @@ void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self)
 }
 
 
+
 void xaffichageJoueurConsole(t_Joueur * self, int lig, int col)
 {
 	/*
@@ -339,6 +340,8 @@ void xaffichageJoueurConsole(t_Joueur * self, int lig, int col)
 	gotoligcol(0, 0);
 	changeColour(BASE_TEXT, BASE_BACKGROUND);
 }
+
+
 
 void affichageConsoleScore(t_Partie * self, int lig, int col)
 {
