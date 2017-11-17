@@ -1,0 +1,36 @@
+REGLE DU JEU BLOKUS
+
+Composition du jeu :
+Le jeu se compose des elements suivants :
+Un plateau de jeu de 400 cases.
+84 pieces (soit 21 pieces dans chacune des 4 couleurs).
+Chacune des 21 pieces est de forme differente.
+
+Les pieces du jeu :
+Il y a :
+1 piece d'un carre.
+1 piece a deux carres.
+2 pieces a trois carres.
+5 pieces a quatre carres.
+12 pieces a cinq carres.
+
+But du jeu :
+Le but du jeu est, pour chaque joueur, de placer ses 21 pieces sur le plateau (ou en tous les cas, un maximum d'entre elles).
+
+Contraintes :
+Chaque joueur doit demarrer sur l'un des angles du plateau.
+L'ordre de jeu est bleu, jaune, rouge, vert.
+Chaque nouvelle piece posee doit toucher au moins une piece de la meme couleur, mais uniquement par les angles, jamais par les cotes.
+
+Fin de la partie :
+Lorsqu'un joueur est bloque et ne peut plus placer de piece, il est oblige de passer son tour. Les autres joueurs poursuivent en 
+conservant le meme ordre de jeu, jusqu'a ce que plus personne ne puisse placer de piece.
+
+Decompte des points :
+Lorsque tous les joueurs sont bloques, chacun compte le nombre de carres qu'il n'a pu placer sur le plateau et calcule son score :
+Chaque carre non pose constitue un point negatif.
+Un bonus de 15 points est accorde si les 21 pieces ont ete posees.
+Ce bonus est de 20 points si les 21 pieces ont ete posees avec le carre solitaire en derniere position.
+Celui qui a le plus de points a gagne !
+
+Pour retourner au menu OPTIONS, appuyer sur SPACE

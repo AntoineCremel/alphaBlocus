@@ -671,7 +671,6 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 {
     // Declaration des variables
     char dep;
-    char a;
     FILE * regle = NULL;
 
     // Nettoyage de l'ecran pour afficher le menu
@@ -776,17 +775,33 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
                 {
-                    regle = fopen("data/regle.txt", "r");
+                    system("CLS");
+                    regle = fopen("data/regles.txt", "r+");
                     if(regle == NULL)
                     {
                         printf("Impossible d'acceder au regle");
                     }
-                    while(!feof(regle))
+                    else
                     {
-                        a=fgetc(regle);
-                        printf("%c",a);
+                        while(!feof(regle))
+                        {
+                            printf("%c",fgetc(regle));
+                        }
+                        while(!quitter)
+                        {
+                            if(kbhit())
+                            {
+                                dep=getch();
+                            }
+                            switch(dep)
+                            {
+                            case ' ' :
+                                fclose(regle);
+                                return OPTIONS;
+                                break;
+                            }
+                        }
                     }
-                    fclose(regle);
                 }
 				if(*lig==4)
                 {
@@ -953,6 +968,7 @@ void superLoop()
     }
 }
 
+/*
 void sauvegarder(char *quitter)
 {
     FILE * save1=NULL;
@@ -1003,3 +1019,4 @@ void sauvegarder(char *quitter)
         }
     }
 }
+*/
