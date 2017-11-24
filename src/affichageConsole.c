@@ -269,8 +269,10 @@ void affichageJoueurConsole(t_Joueur * self, int lig, int col)
 
 void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self)
 {
+    // 0 Variables
     int dep=0; //translation pour afficher d'autres zones de pièces
 
+    // 1 Procédure pour afficher les zones de pièces
     for (int i=0; i<4; i++)
     {
         affichageJoueurConsole(&game->joueurListe[game->joueurActif], I_PLACE_SCROLL, J_PLACE_SCROLL + dep);
