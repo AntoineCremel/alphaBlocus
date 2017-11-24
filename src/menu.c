@@ -776,7 +776,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 				if(*lig==2)
                 {
                     system("CLS");
-                    regle = fopen("data/regles.txt", "r+");
+                    regle = fopen("data/regles.txt", "r");
                     if(regle == NULL)
                     {
                         printf("Impossible d'acceder au regle");
@@ -787,19 +787,20 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         {
                             printf("%c",fgetc(regle));
                         }
-                        while(!quitter)
+                        while(!*quitter)
                         {
                             if(kbhit())
                             {
                                 dep=getch();
-                            }
-                            switch(dep)
+                                switch(dep)
                             {
                             case ' ' :
                                 fclose(regle);
                                 return OPTIONS;
                                 break;
                             }
+                            }
+
                         }
                     }
                 }
@@ -968,7 +969,7 @@ void superLoop()
     }
 }
 
-<<<<<<< HEAD
+
 /*
 void sauvegarder(char *quitter)
 =======
@@ -1023,8 +1024,5 @@ void sauvegarder(char *quitter)
         }
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> c7f03f5c55290bc7886bace0e14d829c8bef20e7
 */
