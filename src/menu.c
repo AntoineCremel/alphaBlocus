@@ -672,6 +672,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     // Declaration des variables
     char dep;
     FILE * regle = NULL;
+    FILE * touche = NULL;
 
     // Nettoyage de l'ecran pour afficher le menu
     system("CLS");
@@ -681,7 +682,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     printf("       Options       ");
     changeColour(L_GREEN,BLACK);
     printf("\n\n    Regles");
-    printf("\n\n    Reconfiguration des touches");
+    printf("\n\n    Configuration des touches");
     changeColour(L_RED,BLACK);
     printf("\n\n\n\n    Retour");
 
@@ -806,7 +807,34 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                 }
 				if(*lig==4)
                 {
-                    return TOUCHE;
+                    system("CLS");
+                    touche = fopen("data/touches.txt", "r");
+                    if(touche== NULL)
+                    {
+                        printf("Impossible d'acceder au regle");
+                    }
+                    else
+                    {
+                        while(!feof(touche))
+                        {
+                            printf("%c",fgetc(touche));
+                        }
+                        while(!*quitter)
+                        {
+                            if(kbhit())
+                            {
+                                dep=getch();
+                                switch(dep)
+                            {
+                            case ' ' :
+                                fclose(touche);
+                                return OPTIONS;
+                                break;
+                            }
+                            }
+
+                        }
+                    }
                 }
 				if(*lig==8)
 					return MENU_P;
@@ -817,6 +845,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     return OPTIONS;
 }
 
+/*
 int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
 {
     // Declaration des variables
@@ -938,6 +967,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     }
     return TOUCHE;
 }
+*/
 
 void superLoop()
 {
@@ -964,8 +994,6 @@ void superLoop()
             choix=menu_charger_partie(tab, &lig, &quitter);
         if(choix==OPTIONS)
             choix=menu_options(tab, &lig, &quitter);
-        if(choix==TOUCHE)
-            choix=menu_reconfigurer_touche(tab, &lig, &quitter);
     }
 }
 
