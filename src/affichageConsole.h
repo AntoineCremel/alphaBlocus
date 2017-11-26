@@ -90,4 +90,6 @@ void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self);
 // Fonction qui sert à afficher le score du joueur
 void affichageConsoleScore(t_Partie * self, int lig, int col);
 
+// Fonction pour afficher, sur la grille, les cases où il est possible de jouer la pièce actuelle.
+
 #endif // AFFICHAGECONSOLE_H_INCLUDED

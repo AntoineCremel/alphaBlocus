@@ -362,6 +362,8 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                     regle = fopen("data/regle.txt", "r+");
                     if (regle != NULL)
                     {
+
+                    	fclose(regle);
                     }
                     else
                     {

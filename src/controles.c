@@ -95,4 +95,5 @@ void readControlesFile(t_Controles * self, char fileName[TAILLE_FILE_NAME])
 			}
 		}
 	}
+	fclose(fic);
 }
