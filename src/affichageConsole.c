@@ -305,10 +305,6 @@ void affichageConsoleScore(t_Partie * self, int lig, int col)
 		// Affichage du score des joueurs
 		changeColour(L_WHITE, L_BLACK);
 		printf("%i", self->joueurListe[i].score);
-
-		// Affichage du nombre de coups qu'il leur leste à jouer
-		gotoligcol(lig + 1, col + i * SCORE_AF_WIDTH);
-		printf("%i", get_n_PossiblePlays(&self->joueurListe[i]));
 	}
 }
 
@@ -352,4 +348,19 @@ void affichagePossibilites(t_Partie * game, int lig, int col)
 		}
 		curs_coin = curs_coin->suivant;
 	}
+}
+
+void endScreen(t_Partie * game)
+{
+	system("cls");
+
+	gotoligcol(10, 10);
+	changeColour(WHITE, BLACK);
+	printf("Partie Terminee !");
+
+	gotoligcol(11, 10);
+	printf("Vainqueur : ");
+
+	changeColour(game->joueurListe[game->joueurActif].couleur, BLACK);
+	printf("Joueur %i", getWinner(game));
 }

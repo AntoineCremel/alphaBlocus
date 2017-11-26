@@ -711,3 +711,20 @@ int get_n_BlockedPlays(t_Partie * self, t_Coup * toTest)
 	}
 	return retour;
 }
+
+int getWinner(t_Partie * self)
+{
+	int retour = 0;
+	int max_score = 0;
+
+	for(int i = 0; i < self->n_Players; i++)
+	{
+		if(self->joueurListe[i].score > max_score)
+		{
+			retour = i;
+			max_score = self->joueurListe[i].score;
+		}
+	}
+
+	return retour;
+}

@@ -45,7 +45,11 @@ void gameTurns(t_Partie * game)
 			if(isFinished(game))
 			{
 				/// ECRAN DE FIN DE LA PARTIE
+				endScreen(game);
+
 				game->state = PARTIE_FINIE;
+
+				getch();
 			}
 
 			gotoligcol(22, 0);

@@ -25,7 +25,7 @@ L’ordre de jeu est bleu, jaune, rouge, vert.
 Chaque nouvelle pièce posée doit toucher au moins une pièce de la même couleur, mais uniquement par les angles, jamais par les cotés.
 
 Fin de la partie :
-Lorsqu’un joueur est bloqué et ne peut plus placer de pièce, il est obligé de passer son tour. Les autres joueurs poursuivent en 
+Lorsqu’un joueur est bloqué et ne peut plus placer de pièce, il est obligé de passer son tour. Les autres joueurs poursuivent en
 conservant le même ordre de jeu, jusqu’à ce que plus personne ne puisse placer de pièce.
 
 Décompte des points :
@@ -34,4 +34,4 @@ Chaque carré non posé constitue un point négatif.
 Un bonus de15 points est accordé si les 21 pièces ont été posées.
 Ce bonus est de 20 points si les 21 pièces ont été posées avec le carré solitaire en
 dernière position.
-Celui qui a le plus de points a gagné ! 
+Celui qui a le plus de points a gagné !

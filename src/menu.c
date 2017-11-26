@@ -359,11 +359,18 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
                 {
-                    regle = fopen("data/regle.txt", "r+");
+                    regle = fopen("data/regle.txt", "r");
                     if (regle != NULL)
                     {
-
+						gotoligcol(0, 0);
+						while(!feof(regle))
+						{
+							printf("%c", fgetc(regle));
+						}
                     	fclose(regle);
+                    	getch();
+                    	system("cls");
+                    	return MENU_P;
                     }
                     else
                     {
