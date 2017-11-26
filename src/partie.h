@@ -131,4 +131,7 @@ void checkAround(t_Partie * self, int grille_i, int grille_j);
 // Fonction qui détecte si tous les joueurs de la partie sont bloqués
 char isFinished(t_Partie * self);
 
+// Fonction chargée de déterminer le nombre de coups d'autres joueurs que le coup passé en paramètre pourrait bloquer
+int get_n_BlockedPlays(t_Partie * self, t_Coup * toTest);
+
 #endif // PARTIE_H_INCLUDED

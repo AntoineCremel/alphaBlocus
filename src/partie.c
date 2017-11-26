@@ -129,12 +129,13 @@ char testDepassement(t_Partie * self)
 	if(self->joueurListe[self->joueurActif].ancre == NULL)
 		return 0;
 
-	// 1 On parcourt les cases de la piece concernée,
-	// 		et on détermine s'il y en a qui dépassent
+	// Boucle chargée de répéter l'opération tant qu'au moins une case de la pièce dépasse
 	while(!cleared)
 	{
 		cleared = 1;
 
+		// 1 On parcourt les cases de la piece concernée,
+		// 		et on détermine s'il y en a qui dépassent
 		for(int i=0; i < I_TAB_PIECE; i++)
 		{
 			for(int j=0; j < J_TAB_PIECE; j++)
@@ -637,4 +638,76 @@ char isFinished(t_Partie * self)
 			return 0;
 	}
 	return 1;
+}
+
+int get_n_BlockedPlays(t_Partie * self, t_Coup * toTest)
+{
+	// 0 Variables
+	t_Joueur * jAct = &self->joueurListe[self->joueurActif];
+	t_Joueur * jCheck = NULL;
+
+	t_Piece * testPiece = get_piece_n(jAct, toTest->piece);
+
+	int check_i, check_j, act_i, act_j;
+	int joueur_a_check = self->joueurActif;
+	t_Coup * coup_curs = NULL;
+	t_Coin * coin_curs = NULL;
+
+	int retour = 0;
+
+	// 1 Boucle qui parcourt tous les joueurs
+	for(joueur_a_check = (self->joueurActif + 1)%self->n_Players; joueur_a_check != self->joueurActif; joueur_a_check = (joueur_a_check + 1)%self->n_Players)
+	{
+		// Parcourt des coups du joueur a check
+		jCheck = &self->joueurListe[joueur_a_check];
+		coin_curs = jCheck->possibilites;
+
+		while(coin_curs)
+		{
+			coup_curs = coin_curs->ancre;
+			while(coup_curs)
+			{
+				// Parcourt des cases du coup actuel
+				for(int i = 0; i < I_TAB_PIECE; i++)
+				{
+					for(int j= 0; j < J_TAB_PIECE; j++)
+					{
+						if(isPiece(jCheck->ancre->grille[i][j]))
+						{
+							// Si l'on a trouvé une case qui est une pièce, on calcule sa position sur la grille
+							check_i = i + coup_curs->curs_i + I_CENTRE_PIECE;
+							check_j = j + coup_curs->curs_j + J_CENTRE_PIECE;
+							// Parcourt des cases du coup en cours
+							for(int k = 0; k < I_TAB_PIECE; k++)
+							{
+								for(int l = 0; l < J_TAB_PIECE; l++)
+								{
+									if(isPiece(testPiece->grille[k][l]))
+									{
+										// Si l'on a trouvé une pièce à cet endroit là également,
+										act_i = k + toTest->curs_i + I_CENTRE_PIECE;
+										act_j = k + toTest->curs_j + J_CENTRE_PIECE;
+
+										// Si ces deux cases sont au même endroit sur la grille, alors on incrémente le retour
+										if(check_i == act_i && check_j == act_j)
+										{
+											retour++;
+											// On sort de la boucle pour ce coup à check
+											i = I_TAB_PIECE;
+											k = I_TAB_PIECE;
+											j = J_TAB_PIECE;
+											l = J_TAB_PIECE;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				coup_curs = coup_curs->suivant;
+			}
+			coin_curs = coin_curs->suivant;
+		}
+	}
+	return retour;
 }

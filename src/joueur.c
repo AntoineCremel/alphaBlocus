@@ -454,3 +454,21 @@ int get_n_PossiblePlays(t_Joueur * self)
 
 	return n_coups;
 }
+
+t_Piece * get_piece_n(t_Joueur * self, int n)
+{
+	t_Piece * start = self->ancre;
+	t_Piece * retour = NULL;
+
+	if(self->ancre == NULL)
+		return NULL;
+
+	while(self->ancre->number != n)
+		scrollToSuivant(self);
+
+	retour = self->ancre;
+
+	self->ancre = start;
+
+	return retour;
+}

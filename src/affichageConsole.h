@@ -91,5 +91,6 @@ void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self);
 void affichageConsoleScore(t_Partie * self, int lig, int col);
 
 // Fonction pour afficher, sur la grille, les cases où il est possible de jouer la pièce actuelle.
+void affichagePossibilites(t_Partie * self, int lig, int col);
 
 #endif // AFFICHAGECONSOLE_H_INCLUDED
