@@ -420,6 +420,6 @@ void endScreen(t_Partie * game)
 	gotoligcol(11, 10);
 	printf("Vainqueur : ");
 
-	changeColour(game->joueurListe[game->joueurActif].couleur, BLACK);
+	changeColour(game->joueurListe[getWinner(game)].couleur, BLACK);
 	printf("Joueur %i", getWinner(game));
 }

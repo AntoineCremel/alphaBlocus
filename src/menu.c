@@ -308,7 +308,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
 				{
-				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 6, 6, JOUEUR_HEURISTIQUE, YELLOW, 7, 7);
+				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 4, 4, JOUEUR_HEURISTIQUE, YELLOW, 9, 9);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
 					return MENU_P;
@@ -425,7 +425,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
 				{
-				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 6, 6, JOUEUR_HUMAIN, YELLOW, 7, 7);
+				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 4, 4, JOUEUR_HUMAIN, YELLOW, 9, 9);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
 					return MENU_P;

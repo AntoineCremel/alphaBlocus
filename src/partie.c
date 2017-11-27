@@ -721,7 +721,7 @@ int getWinner(t_Partie * self)
 	{
 		if(self->joueurListe[i].score > max_score)
 		{
-			retour = i;
+			retour = i + 1;
 			max_score = self->joueurListe[i].score;
 		}
 	}

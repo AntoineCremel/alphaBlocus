@@ -339,7 +339,7 @@ void slowPlay(t_Partie * game, t_Coup * a_jouer)
 					fclose(fic);
 				}
 			}
-			affichageGame(game);
+			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 			waitSeconds(game->game_options.bot_delay);
 		}
 
