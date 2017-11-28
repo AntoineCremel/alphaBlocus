@@ -97,17 +97,16 @@ void joueurInitialisation(t_Joueur * self, char pieceFile[TAILLE_FILE_NAME])
 			// Ensute, on lit le caractère qui renseigne la symétrie de la pièce
 			do
 			{
-				charBuff = (char)fgetc(fichierPiece);
-			}while(charBuff == '\n');
+				if(!feof(fichierPiece))
+					charBuff = (char)fgetc(fichierPiece);
+			}while(charBuff == '\n' && !feof(fichierPiece));
 
-			if(charBuff != EOF)
+
+			if(charBuff == COMPLET || charBuff == DEMI_COMPLET ||
+				charBuff == ROTATION_SEULE || charBuff == DEMI_ROTATION
+				|| charBuff == SIMPLE)
 			{
-				if(charBuff == COMPLET || charBuff == DEMI_COMPLET ||
-					charBuff == ROTATION_SEULE || charBuff == DEMI_ROTATION
-					|| charBuff == SIMPLE)
-				{
-					self->ancre->symetrie = charBuff;
-				}
+				self->ancre->symetrie = charBuff;
 			}
 			fclose(fichierPiece);
 
@@ -454,4 +453,22 @@ int get_n_PossiblePlays(t_Joueur * self)
 	}
 
 	return n_coups;
+}
+
+t_Piece * get_piece_n(t_Joueur * self, int n)
+{
+	t_Piece * start = self->ancre;
+	t_Piece * retour = NULL;
+
+	if(self->ancre == NULL)
+		return NULL;
+
+	while(self->ancre->number != n)
+		scrollToSuivant(self);
+
+	retour = self->ancre;
+
+	self->ancre = start;
+
+	return retour;
 }

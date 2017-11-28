@@ -129,6 +129,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
     printf("       Nouvelle Partie       ");
+
     changeColour(L_YELLOW,BLACK);
     printf("\n\n    Joueur vs Ordinateur");
     printf("\n\n    joueur VS Joueur");
@@ -306,25 +307,25 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
 				{
-				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 6, 6, JOUEUR_ALEATOIRE, YELLOW, 7, 7);
+				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 4, 4, JOUEUR_HEURISTIQUE, YELLOW, 9, 9);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
 					return MENU_P;
 				}
 				if(*lig==4)
 				{
-				    initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 12, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_ALEATOIRE, YELLOW, 0, 19, JOUEUR_ALEATOIRE, RED, 19, 10);
+				    initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 12, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_HEURISTIQUE, YELLOW, 0, 19, JOUEUR_HEURISTIQUE, RED, 19, 10);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
 
-					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 5, 5, JOUEUR_ALEATOIRE, BLUE, 8, 8);
+					initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, RED, 5, 5, JOUEUR_HEURISTIQUE, BLUE, 8, 8);
 					gameTurns(&game);
 					deinitialisationPartie(&game);
 					return MENU_P;
 				}
 				if(*lig==6)
 				{
-				    initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_ALEATOIRE, YELLOW, 0, 19, JOUEUR_ALEATOIRE, RED, 19, 19, JOUEUR_ALEATOIRE, GREEN, 19, 0);
+				    initialisationPartie(&game, 20, 20, PARTIE_STANDARD, 16, JOUEUR_HUMAIN, BLUE, 0, 0, JOUEUR_HEURISTIQUE, YELLOW, 0, 19, JOUEUR_HEURISTIQUE, RED, 19, 19, JOUEUR_HEURISTIQUE, GREEN, 19, 0);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
 					return MENU_P;
@@ -423,7 +424,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
 				{
-				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 6, 6, JOUEUR_HUMAIN, YELLOW, 7, 7);
+				    initialisationPartie(&game, 14, 14, PARTIE_STANDARD, 8, JOUEUR_HUMAIN, BLUE, 4, 4, JOUEUR_HUMAIN, YELLOW, 9, 9);
                     gameTurns(&game);
                     deinitialisationPartie(&game);
 					return MENU_P;
@@ -672,6 +673,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     // Declaration des variables
     char dep;
     FILE * regle = NULL;
+    FILE * touche = NULL;
 
     // Nettoyage de l'ecran pour afficher le menu
     system("CLS");
@@ -681,7 +683,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     printf("       Options       ");
     changeColour(L_GREEN,BLACK);
     printf("\n\n    Regles");
-    printf("\n\n    Reconfiguration des touches");
+    printf("\n\n    Configuration des touches");
     changeColour(L_RED,BLACK);
     printf("\n\n\n\n    Retour");
 
@@ -776,7 +778,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 				if(*lig==2)
                 {
                     system("CLS");
-                    regle = fopen("data/regles.txt", "r+");
+                    regle = fopen("data/regles.txt", "r");
                     if(regle == NULL)
                     {
                         printf("Impossible d'acceder au regle");
@@ -787,25 +789,53 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         {
                             printf("%c",fgetc(regle));
                         }
-                        while(!quitter)
+                        while(!*quitter)
                         {
                             if(kbhit())
                             {
                                 dep=getch();
-                            }
-                            switch(dep)
+                                switch(dep)
                             {
                             case ' ' :
                                 fclose(regle);
                                 return OPTIONS;
                                 break;
                             }
+                            }
+
                         }
                     }
                 }
 				if(*lig==4)
                 {
-                    return TOUCHE;
+                    system("CLS");
+                    touche = fopen("data/touches.txt", "r");
+                    if(touche== NULL)
+                    {
+                        printf("Impossible d'acceder au regle");
+                    }
+                    else
+                    {
+                        while(!feof(touche))
+                        {
+                            printf("%c",fgetc(touche));
+                        }
+                        while(!*quitter)
+                        {
+                            if(kbhit())
+                            {
+                                dep=getch();
+                                switch(dep)
+                            {
+                            case ' ' :
+                                fclose(touche);
+                                return OPTIONS;
+                                break;
+                            }
+                            }
+
+                        }
+                    }
                 }
 				if(*lig==8)
 					return MENU_P;
@@ -816,6 +846,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     return OPTIONS;
 }
 
+/*
 int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
 {
     // Declaration des variables
@@ -937,6 +968,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     }
     return TOUCHE;
 }
+*/
 
 void superLoop()
 {
@@ -963,16 +995,12 @@ void superLoop()
             choix=menu_charger_partie(tab, &lig, &quitter);
         if(choix==OPTIONS)
             choix=menu_options(tab, &lig, &quitter);
-        if(choix==TOUCHE)
-            choix=menu_reconfigurer_touche(tab, &lig, &quitter);
     }
 }
 
 
 /*
 void sauvegarder(char *quitter)
-
-/*void sauvegarder(char *quitter)
 
 {
     FILE * save1=NULL;

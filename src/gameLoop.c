@@ -25,12 +25,15 @@ void gameTurns(t_Partie * game)
 			else if(game->joueurListe[game->joueurActif].type == JOUEUR_ALEATOIRE)
 				aleaTurn(game);
 
+			else if(game->joueurListe[game->joueurActif].type == JOUEUR_HEURISTIQUE)
+				heuristurn(game);
+
 			// On teste si le joueur est bloqué
 			isBloque(&game->joueurListe[game->joueurActif]);
 		}
 		else
 		{
-			/// Ecrire un ecran pour indiquer que ce joueur est bloqué et ne peut plus jouer
+
 			gotoligcol(22, 0);
 			changeColour(game->joueurListe[game->joueurActif].couleur, L_BLACK);
 			printf("Vous etes coince");
@@ -38,6 +41,17 @@ void gameTurns(t_Partie * game)
 			affichageSansCurseur(game);
 
 			getch();
+
+			if(isFinished(game))
+			{
+				/// ECRAN DE FIN DE LA PARTIE
+				endScreen(game);
+
+				game->state = PARTIE_FINIE;
+
+				getch();
+			}
+
 			gotoligcol(22, 0);
 			changeColour(L_WHITE, BLACK);
 			printf("                ");
@@ -68,9 +82,7 @@ void humanTurn(t_Partie * game)
 void aleaTurn(t_Partie * game)
 {
 	// 0 Variables
-	t_Joueur * actuel = &game->joueurListe[game->joueurActif];
 	t_Coup * a_jouer;
-	char stay = 1;
 
 	// Affichage de la partie dans son état actuel
 	affichageGame(game);
@@ -79,6 +91,154 @@ void aleaTurn(t_Partie * game)
 	a_jouer = getAleaCoup(&game->joueurListe[game->joueurActif]);
 
 	// 2 On doit maintenant déplacer le joueur actif
+	slowPlay(game, a_jouer);
+}
+
+char treatInput(t_Partie * game, char pressed)
+{
+	// 0 Variables
+
+	// 1 Analyse de l'input.
+	/*
+		Chaque if teste la correspondance entre la touche pressée et une
+		des touches définies comme touche effectuant une action.
+	*/
+	if(pressed == game->touches.haut)
+	{
+		game->joueurListe[game->joueurActif].curs_lig--;
+		if(testDepassement(game))
+			game->joueurListe[game->joueurActif].curs_lig++;
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
+	}
+	else if(pressed == game->touches.bas)
+	{
+		game->joueurListe[game->joueurActif].curs_lig++;
+		if(testDepassement(game))
+			game->joueurListe[game->joueurActif].curs_lig--;
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
+	}
+	else if(pressed == game->touches.gauche)
+	{
+		game->joueurListe[game->joueurActif].curs_col--;
+		if(testDepassement(game))
+			game->joueurListe[game->joueurActif].curs_col++;
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
+	}
+	else if(pressed == game->touches.droite)
+	{
+		game->joueurListe[game->joueurActif].curs_col++;
+		if(testDepassement(game))
+			game->joueurListe[game->joueurActif].curs_col--;
+
+		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
+	}
+	else if(pressed == game->touches.rotation)
+	{
+		rotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
+		// On teste si ce mouvement fait sortir des cases ou non
+		if(testDepassement(game))
+			antiRotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
+
+		// On affiche la zone des pièces
+		affichageGame(game);
+
+	}
+	else if(pressed == game->touches.inversion)
+	{
+		invertThroughPiece(game->joueurListe[game->joueurActif].ancre);
+
+		if(testDepassement(game))
+			cycleThroughPiece(game->joueurListe[game->joueurActif].ancre);
+
+		// On affiche la zone des pièces
+		affichageGame(game);
+	}
+	else if(pressed == game->touches.scrollBas)
+	{
+		scrollToSuivant(&game->joueurListe[game->joueurActif]);
+
+		if(testDepassement(game))
+			scrollToPrecedent(&game->joueurListe[game->joueurActif]);
+
+		// On affiche la zone des pièces
+		affichageGame(game);
+	}
+	else if(pressed == game->touches.scrollHaut)
+	{
+		scrollToPrecedent(&game->joueurListe[game->joueurActif]);
+
+		if(testDepassement(game))
+			scrollToSuivant(&game->joueurListe[game->joueurActif]);
+
+		// On affiche la zone des pièces
+		affichageGame(game);
+	}
+	else if(pressed == game->touches.selectionner)
+	{
+		if(playCoup(game) == 0)
+		{
+			affichageGame(game);
+			return 0;
+		}
+	}
+	else if(pressed == game->touches.quitter)
+	{
+		game->state = PARTIE_FINIE;
+		return 0;
+	}
+
+
+	return 1;
+}
+
+void heuristurn(t_Partie * game)
+{
+	// 0 Variables
+	t_Joueur * jAct = &game->joueurListe[game->joueurActif];
+	t_Coin * curs_coin = jAct->possibilites;
+	t_Coup * curs_coup = NULL;
+
+	t_Coup * best_coup = NULL;
+
+	unsigned int max_score = 0;
+	unsigned int act_score = 0;
+
+    // 1 Parcourt de la liste des coups possibles
+    while(curs_coin)
+	{
+		curs_coup = curs_coin->ancre;
+		while(curs_coup)
+		{
+			act_score = BASE_SCORE;
+			// 2 Attribution d'un score en fonction de la situation du coup en cours
+			// 2.0 Score en fonction de la distance par rapport au centre
+			act_score += DIST_FROM_CENTER_MULTIP * (abs((game->h_grid/2) - curs_coup->curs_i) + abs((game->w_grid/2) - curs_coup->curs_j));
+
+			// 2.1 Score en fonction du nombre de coups de l'adversaire bloqués par ce coup
+			act_score += get_n_BlockedPlays(game, curs_coup) * PER_BLOCKED_PLAYS;
+
+			// 3 Mise à jour de max_score
+			if(max_score < act_score)
+			{
+				max_score = act_score;
+				best_coup = curs_coup;
+			}
+
+			curs_coup = curs_coup->suivant;
+		}
+		curs_coin = curs_coin->suivant;
+	}
+
+	// 4 On joue maintenant le meilleur coup que l'on a trouvé
+	slowPlay(game, best_coup);
+}
+
+void slowPlay(t_Partie * game, t_Coup * a_jouer)
+{
+	// 0 Variables
+	t_Joueur * actuel = &game->joueurListe[game->joueurActif];
+	char stay = 1;
+
 	while(stay)
 	{
 		// 2.0 On commence par trouver la bonne pièce
@@ -115,7 +275,7 @@ void aleaTurn(t_Partie * game)
 		}
 		while(actuel->ancre->inversion != a_jouer->inversion)
 		{
-			cycleThroughPiece(actuel->ancre);
+			invertThroughPiece(actuel->ancre);
 			testDepassement(game);
 
 			affichageGame(game);
@@ -179,7 +339,7 @@ void aleaTurn(t_Partie * game)
 					fclose(fic);
 				}
 			}
-			affichageGame(game);
+			affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
 			waitSeconds(game->game_options.bot_delay);
 		}
 
@@ -190,101 +350,4 @@ void aleaTurn(t_Partie * game)
 			stay = 0;
 		}
 	}
-}
-
-char treatInput(t_Partie * game, char pressed)
-{
-	// 0 Variables
-
-	// 1 Analyse de l'input.
-	/*
-		Chaque if teste la correspondance entre la touche pressée et une
-		des touches définies comme touche effectuant une action.
-	*/
-	if(pressed == game->touches.haut)
-	{
-		game->joueurListe[game->joueurActif].curs_lig--;
-		if(testDepassement(game))
-			game->joueurListe[game->joueurActif].curs_lig++;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
-	}
-	else if(pressed == game->touches.bas)
-	{
-		game->joueurListe[game->joueurActif].curs_lig++;
-		if(testDepassement(game))
-			game->joueurListe[game->joueurActif].curs_lig--;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
-	}
-	else if(pressed == game->touches.gauche)
-	{
-		game->joueurListe[game->joueurActif].curs_col--;
-		if(testDepassement(game))
-			game->joueurListe[game->joueurActif].curs_col++;
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
-	}
-	else if(pressed == game->touches.droite)
-	{
-		game->joueurListe[game->joueurActif].curs_col++;
-		if(testDepassement(game))
-			game->joueurListe[game->joueurActif].curs_col--;
-
-		affichageConsoleGrilleDeJeu(game, I_PLACE_GRID, J_PLACE_GRID, 1);
-	}
-	else if(pressed == game->touches.rotation)
-	{
-		rotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
-		// On teste si ce mouvement fait sortir des cases ou non
-		if(testDepassement(game))
-			antiRotateThroughPiece(game->joueurListe[game->joueurActif].ancre);
-
-		// On affiche la zone des pièces
-		affichageGame(game);
-
-	}
-	else if(pressed == game->touches.inversion)
-	{
-		inversionPiece(game->joueurListe[game->joueurActif].ancre);
-
-		if(testDepassement(game))
-			cycleThroughPiece(game->joueurListe[game->joueurActif].ancre);
-
-		// On affiche la zone des pièces
-		affichageGame(game);
-	}
-	else if(pressed == game->touches.scrollBas)
-	{
-		scrollToSuivant(&game->joueurListe[game->joueurActif]);
-
-		if(testDepassement(game))
-			scrollToPrecedent(&game->joueurListe[game->joueurActif]);
-
-		// On affiche la zone des pièces
-		affichageGame(game);
-	}
-	else if(pressed == game->touches.scrollHaut)
-	{
-		scrollToPrecedent(&game->joueurListe[game->joueurActif]);
-
-		if(testDepassement(game))
-			scrollToSuivant(&game->joueurListe[game->joueurActif]);
-
-		// On affiche la zone des pièces
-		affichageGame(game);
-	}
-	else if(pressed == game->touches.selectionner)
-	{
-		if(playCoup(game) == 0)
-		{
-			affichageGame(game);
-			return 0;
-		}
-	}
-	else if(pressed == game->touches.quitter)
-	{
-		game->state = PARTIE_FINIE;
-		return 0;
-	}
-
-
-	return 1;
 }

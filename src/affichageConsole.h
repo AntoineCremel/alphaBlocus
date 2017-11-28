@@ -50,7 +50,7 @@
 #define W_SCROLL 6
 
 // Definition de l'affichage de la zone de score
-#define SCORE_AF_WIDTH	4
+#define SCORE_AF_WIDTH	5
 
 // 1 Structures
 
@@ -89,5 +89,10 @@ void affichageCompletJoueurConsole (t_Partie * game, t_Joueur * self);
 
 // Fonction qui sert à afficher le score du joueur
 void affichageConsoleScore(t_Partie * self, int lig, int col);
+
+// Fonction pour afficher, sur la grille, les cases où il est possible de jouer la pièce actuelle.
+void affichagePossibilites(t_Partie * self, int lig, int col);
+
+void endScreen(t_Partie * game);
 
 #endif // AFFICHAGECONSOLE_H_INCLUDED

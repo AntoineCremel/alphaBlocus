@@ -129,4 +129,14 @@ void updateListesPossibilites(t_Partie * self, int curs_i, int curs_j, int rad_i
 // Renvoit 0 sinon
 void checkAround(t_Partie * self, int grille_i, int grille_j);
 
+/// Getters
+// Fonction qui détecte si tous les joueurs de la partie sont bloqués
+char isFinished(t_Partie * self);
+
+// Fonction chargée de déterminer le nombre de coups d'autres joueurs que le coup passé en paramètre pourrait bloquer
+int get_n_BlockedPlays(t_Partie * self, t_Coup * toTest);
+
+// Fonction qui renvoit le joueur avec le meilleur score
+int getWinner(t_Partie * self);
+
 #endif // PARTIE_H_INCLUDED

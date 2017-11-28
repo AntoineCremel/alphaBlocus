@@ -10,6 +10,9 @@ typedef struct gamePlayOptions
 {
 	// Variable qui détermine combien de tours il faut attendre entre chaque action d'un bot
 	float bot_delay;
+	// Variable qui détermine si le jeu doit montrer les coups possibles pour chaque joueur
+	//à chaque tour de jeu
+	char show_possibilites;
 }t_GameOptions;
 
 // 2 Prototypes de fonctions

@@ -18,6 +18,7 @@ Ce fichier contiendra la structure et les définitions des fonctions nécessaires 
 //0 Constantes
 #define JOUEUR_HUMAIN 0
 #define JOUEUR_ALEATOIRE 1
+#define JOUEUR_HEURISTIQUE 2
 
 #define LOG_ALEA_NAME "data/logs/aleatoie.txt"
 
@@ -93,5 +94,8 @@ char isBloque(t_Joueur * self);
 void clearEmptyCoins(t_Joueur * self);
 
 int get_n_PossiblePlays(t_Joueur * self);
+
+// Renvoit un pointeur vers la pièce de numéro n
+t_Piece * get_piece_n(t_Joueur * self, int n);
 
 #endif // JOUEUR_H_INCLUDED

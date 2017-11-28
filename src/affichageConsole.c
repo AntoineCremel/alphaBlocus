@@ -129,6 +129,10 @@ void affichageConsoleGrilleDeJeu(t_Partie * self, int lig, int col, char curseur
 		}
 	}
 	affichageConsoleStart(self, lig, col);
+
+	if(self->game_options.show_possibilites)
+		affichagePossibilites(self, lig, col);
+
 	if(curseur)
 		affichageConsoleCurseur(self, lig, col);
 
@@ -349,13 +353,73 @@ void affichageConsoleScore(t_Partie * self, int lig, int col)
 {
 	// 0 Variables
 
-	// 1 Boucle qui parcourt les jouers
+	// 1 Boucle qui parcourt les joueurs
 	for(int i=0; i < self->n_Players; i++)
 	{
+		// Affichage d'un espace correspondant à la couleujr du joueur
 		gotoligcol(lig, col + i * SCORE_AF_WIDTH);
 		changeColour(BLACK, (self->joueurListe[i].couleur + 8) % 16);
 		printf(" ");
+
+		// Affichage du score des joueurs
 		changeColour(L_WHITE, L_BLACK);
 		printf("%i", self->joueurListe[i].score);
 	}
+}
+
+void affichagePossibilites(t_Partie * game, int lig, int col)
+{
+	// 0 Variables
+	t_Coin * curs_coin = game->joueurListe[game->joueurActif].possibilites;
+	t_Coup * curs_coup = NULL;
+	t_Joueur * jAct = &game->joueurListe[game->joueurActif];
+
+	// 1 Parcourt de la liste de coups possibles pour le joueur actuel
+	/// Cette partie du code devrait être écrite dans une fonction de t_Joueur
+	/// elle est ici par manque de temps, à déplacer le moment venu
+	while(curs_coin != NULL)
+	{
+		curs_coup = curs_coin->ancre;
+		while(curs_coup != NULL)
+		{
+			// 1 On teste si le coup actuel utilise la pièce actuelle, avec la même orientation etc
+			if(curs_coup->piece == jAct->ancre->number
+				&& curs_coup->rotation == jAct->ancre->orientation
+				&& curs_coup->inversion == jAct->ancre->inversion)
+			{
+				// 1.0 Affichage de la pièce en surbrillance à l'endroit indiqué par le curseur
+				for(int i = 0; i < I_TAB_PIECE; i++)
+				{
+					for(int j = 0; j < J_TAB_PIECE; j++)
+					{
+						if(isPiece(jAct->ancre->grille[i][j]))
+						{
+							gotoligcol(lig + i + curs_coup->curs_i + I_CENTRE_PIECE, col + W_SQUARE * (j + curs_coup->curs_j + J_CENTRE_PIECE));
+							changeColour(WHITE, GRID_BACK_COLOUR);
+							for(int k = 0; k < W_SQUARE; k++)
+								printf("O");
+						}
+					}
+				}
+			}
+
+			curs_coup = curs_coup->suivant;
+		}
+		curs_coin = curs_coin->suivant;
+	}
+}
+
+void endScreen(t_Partie * game)
+{
+	system("cls");
+
+	gotoligcol(10, 10);
+	changeColour(WHITE, BLACK);
+	printf("Partie Terminee !");
+
+	gotoligcol(11, 10);
+	printf("Vainqueur : ");
+
+	changeColour(game->joueurListe[getWinner(game)].couleur, BLACK);
+	printf("Joueur %i", getWinner(game));
 }

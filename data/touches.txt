@@ -1,0 +1,14 @@
+Configuration des touches
+
+haut : Z
+bas : S
+gauche : Q
+droite : D
+rotation : R
+inverser : O
+poser piece : SPACE
+defilement des pieces vers le haut : I
+defilement des pieces vers le bas : K
+quitter : M
+
+Pour retourner au menu OPTIONS, appuyer sur SPACE
