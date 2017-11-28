@@ -968,12 +968,12 @@ void superLoop()
     }
 }
 
-<<<<<<< HEAD
+
 /*
 void sauvegarder(char *quitter)
-=======
+
 /*void sauvegarder(char *quitter)
->>>>>>> c7f03f5c55290bc7886bace0e14d829c8bef20e7
+
 {
     FILE * save1=NULL;
     FILE * save2=NULL;
@@ -1023,8 +1023,5 @@ void sauvegarder(char *quitter)
         }
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> c7f03f5c55290bc7886bace0e14d829c8bef20e7
 */
