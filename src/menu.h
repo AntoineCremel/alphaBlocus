@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <conio.h>
 
+#include "toolbox/tools.h"
 #include "affichageConsole.h"
 #include "partie.h"
 #include "gameLoop.h"

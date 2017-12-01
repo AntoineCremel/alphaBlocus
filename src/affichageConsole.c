@@ -5,7 +5,7 @@
     Ces fonctions appellent les affichages de chaque structure et les place aux bons endroits grâce à des gotoligcol appropriés.
 */
 
-
+#if 	defined(_WIN32) || defined (WIN32)
 void gotoligcol( int lig, int col )
 {
     /*
@@ -17,6 +17,14 @@ void gotoligcol( int lig, int col )
     mycoord.Y = lig;
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
+#elif defined(__unix__)
+void gotoligcol( int lig, int col )
+{
+
+     printf("\033[%d;%dH", (lig), (col));
+
+}
+#endif
 
 void changeColour(int letters, int backGround)
 {

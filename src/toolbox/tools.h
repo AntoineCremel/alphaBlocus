@@ -4,6 +4,18 @@
 #include <time.h>
 #include <stdio.h>
 
+#define OS_WINDOWS  0
+#define OS_UNIX		1
+
+#if defined(_WIN32) || defined(WIN32)
+	#define OS OS_WINDOWS
+	#include <conio.h>
+#elif
+	#define OS OS_UNIX
+	#include <termios.h>
+	#include <unistd.h>
+#endif
+
 #define LOG_FILE_SIZE 50
 #define LOG_MSG_SIZE 50
 
@@ -20,5 +32,12 @@ void cycleThroughCorner(int * pos_i, int * pos_j, int loop);
 /// Fonctions de log
 void addCoinLog(char couleur, int i, int j);
 void removeCoinLog(char couleur, int i, int j);
+
+/// Encapsulation des fonctions de conio.h
+// Fonction pour récupérer le caractère appuyé par l'utilisateur
+char loc_getch();
+// Fonction pour récupérer kbhit
+char loc_kbhit();
+
 
 #endif // TOOLS_H_INCLUDED

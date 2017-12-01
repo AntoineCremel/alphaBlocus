@@ -40,7 +40,7 @@ void gameTurns(t_Partie * game)
 
 			affichageSansCurseur(game);
 
-			getch();
+			loc_getch();
 
 			if(isFinished(game))
 			{
@@ -49,7 +49,7 @@ void gameTurns(t_Partie * game)
 
 				game->state = PARTIE_FINIE;
 
-				getch();
+				loc_getch();
 			}
 
 			gotoligcol(22, 0);
@@ -70,7 +70,7 @@ void humanTurn(t_Partie * game)
 	while(stay == 1)
 	{
 		// 1.0 Detection de l'appui d'une touche
-		pressed = getch();
+		pressed = loc_getch();
 		// 1.1 On traite l'input du joueur pour savoir ce qu'il veut faire
 		stay = treatInput(game, pressed);
 

@@ -64,3 +64,33 @@ void removeCoinLog(char couleur, int i, int j)
 	fprintf(logFile, "joueur %i, REMOVED i : %i, j : %i\n", couleur, i, j);
 	fclose(logFile);
 }
+
+#if defined(_WIN32) || defined(WIN32)
+
+char loc_getch()
+{
+	return getch();
+}
+char loc_kbhit()
+{
+	return kbhit();
+}
+
+#elif
+
+char loc_getch()
+{
+  struct termios oldt,
+                 newt;
+  char            ch;
+  tcgetattr( STDIN_FILENO, &oldt );
+  newt = oldt;
+  newt.c_lflag &= ~( ICANON | ECHO );
+  tcsetattr( STDIN_FILENO, TCSANOW, &newt );
+  ch = getchar();
+  tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
+  return ch;
+
+}
+
+#endif

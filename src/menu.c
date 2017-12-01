@@ -51,7 +51,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -149,7 +149,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -253,7 +253,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -370,7 +370,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -483,7 +483,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -595,7 +595,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -699,7 +699,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -793,7 +793,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         {
                             if(kbhit())
                             {
-                                dep=getch();
+                                dep=loc_getch();
                                 switch(dep)
                             {
                             case ' ' :
@@ -824,7 +824,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         {
                             if(kbhit())
                             {
-                                dep=getch();
+                                dep=loc_getch();
                                 switch(dep)
                             {
                             case ' ' :
@@ -876,7 +876,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)
@@ -1012,7 +1012,7 @@ void sauvegarder(char *quitter)
     {
         if(kbhit())
         {
-            dep=getch();
+            dep=loc_getch();
 
     // Les differentes touches
 			switch(dep)

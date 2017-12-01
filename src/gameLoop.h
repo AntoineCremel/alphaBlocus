@@ -1,7 +1,8 @@
 #ifndef GAMELOOP_H_INCLUDED
 #define GAMELOOP_H_INCLUDED
 
-#include <conio.h>
+#include "toolbox/tools.h"
+
 #include <math.h>
 
 #include "mainHeader.h"
@@ -23,29 +24,29 @@
 
 //2 Prototypes de fonctions
 /*
-	gameTurns définit le déroulement de la partie tour par tour
+	gameTurns dÃ©finit le dÃ©roulement de la partie tour par tour
 */
 void gameTurns(t_Partie * game);
 /*
-	humanTurn contient la définition de ce qui se passe durant le tour
+	humanTurn contient la dÃ©finition de ce qui se passe durant le tour
 	d'un joueur humain : boucle d'affichage, de selection de coup etc...
 */
 void humanTurn(t_Partie * game);
 /*
 	aleaTurn contient la fonction permettant a l'ordinateur de jouer
-	un coup aléatoirement
+	un coup alÃ©atoirement
 */
 void aleaTurn(t_Partie * game);
 /*
-	Fonction permettant à l'ordinateur de jouer un coup en fonction d'une liste d'heuristiques.
-	Intelligence Artificielle de type 1, sans réflexion sur plusieurs coups à la suite
+	Fonction permettant Ã  l'ordinateur de jouer un coup en fonction d'une liste d'heuristiques.
+	Intelligence Artificielle de type 1, sans rÃ©flexion sur plusieurs coups Ã  la suite
 */
 void heuristurn(t_Partie * game);
 
-// Fonction qui fait jouer un coup à l'intelligence artificelle
+// Fonction qui fait jouer un coup Ã  l'intelligence artificelle
 void slowPlay(t_Partie * game, t_Coup * a_jouer);
 
-// Fonction qui va analyser l'input donné par l'utilisateur
+// Fonction qui va analyser l'input donnÃ© par l'utilisateur
 // Renvoit 0 si le joueur a finit son tour ou veut quitter la partie,
 // 1 sinon.
 char treatInput(t_Partie * game, char pressed);
