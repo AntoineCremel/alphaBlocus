@@ -1,8 +1,7 @@
 #ifndef AFFICHAGECONSOLE_H_INCLUDED
 #define AFFICHAGECONSOLE_H_INCLUDED
 
-#include <windows.h>
-
+#include "toolbox/tools.h"
 #include "mainHeader.h"
 #include "controles.h"
 #include "partie.h"

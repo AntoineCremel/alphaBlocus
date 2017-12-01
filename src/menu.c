@@ -11,7 +11,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
     char dep;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage de BLOKUS avec modification des couleurs
     changeColour(L_AQUA,BLACK);
@@ -124,7 +124,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     char dep;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
@@ -229,7 +229,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     t_Partie game;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
@@ -346,7 +346,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     t_Partie game;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
@@ -459,7 +459,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     t_Partie game;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_AQUA,BLACK);
@@ -571,7 +571,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
     char dep;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_GREEN,BLACK);
@@ -676,7 +676,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     FILE * touche = NULL;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_YELLOW,BLACK);
@@ -777,7 +777,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
 			case ' ' :
 				if(*lig==2)
                 {
-                    system("CLS");
+                    loc_clear();
                     regle = fopen("data/regles.txt", "r");
                     if(regle == NULL)
                     {
@@ -808,7 +808,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                 }
 				if(*lig==4)
                 {
-                    system("CLS");
+                    loc_clear();
                     touche = fopen("data/touches.txt", "r");
                     if(touche== NULL)
                     {
@@ -853,7 +853,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     char dep;
 
     // Nettoyage de l'ecran pour afficher le menu
-    system("CLS");
+    loc_clear();
 
     // Affichage des differents elements composants le menu principal avec leur couleur respective
     changeColour(L_YELLOW,BLACK);

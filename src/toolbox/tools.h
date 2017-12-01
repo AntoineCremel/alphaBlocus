@@ -10,6 +10,7 @@
 #if defined(_WIN32) || defined(WIN32)
 	#define OS OS_WINDOWS
 	#include <conio.h>
+	#include <windows.h>
 #elif
 	#define OS OS_UNIX
 	#include <termios.h>
@@ -39,6 +40,7 @@ void removeCoinLog(char couleur, int i, int j);
 char loc_getch();
 // Fonction pour récupérer kbhit
 char loc_kbhit();
-
+// Clear screen
+void loc_clear();
 
 #endif // TOOLS_H_INCLUDED

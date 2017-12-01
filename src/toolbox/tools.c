@@ -75,6 +75,10 @@ int loc_kbhit()
 {
 	return kbhit();
 }
+void loc_clear()
+{
+	system("CLS");
+}
 
 #elif
 
@@ -117,6 +121,10 @@ int loc_kbhit()
 	}
 
 	return 0;
+}
+void loc_clear()
+{
+	printf("\033[H\033[J");
 }
 
 #endif

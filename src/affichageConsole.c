@@ -419,7 +419,7 @@ void affichagePossibilites(t_Partie * game, int lig, int col)
 
 void endScreen(t_Partie * game)
 {
-	system("cls");
+	loc_clear();
 
 	gotoligcol(10, 10);
 	changeColour(WHITE, BLACK);
