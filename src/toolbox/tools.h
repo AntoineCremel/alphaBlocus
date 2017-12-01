@@ -39,7 +39,7 @@ void removeCoinLog(char couleur, int i, int j);
 // Fonction pour récupérer le caractère appuyé par l'utilisateur
 char loc_getch();
 // Fonction pour récupérer kbhit
-char loc_kbhit();
+int loc_kbhit();
 // Clear screen
 void loc_clear();
 
