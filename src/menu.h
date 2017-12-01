@@ -2,7 +2,6 @@
 #define MENU_H_INCLUDED
 
 #include <stdio.h>
-#include <conio.h>
 
 #include "toolbox/tools.h"
 #include "affichageConsole.h"

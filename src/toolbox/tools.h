@@ -14,6 +14,7 @@
 	#define OS OS_UNIX
 	#include <termios.h>
 	#include <unistd.h>
+	#include <fcntl.h>
 #endif
 
 #define LOG_FILE_SIZE 50

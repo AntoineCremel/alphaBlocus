@@ -49,7 +49,7 @@ int menu_principal(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -147,7 +147,7 @@ int menu_nouvelle_partie(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -251,7 +251,7 @@ int menu_nombre_IA(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -368,7 +368,7 @@ int menu_nombre_joueur(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -481,7 +481,7 @@ int menu_nombre_joueur_IA(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -593,7 +593,7 @@ int menu_charger_partie(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -697,7 +697,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -791,7 +791,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         }
                         while(!*quitter)
                         {
-                            if(kbhit())
+                            if(loc_kbhit())
                             {
                                 dep=loc_getch();
                                 switch(dep)
@@ -822,7 +822,7 @@ int menu_options(char tab[10][20], int *lig, char *quitter)
                         }
                         while(!*quitter)
                         {
-                            if(kbhit())
+                            if(loc_kbhit())
                             {
                                 dep=loc_getch();
                                 switch(dep)
@@ -874,7 +874,7 @@ int menu_reconfigurer_touche(char tab[10][20], int *lig, char *quitter)
     // Saisie de la touche
     while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
@@ -1010,7 +1010,7 @@ void sauvegarder(char *quitter)
 
      while(!*quitter)
     {
-        if(kbhit())
+        if(loc_kbhit())
         {
             dep=loc_getch();
 
